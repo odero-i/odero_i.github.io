@@ -29,7 +29,7 @@ $A \in \mathbb{R}^{m \times k}  ==   A \in \mathbb{R}^{rowA \times colA}$
 
 $B \in \mathbb{R}^{k \times n}  ==   B \in \mathbb{R}^{rowB \times colB}$
 
-'''C
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -132,4 +132,4 @@ int** dot_product (int A[][colA], int B[][colB]){
     }
     return mult;
 }
-'''
+```
