@@ -11,7 +11,7 @@ which is also known as matrix multiplication.
 
 The dot product.
 
-$C += A . B$
+$$C += A . B$$
 
 $1D Array.$
 
