@@ -10,7 +10,7 @@ Given two matrices A of dimensions M x K and B of dimension K x N, we want to co
 
 
 
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
