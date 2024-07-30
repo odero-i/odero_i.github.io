@@ -29,7 +29,7 @@ $$A \in \mathbb{R}^{m \times k}  ==   A \in \mathbb{R}^{rowA \times colA}$$
 
 $$B \in \mathbb{R}^{k \times n}  ==   B \in \mathbb{R}^{rowB \times colB}$$
 
-```c
+
 #include <stdio.h>
 #include <stdlib.h>
 
