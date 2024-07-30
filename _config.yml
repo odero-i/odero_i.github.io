@@ -41,6 +41,7 @@ kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
+  math_engine: mathjax
 
 # Exclude from processing.
 # The following items will not be processed, by default.
