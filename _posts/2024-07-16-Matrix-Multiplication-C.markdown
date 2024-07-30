@@ -13,15 +13,15 @@ which is also known as matrix multiplication.
 
 $$C += A . B$$
 
-   * 1D Array.
+* 1D Array.
 
-      $$C_{i} = \sum\limits_{i = 0}^{n} (A_{i} . B_{i}) = A_{1}B_{1} + A_{2}B_{2} + ...+ A_{n}B_{n}$$
+$$C_{i} = \sum\limits_{i = 0}^{n} (A_{i} . B_{i}) = A_{1}B_{1} + A_{2}B_{2} + ...+ A_{n}B_{n}$$
 
-   * 2D Array.
+* 2D Array.
 
-      $$C_{i , j} = \sum\limits_{k \in [0 ... K) } (A_{i , k} . B_{k , j})$$
+$$C_{i , j} = \sum\limits_{k \in [0 ... K) } (A_{i , k} . B_{k , j})$$
 
-      $$C_{i , j} = A_{i , k} . B_{k , j}$$
+$$C_{i , j} = A_{i , k} . B_{k , j}$$
 
 * Consider
 
@@ -70,16 +70,10 @@ int main(){
     also the 2-D arrays (Matricies) to match their size at their constant definition.
     */
     //Initialize and Declare the matrix A[rowA][colA]
-    int A[][colA]={ {1,2,3,4},
-                    {5,6,7,8}, 
-                    {9,10,11,12},
-                    {13,14,15,16}};
+    int A[][colA]={{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
 
     //Initialize and Declare the matrix B[rowB][colB]
-    int B[][colB]= {{1,2,3,4},
-                    {1,2,3,4},
-                    {1,2,3,4},
-                    {1,2,3,4}};
+    int B[][colB]= {{1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4}};
 
     //Calling of dot_product() function and initialize it to a pointer variable int **mult
     int **mult=dot_product(A,B);
@@ -132,5 +126,3 @@ int** dot_product (int A[][colA], int B[][colB]){
     }
     return mult;
 }
-
-```
