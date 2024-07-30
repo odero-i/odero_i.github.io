@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title:  "Matrix multiplication in C"
+title:  Matrix multiplication in C
 date:   2024-07-16 07:00:00
 mathjax: true
 ---
