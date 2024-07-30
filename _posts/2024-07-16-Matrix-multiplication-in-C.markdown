@@ -6,11 +6,11 @@ date:   2024-07-16 07:00:00
 mathjax: true
 ---
 
-Given two matrices A of dimensions M x K and B of dimension K x N, we want to compute their dot product C = A . Bwhich is also known as matrix multiplication.
+Given two matrices A of dimensions M x K and B of dimension K x N, we want to compute their dot product C = A . B  which is also known as matrix multiplication.
 
 
 
-```c
+```
 #include <stdio.h>
 #include <stdlib.h>
 
