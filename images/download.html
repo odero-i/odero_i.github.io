@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logos/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logos/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/logos/favicon-16x16.png">
+  <link rel="manifest" href="/assets/logos/site.webmanifest">
+  <link rel="mask-icon" href="/assets/logos/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/logos/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/assets/logos/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141821189-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141821189-1');
+</script>
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Decent Descent</title>
+  <meta name="description" content="A slow descent into the AIbyss, by  [Greg Yang](https://twitter.com/thegregyang) and friends.">
+
+  
+  
+  <link rel="stylesheet" href="https://decentdescent.org/assets/style.css">
+
+  <link rel="canonical" href="https://decentdescent.org/">
+  <link rel="alternate" type="application/rss+xml" title="Decent Descent" href="https://decentdescent.org/feed.xml">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+  <!-- mathjax -->
+  <!-- <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script> -->
+  <!-- <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+	jax: ["input/TeX","output/HTML-CSS"],
+	displayAlign: "left",
+	displayIndent: "2em"
+    });
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script> -->
+  <!-- mathjax v3 -->
+<!--
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function(){
+    function stripcdata(x) {
+      if (x.startsWith('% <![CDATA[') && x.endsWith('%]]>'))
+	return x.substring(11,x.length-4);
+      return x;
+    }
+    document.querySelectorAll("script[type='math/tex']").forEach(function(el){
+      el.outerHTML = "\\(" + stripcdata(el.textContent) + "\\)";
+    });
+    document.querySelectorAll("script[type='math/tex; mode=display']").forEach(function(el){
+      el.outerHTML = "\\[" + stripcdata(el.textContent) + "\\]";
+    });
+    var script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+    document.head.appendChild(script);
+  }, false);
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+-->
+  <!-- Load jQuery -->
+  <!--
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  -->
+  <!-- Load KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <!--
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  -->
+
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <!--
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  -->
+</head>
+
+
+  <body>
+
+    <div>
+
+      <header class="header-background">
+
+        <div class="clearfix header-border">
+          <ul class="list-reset right py-1 header-text font-smoothing">
+            
+              
+            
+              
+              <li class="inline-block">
+                <a class="align-middle link-primary header-link mr-2" href="/about/">About</a>
+              </li>
+              
+            
+              
+            
+              
+            
+              
+            
+          </ul>
+        </div>
+
+        <div class="container mx-auto px-2 mb-2 clearfix header-text">
+	  <!--
+	  <div class="clearfix">
+          <h1 class="h0 inline-block col-65 sm-width-full py-4 mt-3 header-title left">Decent Descent</h1>
+          <h1 class="h0slash inline-block col-3 sm-width-full py-4 mt-3 header-title left">&#65340;</h1>
+	  </div>
+	  -->
+	  <a href="/" class="h0 inline-block col-65 sm-width-full py-4 mt-3 header-title">
+	  <img src='/assets/logos/decent_descent_large_white_text2path.svg' class="autowidth">
+	  </a>
+    <h1 class="h1 col-9 sm-width-full py-0 mt-0 mb-0 inline-block" itemprop="name headline">with Greg Yang</h1>
+          
+          <div class="clearfix mb-4 py-1">
+            <div class="col-4 sm-width-full left border-top-thin">
+              <div class="table">
+                <div class="inline-block mt-3 mr-1">
+                  <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+ <circle cx="8" cy="8" r="8"/>
+</svg>
+
+                </div>
+                <div class="inline-block mt-3 mr-1">
+                  <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+ <circle cx="8" cy="8" r="8"/>
+</svg>
+
+                </div>
+                <div class="inline-block mt-3 mr-1">
+                  <a href="https://twitter.com/thegregyang" title="Follow me on twitter" class="link-social block">
+  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z
+    M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
+  	c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
+  	c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
+  	c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
+  	c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
+  </svg>
+</a>
+
+                </div>
+                <div class="inline-block mt-3">
+                  <a href="mailto:gregyang at company dot com" title="Shoot me an email" class="link-social block">
+  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true" fill-rule="evenodd">
+    <path d='M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z
+    M3.96 6.494c.127.09.508.355 1.144.796.637.44 1.124.78 1.463 1.018l.237.17a5.79 5.79 0 0 0 .592.394c.113.067.22.117.32.15.1.034.194.05.28.05h.01a.885.885 0 0 0 .28-.05c.1-.033.207-.083.32-.15a5.893 5.893 0 0 0 .592-.394 24 24 0 0 1 .238-.17l2.612-1.814c.271-.19.498-.419.68-.686.183-.268.274-.55.274-.843a.855.855 0 0 0-.265-.63.863.863 0 0 0-.628-.263H3.893c-.286 0-.507.096-.661.29-.155.193-.232.435-.232.726 0 .234.102.488.307.761.205.274.422.489.653.645z
+    M12.444 7.091c-1.22.826-2.147 1.468-2.78 1.926a13.17 13.17 0 0 1-.516.366 3.186 3.186 0 0 1-.527.267c-.22.092-.424.137-.614.137h-.011c-.19 0-.395-.045-.614-.137a3.188 3.188 0 0 1-.528-.267c-.132-.088-.304-.21-.516-.366-.503-.368-1.427-1.01-2.774-1.926A2.957 2.957 0 0 1 3 6.606v4.431a.86.86 0 0 0 .262.631.86.86 0 0 0 .631.263h8.216a.86.86 0 0 0 .631-.263.86.86 0 0 0 .262-.63V6.605c-.16.178-.346.34-.558.485z
+'/>
+  </svg>
+</a>
+<!--
+  Icons modified from one made by Dave Gandy under CC 3.0 BY
+-->
+
+                </div>
+              </div>
+              <!-- Set site description in config.yml -->
+	      <!--
+              <p class="h4 lh-condensed font-smoothing mt-2 py-1">A slow descent into the AIbyss, by  [Greg Yang](https://twitter.com/thegregyang) and friends.</p>
+	      -->
+            </div>
+
+	    <!--
+            <div class="col-4 sm-width-full left border-top-thin mt-3 mt-lg-0 ml-lg-4 table">
+	    -->
+		<!--
+                <div class="inline-block mt-3 mr-1">
+                  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+ <circle cx="8" cy="8" r="8"/>
+</svg>
+
+                </div>
+                <div class="inline-block mt-3">
+                  <a href="https://twitter.com/thegregyang" title="Follow me on twitter" class="link-social block">
+  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z
+    M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
+  	c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
+  	c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
+  	c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
+  	c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
+  </svg>
+</a>
+
+                </div>
+		-->
+	    <!--
+            </div>
+	    -->
+          </div>
+
+        </div>
+      </header>
+
+      <div class="container mx-auto px-2 py-4">
+        
+          <!-- Renders post date, title, and snippet of text. -->
+<div class="py-2 mb-2 prose">
+  <a class="no-underline h5 bold text-accent" title="/tp5.html" href="/tp5.html">Mar 8, 2022</a>
+  <h2 class="h1 lh-condensed col-9 mt-0">
+	  <a class="link-primary" title="/tp5.html" href="/tp5.html">Tuning GPT-3 on a Single GPU<!--<span class='bold text-accent'>&#65340;</span>--></br>  <h3 class='h5 lh-condensed col-9 mt-0"'>Tensor Programs V</h3>
+  </h2>
+</a>
+
+  <!--<p>Cross-posted from Microsoft Research Blog Great scientific achievements cannot be made by trial and error alone. Every launch in the space program is underpinned by centuries of fundamental research in...</p>-->
+</div>
+
+        
+          <!-- Renders post date, title, and snippet of text. -->
+<div class="py-2 mb-2 prose">
+  <a class="no-underline h5 bold text-accent" title="/tp4.html" href="/tp4.html">Jul 21, 2021</a>
+  <h2 class="h1 lh-condensed col-9 mt-0">
+	  <a class="link-primary" title="/tp4.html" href="/tp4.html">Feature Learning in Infinite-Width Neural Networks<!--<span class='bold text-accent'>&#65340;</span>--></br>  <h3 class='h5 lh-condensed col-9 mt-0"'>Tensor Programs IV</h3>
+  </h2>
+</a>
+
+  <!--<p>Cross-posted from Microsoft Research Blog In the pursuit of learning about fundamentals of the natural world, scientists have had success with coming at discoveries from both a bottom-up and top-down...</p>-->
+</div>
+
+        
+          <!-- Renders post date, title, and snippet of text. -->
+<div class="py-2 mb-2 prose">
+  <a class="no-underline h5 bold text-accent" title="/rs4a1.html" href="/rs4a1.html">May 6, 2020</a>
+  <h2 class="h1 lh-condensed col-9 mt-0">
+	  <a class="link-primary" title="/rs4a1.html" href="/rs4a1.html">Randomized Smoothing of All Shapes and Sizes, Part I<!--<span class='bold text-accent'>&#65340;</span>--></br>  <h3 class='h5 lh-condensed col-9 mt-0"'>Wulff Crystals Determine the Optimal Randomized Smoothing Distribution</h3>
+  </h2>
+</a>
+
+  <!--<p>Can we find a general theory for randomized smoothing? We show that for an appropriate notion of “optimal”, the best smoothing distribution for any norm has level sets given by...</p>-->
+</div>
+
+        
+          <!-- Renders post date, title, and snippet of text. -->
+<div class="py-2 mb-2 prose">
+  <a class="no-underline h5 bold text-accent" title="/smoothadv.html" href="/smoothadv.html">Jun 13, 2019</a>
+  <h2 class="h1 lh-condensed col-9 mt-0">
+	  <a class="link-primary" title="/smoothadv.html" href="/smoothadv.html">Provably Robust Deep Learning<!--<span class='bold text-accent'>&#65340;</span>--></br>  <h3 class='h5 lh-condensed col-9 mt-0"'>By Adversarially Training Smoothed Classifiers</h3>
+  </h2>
+</a>
+
+  <!--<p>Recently, several works proposed the convolution of a neural network with a Gaussian as a smoothed classifier for provably robust classification. We show that adversarially training this smoothed classifier significantly...</p>-->
+</div>
+
+        
+      </div>
+
+    </div>
+
+    <!--
+<div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/"></a></p>
+    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <li class="inline-block mr-1">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Decent Descent">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </li>
+      <li class="inline-block">
+        <a class="github-button" href="https://github.com//" data-icon="octicon-star" data-count-href="//stargazers" data-count-api="/repos//#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star / on GitHub">Star</a>
+      </li>
+    </ul>
+  </div>
+</div>
+-->
+<div class="clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+  </div>
+</div>
+
+<!--
+<script>
+  $("script[type='math/tex']").replaceWith(function() {
+      var tex = $(this).text();
+      return katex.renderToString(tex, {displayMode: false});
+  });
+
+  $("script[type='math/tex; mode=display']").replaceWith(function() {
+      var tex = $(this).html();
+      return katex.renderToString(tex.replace(/%.*/g, ''), {displayMode: true});
+  });
+</script>
+-->
+
+
+  </body>
+
+</html>
