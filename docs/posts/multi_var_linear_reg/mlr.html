@@ -176,13 +176,13 @@
 
 <article class="container px-2 mx-auto mb4" itemscope itemtype="http://schema.org/BlogPosting">
   
-  <h1 class="h0 col-9 sm-width-full py-0 mt-7 mb-0 inline-block" itemprop="name headline">Univariate Linear Regression</h1>
+  <h1 class="h0 col-9 sm-width-full py-0 mt-7 mb-0 inline-block" itemprop="name headline">Multivariate Linear Regression</h1>
   <h1 class="h1 col-9 sm-width-full py-0 mt-0 mb-4 inline-block" itemprop="name headline">C Programming</h1>
   
   <div class="col-12 sm-width-full mt-1 border-top-thin ">
     <p class="text-accent mb-0 pt-2 pb-0 bold authordate"><a class='link-authordate' href="https://x.com/oderoi_">Isack Odero</a> 
     </p>
-    <p class="mb-1 pt-0 pb-0 bold authordate"><time datetime="2022-03-08T14:00:00+00:00" itemprop="datePublished">July 8, 2024</time>
+    <p class="mb-1 pt-0 pb-0 bold authordate"><time datetime="2022-03-08T14:00:00+00:00" itemprop="datePublished">Aug 27, 2024</time>
     
   <div class="table">
     <!-- <div class="inline-block mb-0 mr-1">
@@ -213,70 +213,67 @@
 
 <!-- <p><img src="/assets/tp5/anim_notitle_verbose.gif" class="limit-height" style="max-height:300px;" /></p> -->
 
-<h3>1.0 Problem statement</h3>
+<h2>defined</h2>
+<p>Multivariate linear regression is a machine learning technique used to analyze the relationship between multiple independent variables and multiple dependent variables simultaneously. Unlike multiple linear regression, which focuses on predicting a single dependent variable from multiple predictors, multivariate linear regression allows for the modeling of multiple correlated outcome variables.</p>
 
-<p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
+<h2>1.0 Problem statement</h2>
 
-<ul>
-  <li>You would like to expand your business to cities that may give your restaurant higher profits.</li>
-  <li>The chain already has restaurants in various cities and you have data for profits and populations from the cities.</li>
-  <li>You also have data on cities that are candidates for a new restaurant.</li>
-  <ul>
-    <li>For these cities, you have the city population.</li>
-  </ul>
-</ul>
-<p>Can you use the data to help you identify which cities may potentially give your business higher profits?</p>
+<p>We will use the motivating example of housing price prediction. The training dataset contains four features (size, bedrooms, floors and, age) shown in the table below.</p>
 
-<ul>
-  <li>Note:</li>
-  <ul>
-    <li>X is the population of a city</li>
-    <li>y is the profit of a restaurant in that city. A negative value for profit indicates a loss.</li>
-    <ul>
-      <li>Both X and y are arrays.</li>
-    </ul>
-  </ul>
-</ul>
 
 <table>
   <tr>
-    <th>Population of a city (<b>x</b> 10,000) as \(x\) </th>
-    <th>Profit of a restaurent (<b>x</b> $10,000) as \( f_{w,b}(x^{(i)}) \)or \(x\) </th>
+    <th>Size (sqf) </th>
+    <th>Number of bedrooms</th>
+    <th>Number of floors</th>
+    <th>Age of Home</th>
+    <th>Price (1000$)</th>
     
 </tr>
   <tr>
-    <td>6.1101</td>
-    <td>17.592</td>
+    <td>2104</td>
+    <td>5</td>
+    <td>1</td>
+    <td>45</td>
+    <td>460</td>
   </tr>
   <tr>
-    <td>5.5277</td>
-    <td>9.1302</td>
+    <td>1416</td>
+    <td>3</td>
+    <td>2</td>
+    <td>40</td>
+    <td>232</td>
   </tr>
   <tr>
-    <td>8.5186</td>
-    <td>13.662</td>
-  </tr>
-  <tr>
-    <td>7.0032</td>
-    <td>11.854</td>
-  </tr>
-  <tr>
-    <td>5.8598</td>
-    <td>6.8233</td>
+    <td>852</td>
+    <td>2</td>
+    <td>1</td>
+    <td>35</td>
+    <td>178</td>
   </tr>
 </table>
-<p>Number of training example (size (1000 sqft) as x) \(m\)</p>
-<p>In this case \(m = 5\)</p>
+<p>Let's build a linear regression model using these values so you can then predict the price for other houses. For example, a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old. </p>
 <!-- [Read the paper](https://www.microsoft.com/en-us/research/publication/tuning-large-neural-networks-via-zero-shot-hyperparameter-transfer/)
 
 [Download the code](http://github.com/microsoft/mup) -->
 
-<h3>2.0 Model Function</h3>
-<p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
-<p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
+<h3>1.1 Matrix \(X\) containing our example</h3>
+<p>Each row of datasets represent one example, with $n$ number of features and $m$ training examples, now \(\mathbf{x}\) is an input matrix with dimensions \((m, n)\) where $m$ is row and \(n\) is column.</p>
 <!-- [![Two line-plots showing the change in activation scale between PyTorch default and the µ-Parametrization. Under PyTorch default, the activation scale grows as the network width increases for a particular time step. Under µ-Parametrization, the activation scale is stable across widths for a particular time step. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg) -->
 
+$$\mathbf{X} = 
+\begin{pmatrix}
+ x^{(0)}_0 & x^{(0)}_1 & \cdots & x^{(0)}_{n-1} \\ 
+ x^{(1)}_0 & x^{(1)}_1 & \cdots & x^{(1)}_{n-1} \\
+ \vdots  &  \vdots  &  \vdots  &  \vdots  \\
+ x^{(m-1)}_0 & x^{(m-1)}_1 & \cdots & x^{(m-1)}_{n-1} 
+\end{pmatrix}
+$$
 
+<p>notation:</p>
+<ul>
+    <li>\(\mathbf{x}^{(i)}\) is vector containing example i. \(\mathbf{x}^{(i)}\) \( = (x^{(i)}_0, x^{(i)}_1, \cdots,x^{(i)}_{n-1})\)</li>
+</ul>
 <h3>3.0 Compute Cost</h3>
 <p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
 <p>Gradient descent involve repeated steps to adjust the values of <b>w</b> and <b>b</b> to get smaller and smaller <b>Cost</b>, \(J(w,b)\).</p>
