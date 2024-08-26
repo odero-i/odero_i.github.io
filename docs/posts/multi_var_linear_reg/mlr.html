@@ -479,9 +479,31 @@ $$
  \frac{\partial J(\mathbf{w},b)}{\partial w_3}
 \end{pmatrix}
 $$
+<li>$$\frac{\partial J(\mathbf{w},b)}{\partial b} \in \mathbb{R}_{1}$$</li>
 </ul>
 
+<h2>6.0 Evaluating our model by compute R-squared</h2>
+<p>R-squared is the proportion of the variance in the dependent variable that is explained by the independent variables in a regression model. It ranges from 0 to 1, where 0 means no relationship and 1 means a perfect fit</p>
+<p>R-squared(coefficient of Determination) tells us How well our model is  performing or how well our model's predictions match the real results. A higher R-squared means our model is doing a better job predicting.</p>
 
+$$
+R^2 = 1 - \frac{Residual\ Sum\ of\ Squares\ (\mathbf{ss}_{res})}{Total\ Sum\ of\ Squares\ (\mathbf{ss}_{total})}
+$$
+
+
+<!-- ![Residual Sum of Squares](images/ssr.png)
+
+![Total Sum of Squares](images/sst.png) -->
+
+
+$$
+R^2 = 1 - \frac{\mathbf{ss}_{res}}{\mathbf{ss}_{total}}\\
+$$
+
+
+$$
+R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(y_{mean}^{(i)} - y^{(i)})^2}
+$$
 
 
 
