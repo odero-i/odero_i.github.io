@@ -292,14 +292,12 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 
 <img src="../../images/counter_cost.png" height="36", width="auto">
 
-_**3.3 Convex Cost surface**_
+<h4>3.3 Convex Cost surface</h4>
 
-The fact that the cost function squares the loss, $ \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2$  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.
+<p>The fact that the cost function squares the loss, $ \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2$  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
+<h3>4.0 Gradient Descent</h3>
 
-#### 4.0 Gradient Descent
-
-In linear regression, we utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
-
+<p>In linear regression, we utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$</p>
 $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
 \;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
  b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
