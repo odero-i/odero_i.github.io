@@ -253,78 +253,46 @@
 
 <h3>3.0 Compute Cost</h3>
 <p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
-<p>Gradient descent involve repeated steps to adjust the values of w and b to get smaller and smaller <b>Cost</b>, \(J{(w,b)}\), 
-  .</p>
+<p>Gradient descent involve repeated steps to adjust the values of w and b to get smaller and smaller <b>Cost</b>, \(J{(w,b)}\)</p>
 
-<!-- [![An animated line-plot showing the stability of optimal learning rate as we change the neural network's parametrization. The parametrization is varied by interpolating between µ-Parametrization and PyTorch default in terms of the scaling for the learning rate and the initialization scale. The animation shows that µ-Parametrization is the only parametrization that preserves the optimality of learning rate across model widths; it also achieves the best absolute performance across all parametrizations. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif) -->
 
-<p><img src="/assets/tp5/anim_notitle_verbose.gif" class="limit-height" style="max-height:300px;" /></p>
 
-<p><em>Figure 2: On the left, we train multilayer perceptrons (MLPs) of different widths (which correspond to the curves of different colors and patterns) with different learning rates (shown along the x-axis) on CIFAR10 and plot the training loss along the y-axis. On the right, the 2D plane of parameterizations is formed by interpolation of 1) the initialization scaling between PyTorch default and µP (x-axis), and 2) the learning rate scaling between PyTorch default and µP (y-axis). On this plane, PyTorch default is represented by (0, 0) and µP by (1, 1). The width-256 (log2(width) = 8) model is the same across all frames (except for random seed), but we widen models according to the parameterization represented by the dot on the right.</em></p>
 
-<p>Building on the theoretical foundation of <a href="https://www.microsoft.com/en-us/research/people/gregyang/">Tensor Programs</a>, µTransfer works automatically for advanced architectures, such as <a href="https://arxiv.org/abs/1706.03762">Transformer</a> and <a href="https://www.microsoft.com/en-us/research/publication/deep-residual-learning-for-image-recognition/">ResNet</a>. It can also simultaneously transfer a wide range of hyperparameters. Using Transformer as an example, we demonstrate in Figure 3 how the optima of key hyperparameters are stable across widths. </p>
+<h3>3.0 Compute Cost</h3>
+<p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
+<p>Gradient descent involve repeated steps to adjust the values of `w` and `b` to get smaller and smaller `Cost`, \(J(w,b)\).</p>
+<p>The equation for Cost with one variable</p> 
+$$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2}$$ 
 
-<!-- [![Four line-plots showing the stability of optima of various hyperparameters across widths. From left-to-right and top-to-bottom, we see that the optima for learning rate, cross-entropy temperature, initialization standard deviation, and learning rate schedule are all roughly stable across widths, from 128 to 4,096. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_width_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_width_edited-scaled.jpg) -->
+<p>where</p> 
+  $$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$
+  
+<ul>
+  <li>$f_{w,b}(x^{(i)})$ is our prediction for example $i$ using parameters $w,b$.</li>
+  <li>$(f_{w,b}(x^{(i)}) -y^{(i)})^2$ is the squared difference between the target value and the prediction. </li>
+  <li>These differences are summed over all the $m$ examples and divided by `2*m` to produce the cost, $J(w,b)$.</li>
+</ul>
+-   
+-    
+>Note, 
+- Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
 
-<p><img src="/assets/tp5/TP5_blog_width_cropped.jpg" class="limit-height" style="max-height:500px;" /></p>
 
-<p><em>Figure 3: Transformers of different widths parameterized in µP and trained on <a href="https://paperswithcode.com/dataset/wikitext-2">WikiText-2</a>. As we increase model width, the optimal learning rate, cross-entropy temperature, initialization scale, and learning rate schedule remain stable. We can meaningfully predict the optimal hyperparameters of a wider network by looking at those of a narrow one. In plot on the lower right, we tried the following learning rate schedules: (a) linear decay, (b) StepLR @ [5k, 8k] with a decay factor of 0.1, (c) StepLR @ [4k, 7k] with a decay factor of 0.3, (d) cosine annealing,(e) constant, and (f) inverse square-root decay.</em></p>
+_**3.1 Cost versus iterations of gradient descent**_
 
-<blockquote>
-  <p>“I am excited about µP advancing our understanding of large models. µP’s principled way of parameterizing the model and selecting the learning rate make it easier for anybody to scale the training of deep neural networks. Such an elegant combination of beautiful theory and practical impact.”</p>
+A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.
 
-  <p><em>— Johannes Gehrke, Technical Fellow, Lab Director of Research at Redmond, and CTO and Head of Machine Learning for the Intelligent Communications and Conversations Cloud (IC3)</em></p>
-</blockquote>
+![Cost vs Iteration](images/cost.png)
 
-<h1 id="beyond-width-empirical-scaling-of-model-depth-and-more">Beyond Width: Empirical Scaling of Model Depth and More</h1>
 
-<p>Modern neural network scaling involves many more dimensions than just width. In our work, we also explore how µP can be applied to realistic training scenarios by combining it with simple heuristics for nonwidth dimensions. In Figure 4, we use the same transformer setup to show how the optimal learning rate remains stable within reasonable ranges of nonwidth dimensions. For hyperparameters other than learning rate, see Figure 19 in our paper. </p>
 
-<!-- [![Four line-plots showing the stability of the optimal learning rate across width, depth, batch size, and sequence length. The width is varied from 128 to 4,096, the depth from 2 to 32, the batch size from 20 to 512, and the sequence length from 32 to 512. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_scale_dim_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_scale_dim_edited-scaled.jpg) -->
 
-<p><img src="/assets/tp5/TP5_blog_scale_dim_cropped.jpg" class="limit-height" style="max-height:500px;" /></p>
 
-<p><em>Figure 4: Transformers of different sizes parameterized in µP and trained on <a href="https://blog.salesforceairesearch.com/the-wikitext-long-term-dependency-language-modeling-dataset/">Wikitext-2</a>. Not only does the optimal learning rate transfer across width, as shown in Figure 3, it also empirically transfers across other scale dimensions—such as depth, batch size, and sequence length—across the ranges we tested here. This means we can combine our theoretically motivated transfer across width with the empirically verified one across other scale dimensions to obtain the practical procedure, µTransfer, to tune hyperparameters indirectly on a small model and transfer to a large one.</em></p>
 
-<h1 id="testing-µtransfer">Testing µTransfer</h1>
 
-<p>Now that we have verified the transfer of individual hyperparameters, it is time to combine them in a more realistic scenario. In Figure 5, we compare µTransfer, which transfers tuned hyperparameters from a small proxy model, with directly tuning the large target model. In both cases, the tuning is done via random search. Figure 5 illustrates a <a href="https://en.wikipedia.org/wiki/Pareto_front">Pareto frontier</a> of the relative tuning compute budget compared with the tuned model quality (BLEU score) on <a href="https://sites.google.com/site/iwsltevaluation2014/data-provided?authuser=0">IWSLT14 De-En</a>, a machine translation dataset. Across all compute budget levels, µTransfer is about an order of magnitude (in base 10) more compute-efficient for tuning. We expect this efficiency gap to dramatically grow as we move to larger target model sizes. </p>
 
-<!-- [![A line-plot showing the Pareto-front corresponding to model performance measured in BLEU score and the compute budget for hyperparameter tuning. The curve representing our method, µTransfer, dominates that of conventional tuning with a margin of roughly 10 times in compute budget. Our method also yields the best absolute performance, at almost 35.4 in BLEU score, where as the conventional method tops out at 35.2. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_pareto_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_pareto_edited-scaled.jpg) -->
 
-<p><img src="/assets/tp5/TP5_blog_pareto_edited-scaled.jpg" class="limit-height" style="max-height:400px;" /></p>
 
-<p><em>Figure 5: Across different tuning budgets, µTransfer dominates the baseline method of directly tuning the target model. As we train larger target models with billions of parameters, we expect the performance gap to widen, since the proxy model can remain small while still meaningfully predicting the optimal hyperparameters, as shown in Figures 3 and 4.</em></p>
-
-<h1 id="a-glimpse-of-the-future-µp--gpt-3">A Glimpse of the Future: µP + GPT-3</h1>
-
-<p>Before this work, the larger a model was, the less well-tuned we expected it to be due to the high cost of tuning. Therefore, we expected that the largest models could benefit the most from µTransfer, which is why we partnered with OpenAI to evaluate it on GPT-3. </p>
-
-<p>After parameterizing a version of GPT-3 with relative attention in µP, we tuned a small proxy model with 40 million parameters before copying the best hyperparameter combination to the 6.7-billion parameter variant of GPT-3, as prescribed by µTransfer. The total compute used during this tuning stage was only 7 percent of the compute used in the pretraining of the final 6.7-billion model. This µTransferred model outperformed the model of the same size (with absolute attention) in the original <a href="https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Farxiv.org%2Fabs%2F2005.14165&amp;data=04%7C01%7Cv-kaforster%40microsoft.com%7C7ffeca0cffc540f9a38f08d9fd79b534%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637819521438441449%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=SYsZf5I2FPXJO8y7Axxf3EYwbXyVbAh1nJdNTDkro%2FM%3D&amp;reserved=0">GPT-3 paper</a>. In fact, it performs similarly to the model (with absolute attention) with double the parameter count from the same paper, as shown in Figure 6. </p>
-
-<!-- [![Two bar-plots showing the relative performance of GPT-3 6.7B compared to GPT-3 6.7B tuned with µTransfer. On language modeling tasks, including PTB, Wikitext 103, and LM1B, the run with µTransfer achieves lower perplexities. On NLU tasks, including HellaSwag, LAMBADA, and SQuADv2, the run with µTransfer achieves higher accuracies, comparable to those achieved by GPT-3 6.7B or GPT-3 13B tuned without µTransfer. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/GPT3-barchart-1024x391.png)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/GPT3-barchart.png) -->
-
-<p><img src="/assets/tp5/GPT3-barchart.png" class="limit-height" style="max-height:300px;" /></p>
-
-<p><em>Figure 6: We applied µTransfer to GPT-3 6.7-billion parameter model with relative attention and obtained better results than the baseline with absolute attention used in the original <a href="https://arxiv.org/abs/2005.14165">GPT-3 paper</a>, all while only spending 7 percent of the pretraining compute budget on tuning. The performance of this µTransfer 6.7-billion model is comparable to that of the 13-billion model (with absolute attention) in the original GPT-3 paper.</em></p>
-
-<h1 id="implications-for-deep-learning-theory">Implications for Deep Learning Theory</h1>
-
-<p>As shown previously, µP gives a scaling rule which uniquely preserves the optimal hyperparameter combination across models of different widths in terms of training loss. Conversely, other scaling rules, like the default in PyTorch or the <a href="http://arxiv.org/abs/1806.07572">NTK parameterization</a> studied in the theoretical literature, are looking at regions in the hyperparameter space farther and farther from the optimum as the network gets wider. In that regard, we believe that the feature learning limit of µP, rather than the <a href="http://arxiv.org/abs/1806.07572">NTK limit</a>, is the most natural limit to study if our goal is to derive insights that are applicable to feature learning neural networks used in practice. As a result, more advanced theories on overparameterized neural networks should reproduce the feature learning limit of µP in the large width setting. </p>
-
-<h1 id="theory-of-tensor-programs">Theory of Tensor Programs</h1>
-
-<p>The advances described above are made possible by the theory of <a href="https://www.microsoft.com/en-us/research/people/gregyang/">Tensor Programs</a> (TPs) developed over the last several years. Just as <a href="https://pytorch.org/docs/stable/autograd.html">autograd</a> helps practitioners compute the gradient of any general computation graph, TP theory enables researchers to compute the limit of any general computation graph when its matrix dimensions become large. Applied to the underlying graphs for neural network initialization, training, and inference, the TP technique yields fundamental theoretical results, such as the architectural universality of the <a href="https://arxiv.org/abs/1910.12478">Neural Network-Gaussian Process correspondence</a> and the <a href="https://arxiv.org/abs/2011.14522">Dynamical Dichotomy theorem</a>, in addition to deriving <a href="https://arxiv.org/abs/2011.14522">µP and the feature learning limit</a> that led to µTransfer. Looking ahead, we believe extensions of TP theory to depth, batch size, and other scale dimensions hold the key to the reliable scaling of large models beyond width. </p>
-
-<h1 id="applying-µtransfer-to-your-own-models">Applying µTransfer to Your Own Models</h1>
-
-<p>Even though the math can be intuitive, we found that implementing µP (which enables µTransfer) from scratch can be error prone. This is similar to how autograd is tricky to implement from scratch even though the chain rule for taking derivatives is very straightforward. For this reason, we created the <a href="https://github.com/microsoft/mup"><code class="highlighter-rouge">mup</code> package</a> to enable practitioners to easily implement µP in their own PyTorch models, just as how frameworks like PyTorch, TensorFlow, and JAX have enabled us to take autograd for granted. Please note that µTransfer works for models of any size, not just those with billions of parameters. </p>
-
-<h1 id="the-journey-has-just-begun">The Journey Has Just Begun</h1>
-
-<p>While our theory explains why models of different widths behave differently, more investigation is needed to build a theoretical understanding of the scaling of network depth and other scale dimensions. Many works have addressed the latter, such as the research on batch size by <a href="https://arxiv.org/abs/1811.03600">Shallue et al.</a>, <a href="https://arxiv.org/abs/1711.00489">Smith et al.</a>, and <a href="https://arxiv.org/pdf/1812.06162.pdf">McCandlish et al.</a>, as well as research on neural language models in general by <a href="https://arxiv.org/abs/1909.12673">Rosenfield et al.</a> and <a href="https://arxiv.org/abs/2001.08361">Kaplan et al.</a> We believe µP can remove a confounding variable for such investigations.  Furthermore, recent large-scale architectures often involve scale dimensions beyond those we have talked about in our work, such as the number of experts in a mixture-of-experts system. Another high-impact domain to which µP and µTransfer have not been applied is fine tuning a pretrained model. While feature learning is crucial in that domain, the need for regularization and the finite-width effect prove to be interesting challenges. </p>
-
-<!-- We firmly believe in fundamental research as a cost-effective complement to trial and error and plan to continue our work to derive more principled approaches to large-scale machine learning. To learn about our other deep learning projects or opportunities to work with us and even help us expand µP, please go to our [Deep Learning Group](https://www.microsoft.com/en-us/research/group/deep-learning-group/) page. -->
 
   </div>
   <div class="col-4 sm-width-full mt-3 border-top-thin "/>
