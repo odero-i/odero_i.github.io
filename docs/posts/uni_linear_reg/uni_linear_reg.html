@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <link rel="mask-icon" href="./images/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="./images/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/assets/logos/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141821189-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141821189-1');
+</script>
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Univariety Linear Regression</title>
+  <meta name="description" content="Cross-posted from Microsoft Research Blog">
+
+  
+  
+  <link rel="stylesheet" href="https://decentdescent.org/assets/style.css">
+
+  <link rel="canonical" href="https://decentdescent.org/tp5.html">
+  <link rel="alternate" type="application/rss+xml" title="Decent Descent" href="https://decentdescent.org/feed.xml">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+  <!-- mathjax -->
+  <!-- <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script> -->
+  <!-- <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+	jax: ["input/TeX","output/HTML-CSS"],
+	displayAlign: "left",
+	displayIndent: "2em"
+    });
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script> -->
+  <!-- mathjax v3 -->
+<!--
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function(){
+    function stripcdata(x) {
+      if (x.startsWith('% <![CDATA[') && x.endsWith('%]]>'))
+	return x.substring(11,x.length-4);
+      return x;
+    }
+    document.querySelectorAll("script[type='math/tex']").forEach(function(el){
+      el.outerHTML = "\\(" + stripcdata(el.textContent) + "\\)";
+    });
+    document.querySelectorAll("script[type='math/tex; mode=display']").forEach(function(el){
+      el.outerHTML = "\\[" + stripcdata(el.textContent) + "\\]";
+    });
+    var script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+    document.head.appendChild(script);
+  }, false);
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+-->
+  <!-- Load jQuery -->
+  <!--
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  -->
+  <!-- Load KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <!--
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+  -->
+
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <!--
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  -->
+</head>
+
+
+  <body>
+
+    <header class="px-2 clearfix">
+  <div class="left sm-width-full py-1 mt-1 mt-lg-0">
+    <!--
+    <a class="align-middle link-primary text-accent" href="/">
+      Decent Descent
+    </a>
+    -->
+    <a class="align-middle link-primary mt-1" href="/">
+        <img src="./images/decent_descent_abbrev_black_text2path.svg" height="36" width="auto">
+    </a>
+  </div>
+  <div class="right sm-width-full">
+    <ul class="list-reset mt-lg-1 mb-2 mb-lg-1">
+      
+        
+      
+        
+        <li class="inline-block">
+          <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href=".././about.html">
+            About
+          </a>
+        </li>
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+</header>
+
+
+    <div>
+      
+
+<article class="container px-2 mx-auto mb4" itemscope itemtype="http://schema.org/BlogPosting">
+  
+  <h1 class="h0 col-9 sm-width-full py-0 mt-7 mb-0 inline-block" itemprop="name headline">Univariety Linear Regression</h1>
+  <h1 class="h1 col-9 sm-width-full py-0 mt-0 mb-4 inline-block" itemprop="name headline">C Programming</h1>
+  
+  <div class="col-12 sm-width-full mt-1 border-top-thin ">
+    <p class="text-accent mb-0 pt-2 pb-0 bold authordate"><a class='link-authordate' href="https://x.com/oderoi">Isack Odero</a> 
+    </p>
+    <p class="mb-1 pt-0 pb-0 bold authordate"><time datetime="2022-03-08T14:00:00+00:00" itemprop="datePublished">July 8, 2024</time>
+    
+  <div class="table">
+    <div class="inline-block mb-0 mr-1">
+      <a href="https://arxiv.org/abs/2203.03466" title="Read the Paper" class="link-social block">
+  <svg height="32" class="header-social-op" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true" fill-rule="evenodd">
+    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z 
+             M9.08 2.6H4.76c-.595 0-1.08.485-1.08 1.08v8.64c0 .595.485 1.08 1.08 1.08h6.48c.595 0 1.08-.485 1.08-1.08V5.84zm2.43 3.78H8.54V3.41z"/>
+  </svg>
+</a>
+
+    </div>
+    <div class="inline-block mb-0">
+      <a href="https://github.com/oderoi" title="Clone the Code" class="link-social block">
+<svg height="32" class="octicon octicon-mark-github header-social-op" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+</a>
+
+    </div>
+  </div>
+    
+    </p>
+  </div>
+
+  <div class="prose" itemprop="articleBody">
+      <!-- <p><em>Cross-posted from <a href="https://www.microsoft.com/en-us/research/blog/%c2%b5transfer-a-technique-for-hyperparameter-tuning-of-enormous-neural-networks/">Microsoft Research Blog</a></em></p> -->
+
+<!-- ![An animated line-plot showing the stability of optimal learning rate as we change the neural network's parametrization. The parametrization is varied by interpolating between mup-Parametrization and PyTorch default in terms of the scaling for the learning rate and the initialization scale. The animation shows that mu-Parametrization is the only parametrization that preserves the optimality of learning rate across model widths; it also achieves the best absolute performance across all parametrizations.](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif) -->
+
+<!-- <p><img src="/assets/tp5/anim_notitle_verbose.gif" class="limit-height" style="max-height:300px;" /></p> -->
+
+<h3>1.0 Problem statement</h1>
+
+<p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
+
+<ul>
+  <li>You would like to expand your business to cities that may give your restaurant higher profits.</li>
+  <li>The chain already has restaurants in various cities and you have data for profits and populations from the cities.</li>
+  <li>You also have data on cities that are candidates for a new restaurant.</li>
+  <ul>
+    <li>For these cities, you have the city population.</li>
+  </ul>
+</ul>
+<p>In this post, we relay how our fundamental research enabled us, for the first time, to tune enormous neural networks that are too expensive to train more than once. We achieved this by showing that a particular parameterization preserves optimal hyperparameters across different model sizes. This is the µ-Parametrization (or <em>µP</em>, pronounced “myu-P”) that we introduced in a <a href="https://arxiv.org/abs/2011.14522">previous paper</a>, where we showed that it uniquely enables maximal feature learning in the infinite-width limit. In collaboration with researchers at <a href="https://openai.com/">OpenAI</a>, we verified its practical advantage on a range of realistic scenarios, which we describe in our new paper, “<a href="arxiv.org/abs/2203.03466">Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</a>.”</p>
+
+<p>By greatly reducing the need to guess which training hyperparameters to use, this technique can accelerate research on enormous neural networks, such as <a href="https://arxiv.org/abs/2005.14165">GPT-3</a> and potentially larger successors in the future. We also released a PyTorch package that facilitates the integration of our technique in existing models, available on the <a href="http://github.com/microsoft/mup">project GitHub page</a> or by simply running <code class="highlighter-rouge">pip install mup</code>.</p>
+
+<!-- [Read the paper](https://www.microsoft.com/en-us/research/publication/tuning-large-neural-networks-via-zero-shot-hyperparameter-transfer/)
+
+[Download the code](http://github.com/microsoft/mup) -->
+
+<blockquote>
+  <p>“µP provides an impressive step toward removing some of the black magic from scaling up neural networks. It also provides a theoretically backed explanation of some tricks used by past work, like the <a href="https://arxiv.org/abs/1910.10683">T5 model</a>. I believe both practitioners and researchers alike will find this work valuable.”</p>
+
+  <p><em>— Colin Raffel, Assistant Professor of Computer Science, University of North Carolina at Chapel Hill and co-creator of T5</em></p>
+</blockquote>
+
+<h1 id="scaling-the-initialization-is-easy-but-scaling-training-is-hard">Scaling the Initialization Is Easy, But Scaling Training Is Hard</h1>
+
+<p>Large neural networks are hard to train partly because we don’t understand how their behavior changes as their size increases. Early work on deep learning, such as by <a href="http://proceedings.mlr.press/v9/glorot10a.html">Glorot &amp; Bengio</a> and <a href="https://www.microsoft.com/en-us/research/publication/delving-deep-into-rectifiers-surpassing-human-level-performance-on-imagenet-classification/">He et al.</a>, generated useful heuristics that deep learning practitioners widely use today. In general, these heuristics try to keep the activation scales consistent at initialization. However, as training starts, this consistency breaks at different model widths, as illustrated on the left in Figure 1.</p>
+
+<p>Unlike at random initialization, behavior during training is much harder to mathematically analyze. Our goal is to obtain a similar consistency so that as model width increases, the change in activation scales during training stay consistent and similar to initialization to avoid numerical overflow and underflow. Our solution, µP, achieves this goal, as seen on the right in Figure 1, which shows the stability of network activation scales for the first few steps of training across increasing model width. </p>
+
+<!-- [![Two line-plots showing the change in activation scale between PyTorch default and the µ-Parametrization. Under PyTorch default, the activation scale grows as the network width increases for a particular time step. Under µ-Parametrization, the activation scale is stable across widths for a particular time step. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg) -->
+
+<p><img src="/assets/tp5/logits_attnlogits_embedding_edited.jpg" class="limit-height" style="max-height:400px;" /></p>
+
+<p><em>Figure 1: In the default parameterization in PyTorch, the graph on the left, the activation scales diverge in width after one step of training. But in µP, the graph on the right, the activation scales change by a consistent amount regardless of width for any training step. The y-axis shows the change of network activation scales on a fixed input after t=0, 1, 2, 3, and 4 steps of training as the width of the model varies, which is shown along the x-axis.</em></p>
+
+<p>Our parameterization, which maintains this consistency during training, follows two pieces of crucial insight. First, gradient updates behave differently from random weights when the width is large. This is because gradient updates are derived from data and contain correlations, whereas random initializations do not. Therefore, they need to be scaled differently. Second, parameters of different shapes also behave differently when the width is large. While we typically divide parameters into weights and biases, with the former being matrices and the latter vectors, some weights behave like vectors in the large-width setting. For example, the embedding matrix in a language model is of size <em>vocabsize x width</em>. While the width tends to infinity, <em>vocabsize</em> stays constant and finite. During matrix multiplication, the difference in behavior between summing along a finite dimension and an infinite one cannot be more different.</p>
+
+<p>These insights, which we discuss in detail in a <a href="/tp4.html">previous blog post</a>, motivated us to develop µP. In fact, beyond just keeping the activation scale consistent throughout training, µP ensures that neural networks of different and sufficiently large widths behave similarly during training such that they <em>converge to</em> a desirable limit, which we call <em>the feature learning limit</em>. </p>
+
+<h1 id="a-theory-guided-approach-to-scaling-width">A Theory-Guided Approach to Scaling Width</h1>
+
+<p>Our theory of scaling enables a procedure to transfer training hyperparameters across model sizes. If, as discussed above, µP networks of different widths share similar training dynamics, they likely also share similar optimal hyperparameters. Consequently, we can simply apply the optimal hyperparameters of a small model directly onto a scaled-up version. We call this practical procedure <em>µTransfer</em>. If our hypothesis is correct, the training loss-hyperparameter curves for µP models of different widths would share a similar minimum.</p>
+
+<p>Conversely, our reasoning suggests that no scaling rule of initialization and learning rate other than µP can achieve the same result. This is supported by the animation below. Here, we vary the parameterization by interpolating the initialization scaling and the learning rate scaling between PyTorch default and µP. As shown, µP is the only parameterization that preserves the optimal learning rate across width, achieves the best performance for the model with width 213 = 8192, and where wider models always do better for a given learning rate—that is, graphically, the curves don’t intersect. </p>
+
+<!-- [![An animated line-plot showing the stability of optimal learning rate as we change the neural network's parametrization. The parametrization is varied by interpolating between µ-Parametrization and PyTorch default in terms of the scaling for the learning rate and the initialization scale. The animation shows that µ-Parametrization is the only parametrization that preserves the optimality of learning rate across model widths; it also achieves the best absolute performance across all parametrizations. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif) -->
+
+<p><img src="/assets/tp5/anim_notitle_verbose.gif" class="limit-height" style="max-height:300px;" /></p>
+
+<p><em>Figure 2: On the left, we train multilayer perceptrons (MLPs) of different widths (which correspond to the curves of different colors and patterns) with different learning rates (shown along the x-axis) on CIFAR10 and plot the training loss along the y-axis. On the right, the 2D plane of parameterizations is formed by interpolation of 1) the initialization scaling between PyTorch default and µP (x-axis), and 2) the learning rate scaling between PyTorch default and µP (y-axis). On this plane, PyTorch default is represented by (0, 0) and µP by (1, 1). The width-256 (log2(width) = 8) model is the same across all frames (except for random seed), but we widen models according to the parameterization represented by the dot on the right.</em></p>
+
+<p>Building on the theoretical foundation of <a href="https://www.microsoft.com/en-us/research/people/gregyang/">Tensor Programs</a>, µTransfer works automatically for advanced architectures, such as <a href="https://arxiv.org/abs/1706.03762">Transformer</a> and <a href="https://www.microsoft.com/en-us/research/publication/deep-residual-learning-for-image-recognition/">ResNet</a>. It can also simultaneously transfer a wide range of hyperparameters. Using Transformer as an example, we demonstrate in Figure 3 how the optima of key hyperparameters are stable across widths. </p>
+
+<!-- [![Four line-plots showing the stability of optima of various hyperparameters across widths. From left-to-right and top-to-bottom, we see that the optima for learning rate, cross-entropy temperature, initialization standard deviation, and learning rate schedule are all roughly stable across widths, from 128 to 4,096. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_width_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_width_edited-scaled.jpg) -->
+
+<p><img src="/assets/tp5/TP5_blog_width_cropped.jpg" class="limit-height" style="max-height:500px;" /></p>
+
+<p><em>Figure 3: Transformers of different widths parameterized in µP and trained on <a href="https://paperswithcode.com/dataset/wikitext-2">WikiText-2</a>. As we increase model width, the optimal learning rate, cross-entropy temperature, initialization scale, and learning rate schedule remain stable. We can meaningfully predict the optimal hyperparameters of a wider network by looking at those of a narrow one. In plot on the lower right, we tried the following learning rate schedules: (a) linear decay, (b) StepLR @ [5k, 8k] with a decay factor of 0.1, (c) StepLR @ [4k, 7k] with a decay factor of 0.3, (d) cosine annealing,(e) constant, and (f) inverse square-root decay.</em></p>
+
+<blockquote>
+  <p>“I am excited about µP advancing our understanding of large models. µP’s principled way of parameterizing the model and selecting the learning rate make it easier for anybody to scale the training of deep neural networks. Such an elegant combination of beautiful theory and practical impact.”</p>
+
+  <p><em>— Johannes Gehrke, Technical Fellow, Lab Director of Research at Redmond, and CTO and Head of Machine Learning for the Intelligent Communications and Conversations Cloud (IC3)</em></p>
+</blockquote>
+
+<h1 id="beyond-width-empirical-scaling-of-model-depth-and-more">Beyond Width: Empirical Scaling of Model Depth and More</h1>
+
+<p>Modern neural network scaling involves many more dimensions than just width. In our work, we also explore how µP can be applied to realistic training scenarios by combining it with simple heuristics for nonwidth dimensions. In Figure 4, we use the same transformer setup to show how the optimal learning rate remains stable within reasonable ranges of nonwidth dimensions. For hyperparameters other than learning rate, see Figure 19 in our paper. </p>
+
+<!-- [![Four line-plots showing the stability of the optimal learning rate across width, depth, batch size, and sequence length. The width is varied from 128 to 4,096, the depth from 2 to 32, the batch size from 20 to 512, and the sequence length from 32 to 512. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_scale_dim_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_scale_dim_edited-scaled.jpg) -->
+
+<p><img src="/assets/tp5/TP5_blog_scale_dim_cropped.jpg" class="limit-height" style="max-height:500px;" /></p>
+
+<p><em>Figure 4: Transformers of different sizes parameterized in µP and trained on <a href="https://blog.salesforceairesearch.com/the-wikitext-long-term-dependency-language-modeling-dataset/">Wikitext-2</a>. Not only does the optimal learning rate transfer across width, as shown in Figure 3, it also empirically transfers across other scale dimensions—such as depth, batch size, and sequence length—across the ranges we tested here. This means we can combine our theoretically motivated transfer across width with the empirically verified one across other scale dimensions to obtain the practical procedure, µTransfer, to tune hyperparameters indirectly on a small model and transfer to a large one.</em></p>
+
+<h1 id="testing-µtransfer">Testing µTransfer</h1>
+
+<p>Now that we have verified the transfer of individual hyperparameters, it is time to combine them in a more realistic scenario. In Figure 5, we compare µTransfer, which transfers tuned hyperparameters from a small proxy model, with directly tuning the large target model. In both cases, the tuning is done via random search. Figure 5 illustrates a <a href="https://en.wikipedia.org/wiki/Pareto_front">Pareto frontier</a> of the relative tuning compute budget compared with the tuned model quality (BLEU score) on <a href="https://sites.google.com/site/iwsltevaluation2014/data-provided?authuser=0">IWSLT14 De-En</a>, a machine translation dataset. Across all compute budget levels, µTransfer is about an order of magnitude (in base 10) more compute-efficient for tuning. We expect this efficiency gap to dramatically grow as we move to larger target model sizes. </p>
+
+<!-- [![A line-plot showing the Pareto-front corresponding to model performance measured in BLEU score and the compute budget for hyperparameter tuning. The curve representing our method, µTransfer, dominates that of conventional tuning with a margin of roughly 10 times in compute budget. Our method also yields the best absolute performance, at almost 35.4 in BLEU score, where as the conventional method tops out at 35.2. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_pareto_edited-scaled.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/TP5_blog_pareto_edited-scaled.jpg) -->
+
+<p><img src="/assets/tp5/TP5_blog_pareto_edited-scaled.jpg" class="limit-height" style="max-height:400px;" /></p>
+
+<p><em>Figure 5: Across different tuning budgets, µTransfer dominates the baseline method of directly tuning the target model. As we train larger target models with billions of parameters, we expect the performance gap to widen, since the proxy model can remain small while still meaningfully predicting the optimal hyperparameters, as shown in Figures 3 and 4.</em></p>
+
+<h1 id="a-glimpse-of-the-future-µp--gpt-3">A Glimpse of the Future: µP + GPT-3</h1>
+
+<p>Before this work, the larger a model was, the less well-tuned we expected it to be due to the high cost of tuning. Therefore, we expected that the largest models could benefit the most from µTransfer, which is why we partnered with OpenAI to evaluate it on GPT-3. </p>
+
+<p>After parameterizing a version of GPT-3 with relative attention in µP, we tuned a small proxy model with 40 million parameters before copying the best hyperparameter combination to the 6.7-billion parameter variant of GPT-3, as prescribed by µTransfer. The total compute used during this tuning stage was only 7 percent of the compute used in the pretraining of the final 6.7-billion model. This µTransferred model outperformed the model of the same size (with absolute attention) in the original <a href="https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Farxiv.org%2Fabs%2F2005.14165&amp;data=04%7C01%7Cv-kaforster%40microsoft.com%7C7ffeca0cffc540f9a38f08d9fd79b534%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637819521438441449%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=SYsZf5I2FPXJO8y7Axxf3EYwbXyVbAh1nJdNTDkro%2FM%3D&amp;reserved=0">GPT-3 paper</a>. In fact, it performs similarly to the model (with absolute attention) with double the parameter count from the same paper, as shown in Figure 6. </p>
+
+<!-- [![Two bar-plots showing the relative performance of GPT-3 6.7B compared to GPT-3 6.7B tuned with µTransfer. On language modeling tasks, including PTB, Wikitext 103, and LM1B, the run with µTransfer achieves lower perplexities. On NLU tasks, including HellaSwag, LAMBADA, and SQuADv2, the run with µTransfer achieves higher accuracies, comparable to those achieved by GPT-3 6.7B or GPT-3 13B tuned without µTransfer. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/GPT3-barchart-1024x391.png)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/GPT3-barchart.png) -->
+
+<p><img src="/assets/tp5/GPT3-barchart.png" class="limit-height" style="max-height:300px;" /></p>
+
+<p><em>Figure 6: We applied µTransfer to GPT-3 6.7-billion parameter model with relative attention and obtained better results than the baseline with absolute attention used in the original <a href="https://arxiv.org/abs/2005.14165">GPT-3 paper</a>, all while only spending 7 percent of the pretraining compute budget on tuning. The performance of this µTransfer 6.7-billion model is comparable to that of the 13-billion model (with absolute attention) in the original GPT-3 paper.</em></p>
+
+<h1 id="implications-for-deep-learning-theory">Implications for Deep Learning Theory</h1>
+
+<p>As shown previously, µP gives a scaling rule which uniquely preserves the optimal hyperparameter combination across models of different widths in terms of training loss. Conversely, other scaling rules, like the default in PyTorch or the <a href="http://arxiv.org/abs/1806.07572">NTK parameterization</a> studied in the theoretical literature, are looking at regions in the hyperparameter space farther and farther from the optimum as the network gets wider. In that regard, we believe that the feature learning limit of µP, rather than the <a href="http://arxiv.org/abs/1806.07572">NTK limit</a>, is the most natural limit to study if our goal is to derive insights that are applicable to feature learning neural networks used in practice. As a result, more advanced theories on overparameterized neural networks should reproduce the feature learning limit of µP in the large width setting. </p>
+
+<h1 id="theory-of-tensor-programs">Theory of Tensor Programs</h1>
+
+<p>The advances described above are made possible by the theory of <a href="https://www.microsoft.com/en-us/research/people/gregyang/">Tensor Programs</a> (TPs) developed over the last several years. Just as <a href="https://pytorch.org/docs/stable/autograd.html">autograd</a> helps practitioners compute the gradient of any general computation graph, TP theory enables researchers to compute the limit of any general computation graph when its matrix dimensions become large. Applied to the underlying graphs for neural network initialization, training, and inference, the TP technique yields fundamental theoretical results, such as the architectural universality of the <a href="https://arxiv.org/abs/1910.12478">Neural Network-Gaussian Process correspondence</a> and the <a href="https://arxiv.org/abs/2011.14522">Dynamical Dichotomy theorem</a>, in addition to deriving <a href="https://arxiv.org/abs/2011.14522">µP and the feature learning limit</a> that led to µTransfer. Looking ahead, we believe extensions of TP theory to depth, batch size, and other scale dimensions hold the key to the reliable scaling of large models beyond width. </p>
+
+<h1 id="applying-µtransfer-to-your-own-models">Applying µTransfer to Your Own Models</h1>
+
+<p>Even though the math can be intuitive, we found that implementing µP (which enables µTransfer) from scratch can be error prone. This is similar to how autograd is tricky to implement from scratch even though the chain rule for taking derivatives is very straightforward. For this reason, we created the <a href="https://github.com/microsoft/mup"><code class="highlighter-rouge">mup</code> package</a> to enable practitioners to easily implement µP in their own PyTorch models, just as how frameworks like PyTorch, TensorFlow, and JAX have enabled us to take autograd for granted. Please note that µTransfer works for models of any size, not just those with billions of parameters. </p>
+
+<h1 id="the-journey-has-just-begun">The Journey Has Just Begun</h1>
+
+<p>While our theory explains why models of different widths behave differently, more investigation is needed to build a theoretical understanding of the scaling of network depth and other scale dimensions. Many works have addressed the latter, such as the research on batch size by <a href="https://arxiv.org/abs/1811.03600">Shallue et al.</a>, <a href="https://arxiv.org/abs/1711.00489">Smith et al.</a>, and <a href="https://arxiv.org/pdf/1812.06162.pdf">McCandlish et al.</a>, as well as research on neural language models in general by <a href="https://arxiv.org/abs/1909.12673">Rosenfield et al.</a> and <a href="https://arxiv.org/abs/2001.08361">Kaplan et al.</a> We believe µP can remove a confounding variable for such investigations.  Furthermore, recent large-scale architectures often involve scale dimensions beyond those we have talked about in our work, such as the number of experts in a mixture-of-experts system. Another high-impact domain to which µP and µTransfer have not been applied is fine tuning a pretrained model. While feature learning is crucial in that domain, the need for regularization and the finite-width effect prove to be interesting challenges. </p>
+
+<!-- We firmly believe in fundamental research as a cost-effective complement to trial and error and plan to continue our work to derive more principled approaches to large-scale machine learning. To learn about our other deep learning projects or opportunities to work with us and even help us expand µP, please go to our [Deep Learning Group](https://www.microsoft.com/en-us/research/group/deep-learning-group/) page. -->
+
+  </div>
+  <div class="col-4 sm-width-full mt-3 border-top-thin "/>
+  <div class="table pt-2">
+    <div class="inline-block mb-0 mr-1">
+      <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+ <circle cx="8" cy="8" r="8"/>
+</svg>
+
+    </div>
+    <div class="inline-block mb-0 mr-1">
+      <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+ <circle cx="8" cy="8" r="8"/>
+</svg>
+
+    </div>
+    <div class="inline-block mb-0 mr-1">
+      <a href="https://twitter.com/intent/tweet?text=Tuning+GPT-3+on+a+Single+GPU&amp;url=https%3A%2F%2Fdecentdescent.org%2Ftp5.html" title="Share on twitter" class="link-social block">
+  <svg height="32" class="header-social-op" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
+  	c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
+  	c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
+  	c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
+  	c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
+  </svg>
+</a>
+
+    </div>
+    <div class="inline-block mb-0 mr-1">
+      <a onclick="parent.postMessage('submit','*')" href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdecentdescent.org%2Ftp5.html&amp;t=Tuning+GPT-3+on+a+Single+GPU" title="Share on Hacker News" class="link-social block">
+  <svg height="32" class="header-social-op" version="1.1" width="32" viewBox="0 0 496 496" aria-hidden="true">
+    <path d="M 248,0 C 111,0 0,111 0,248 0,385 111,496 248,496 385,496 496,385 496,248 496,111 385,0 248,0 Z m -96,120 h 37.30078 c 52.5,98.3 49.19883,101.19961 59.29883,125.59961 12.3,-27 5.79961,-24.39961 60.59961,-125.59961 H 344 L 263.19922,275.09961 V 376 H 231.80078 V 273.30078 Z M 45.087891,221.17773 c 0.03739,0.007 0.07799,0.0215 0.111328,0.0215 H 45 c 0.01711,-0.0286 0.0505,-0.0286 0.08789,-0.0215 z
+"/>
+  </svg>
+</a>
+
+    </div>
+    <div class="inline-block mb-0 mr-1">
+      <a href="http://reddit.com/submit?url=https%3A%2F%2Fdecentdescent.org%2Ftp5.html&amp;title=Tuning+GPT-3+on+a+Single+GPU" title="Share on Reddit" class="link-social block">
+  <svg height="32" class="header-social-op" version="1.1" width="32" viewBox="8 8 496 496" aria-hidden="true">
+    <path d="M201.5 305.5c-13.8 0-24.9-11.1-24.9-24.6 0-13.8 11.1-24.9 24.9-24.9 13.6 0 24.6 11.1 24.6 24.9 0 13.6-11.1 24.6-24.6 24.6zM504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-132.3-41.2c-9.4 0-17.7 3.9-23.8 10-22.4-15.5-52.6-25.5-86.1-26.6l17.4-78.3 55.4 12.5c0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.3 24.9-24.9s-11.1-24.9-24.9-24.9c-9.7 0-18 5.8-22.1 13.8l-61.2-13.6c-3-.8-6.1 1.4-6.9 4.4l-19.1 86.4c-33.2 1.4-63.1 11.3-85.5
+    26.8-6.1-6.4-14.7-10.2-24.1-10.2-34.9 0-46.3 46.9-14.4 62.8-1.1 5-1.7 10.2-1.7 15.5 0 52.6 59.2 95.2 132 95.2 73.1 0 132.3-42.6 132.3-95.2 0-5.3-.6-10.8-1.9-15.8 31.3-16 19.8-62.5-14.9-62.5zM302.8 331c-18.2 18.2-76.1 17.9-93.6 0-2.2-2.2-6.1-2.2-8.3 0-2.5 2.5-2.5 6.4 0 8.6 22.8 22.8 87.3 22.8 110.2 0 2.5-2.2 2.5-6.1 0-8.6-2.2-2.2-6.1-2.2-8.3 0zm7.7-75c-13.6 0-24.6 11.1-24.6 24.9 0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.1 24.9-24.6 0-13.8-11-24.9-24.9-24.9z"/>
+  </svg>
+</a>
+
+    </div>
+    <div class="inline-block mb-0 mr-1">
+      <a href="https://facebook.com/sharer.php?u=https%3A%2F%2Fdecentdescent.org%2Ftp5.html" title="Share on Facebook" class="link-social block">
+  <svg height="32" class="header-social-op" version="1.1" width="32" viewBox="8 8 496 496" aria-hidden="true">
+    <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+/>
+  </svg>
+</a>
+
+    </div>
+  </div>
+
+</article>
+
+
+    </div>
+
+    <!--
+<div class="border-top-thin clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+    <p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/"></a></p>
+    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <li class="inline-block mr-1">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Decent Descent">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </li>
+      <li class="inline-block">
+        <a class="github-button" href="https://github.com//" data-icon="octicon-star" data-count-href="//stargazers" data-count-api="/repos//#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star / on GitHub">Star</a>
+      </li>
+    </ul>
+  </div>
+</div>
+-->
+<div class="clearfix mt-2 mt-lg-4">
+  <div class="container mx-auto px-2">
+  </div>
+</div>
+
+<!--
+<script>
+  $("script[type='math/tex']").replaceWith(function() {
+      var tex = $(this).text();
+      return katex.renderToString(tex, {displayMode: false});
+  });
+
+  $("script[type='math/tex; mode=display']").replaceWith(function() {
+      var tex = $(this).html();
+      return katex.renderToString(tex.replace(/%.*/g, ''), {displayMode: true});
+  });
+</script>
+-->
+
+
+  </body>
+
+</html>
