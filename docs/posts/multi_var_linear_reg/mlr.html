@@ -440,6 +440,46 @@ $$f_{\mathbf{w},b}(\mathbf{x}) \in \mathbb{R}_{m \times 1}$$
 
 <p>In contrast to previous labs, \(\mathbf{w}\) and \(\mathbf{x}^{(i)}\) are vectors rather than scalars supporting multiple features.</p>
 
+<h2>5.0 Gradient Descent With Multiple Variables</h2>
+<p>Gradient descent for multiple variables:</p>
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
+& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j} \tag{5}  \; & \text{for j = 0..n-1}\newline
+&b\ \ = b -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+
+<p>where, n is the number of features, parameters \(w_j\),  $b$, are updated simultaneously and where  </p>
+
+$$
+\begin{align}
+\frac{\partial J(\mathbf{w},b)}{\partial w_j}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})x_{j}^{(i)} \tag{6}  \\
+\frac{\partial J(\mathbf{w},b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)}) \tag{7}
+\end{align}
+$$
+
+<ul>
+    <li>m is the number of training examples in the data set</li>
+    <li>\(f_{\mathbf{w},b}(\mathbf{x}^{(i)})\) is the model's prediction, while \(y^{(i)}\) is the target value</li>
+</ul>
+<p>Note:</p>
+<ul>
+    <li>$$\frac{\partial J(\mathbf{w},b)}{\partial w_j} \in \mathbb{R}_{1 \times n} = \mathbb{R}_{1 \times 4}$$</li>
+    $$\frac{\partial J(\mathbf{w},b)}{\partial w_j}
+= 
+\begin{pmatrix}
+  \frac{\partial J(\mathbf{w},b)}{\partial w_0} ,
+  \frac{\partial J(\mathbf{w},b)}{\partial w_1} ,
+  \cdots ,
+ \frac{\partial J(\mathbf{w},b)}{\partial w_{n-1}}
+\end{pmatrix}
+= 
+\begin{pmatrix}
+  \frac{\partial J(\mathbf{w},b)}{\partial w_0} ,
+  \frac{\partial J(\mathbf{w},b)}{\partial w_1} ,
+  \frac{\partial J(\mathbf{w},b)}{\partial w_2} ,
+ \frac{\partial J(\mathbf{w},b)}{\partial w_3}
+\end{pmatrix}
+$$
+</ul>
 
 
 
