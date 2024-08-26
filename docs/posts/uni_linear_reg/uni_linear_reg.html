@@ -248,22 +248,13 @@
 
 <h3>2.0 Model Function</h3>
 <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
-$$ f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$
+<p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 <!-- [![Two line-plots showing the change in activation scale between PyTorch default and the µ-Parametrization. Under PyTorch default, the activation scale grows as the network width increases for a particular time step. Under µ-Parametrization, the activation scale is stable across widths for a particular time step. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg) -->
 
-<p><img src="/assets/tp5/logits_attnlogits_embedding_edited.jpg" class="limit-height" style="max-height:400px;" /></p>
-
-<p><em>Figure 1: In the default parameterization in PyTorch, the graph on the left, the activation scales diverge in width after one step of training. But in µP, the graph on the right, the activation scales change by a consistent amount regardless of width for any training step. The y-axis shows the change of network activation scales on a fixed input after t=0, 1, 2, 3, and 4 steps of training as the width of the model varies, which is shown along the x-axis.</em></p>
-
-<p>Our parameterization, which maintains this consistency during training, follows two pieces of crucial insight. First, gradient updates behave differently from random weights when the width is large. This is because gradient updates are derived from data and contain correlations, whereas random initializations do not. Therefore, they need to be scaled differently. Second, parameters of different shapes also behave differently when the width is large. While we typically divide parameters into weights and biases, with the former being matrices and the latter vectors, some weights behave like vectors in the large-width setting. For example, the embedding matrix in a language model is of size <em>vocabsize x width</em>. While the width tends to infinity, <em>vocabsize</em> stays constant and finite. During matrix multiplication, the difference in behavior between summing along a finite dimension and an infinite one cannot be more different.</p>
-
-<p>These insights, which we discuss in detail in a <a href="/tp4.html">previous blog post</a>, motivated us to develop µP. In fact, beyond just keeping the activation scale consistent throughout training, µP ensures that neural networks of different and sufficiently large widths behave similarly during training such that they <em>converge to</em> a desirable limit, which we call <em>the feature learning limit</em>. </p>
-
-<h1 id="a-theory-guided-approach-to-scaling-width">A Theory-Guided Approach to Scaling Width</h1>
-
-<p>Our theory of scaling enables a procedure to transfer training hyperparameters across model sizes. If, as discussed above, µP networks of different widths share similar training dynamics, they likely also share similar optimal hyperparameters. Consequently, we can simply apply the optimal hyperparameters of a small model directly onto a scaled-up version. We call this practical procedure <em>µTransfer</em>. If our hypothesis is correct, the training loss-hyperparameter curves for µP models of different widths would share a similar minimum.</p>
-
-<p>Conversely, our reasoning suggests that no scaling rule of initialization and learning rate other than µP can achieve the same result. This is supported by the animation below. Here, we vary the parameterization by interpolating the initialization scaling and the learning rate scaling between PyTorch default and µP. As shown, µP is the only parameterization that preserves the optimal learning rate across width, achieves the best performance for the model with width 213 = 8192, and where wider models always do better for a given learning rate—that is, graphically, the curves don’t intersect. </p>
+<h3>3.0 Compute Cost</h3>
+<p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
+<p>Gradient descent involve repeated steps to adjust the values of w and b to get smaller and smaller <b>Cost</b>, \(J{(w,b)}\), 
+  .</p>
 
 <!-- [![An animated line-plot showing the stability of optimal learning rate as we change the neural network's parametrization. The parametrization is varied by interpolating between µ-Parametrization and PyTorch default in terms of the scaling for the learning rate and the initialization scale. The animation shows that µ-Parametrization is the only parametrization that preserves the optimality of learning rate across model widths; it also achieves the best absolute performance across all parametrizations. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/1400x788_Hyperparameters_no_logo_hero.gif) -->
 
