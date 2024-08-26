@@ -282,6 +282,90 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 <img src="../../images/cost.png" height="36" width="auto">
 
 
+<h4>3.2 Plot of cost J(w,b) vs w,b with path of gradient descent</h4>
+
+<p>Plot shows the $cost(w,b)$ over a range of $w$ and $b$. Cost levels are represented by the rings. Overlayed, using red arrows, is the path of gradient descent. Here are some things to note:</p>
+- The path makes steady (monotonic) progress toward its goal.
+- initial steps are much larger than the steps near the goal.
+
+![Cost vs Iteration](images/counter_cost.png)
+
+_**3.3 Convex Cost surface**_
+
+The fact that the cost function squares the loss, $ \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2$  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.
+
+#### 4.0 Gradient Descent
+
+In linear regression, we utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
+
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
+\;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
+ b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+where, parameters $w$, $b$ are updated simultaneously.  
+The gradient is defined as:
+$$
+\begin{align}
+\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})*x^{(i)} \tag{4}\\
+  \frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\\
+\end{align}
+$$
+
+Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
+
+
+_**4.1 Cost vs w, with gradients, b set to 100.**_
+
+The plot shows $\frac{\partial J(w,b)}{\partial w}$ or the slope of the cost curve relative to $w$ at three points. The derivative is negative. Due to the 'bowl shape', the derivatives will always lead gradient descent toward the bottom where the gradient is zero.
+
+![gradient](images/grads.png)
+
+#### 5.0 Evaluating our model
+
+To evaluate the estimation model, we use coefficient of determination which is given by the following formula:
+
+$$
+R^2 = 1 - \frac{Residual\ Square\ Sum}{Total\ Square\ Sum}
+$$
+
+
+$$
+R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - f_{w,b}(x^{(i)})_{mean})^2}
+$$
+
+#### 6.0 Learning parameters using batch gradient descent 
+
+You will now find the optimal parameters of a linear regression model by using batch gradient descent. Recall batch refers to running all the examples in one iteration.
+- You don't need to implement anything for this part. Simply run the cells below. 
+
+- A good way to verify that gradient descent is working correctly is to look
+at the value of $J(w,b)$ and check that it is decreasing with each step. 
+
+- Assuming you have implemented the gradient and computed the cost correctly and you have an appropriate value for the learning rate alpha, $J(w,b)$ should never increase and should converge to a steady value by the end of the algorithm.
+
+_**6.1 Expected Output**_
+
+Optimal w, b found by gradient descent 
+
+| w                  | b                        |
+| -------------------| ------------------------ |
+|1.492054            |-3.216610                 |
+
+We will now use our final parameters w, b to find our prediction for single example.
+
+recall:
+
+$$
+f_{w,b}(x^{(i)}) = w * x^{i} + b
+$$
+
+Let's predict what profit will be for the ares of 35,000 and 70,000 people
+
+- The model takes in population of a city in 10,000s as input. 
+
+- Therefore, 35,000 people can be translated into an input to the model as `input[] = {3.5}`
+
+- Similarly, 70,000 people can be translated into an input to the model as `input[] = {7.5}`
 
 
 
