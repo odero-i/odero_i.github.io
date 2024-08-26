@@ -188,7 +188,7 @@
 
 <!-- <p><img src="/assets/tp5/anim_notitle_verbose.gif" class="limit-height" style="max-height:300px;" /></p> -->
 
-<h3>1.0 Problem statement</h1>
+<h3>1.0 Problem statement</h3>
 
 <p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
 
@@ -215,7 +215,7 @@
 
 <table>
   <tr>
-    <th>Population of a city (\(x\) 10,000) as $x$ </th>
+    <th>Population of a city (\(x\) 10,000) as \(x\)$ </th>
     <th>Profit of a restaurent (\(x\) $10,000) as \( f_{w,b}(x^{(i)}) \)or \(x\)$ </th>
     
 </tr>
@@ -240,24 +240,13 @@
     <td>6.8233</td>
   </tr>
 </table>
-<p>By greatly reducing the need to guess which training hyperparameters to use, this technique can accelerate research on enormous neural networks, such as <a href="https://arxiv.org/abs/2005.14165">GPT-3</a> and potentially larger successors in the future. We also released a PyTorch package that facilitates the integration of our technique in existing models, available on the <a href="http://github.com/microsoft/mup">project GitHub page</a> or by simply running <code class="highlighter-rouge">pip install mup</code>.</p>
-
+<p>Number of training example (size (1000 sqft) as x) \(m\)</p>
+<p>In this case \(m = 5\)</p>
 <!-- [Read the paper](https://www.microsoft.com/en-us/research/publication/tuning-large-neural-networks-via-zero-shot-hyperparameter-transfer/)
 
 [Download the code](http://github.com/microsoft/mup) -->
 
-<blockquote>
-  <p>“µP provides an impressive step toward removing some of the black magic from scaling up neural networks. It also provides a theoretically backed explanation of some tricks used by past work, like the <a href="https://arxiv.org/abs/1910.10683">T5 model</a>. I believe both practitioners and researchers alike will find this work valuable.”</p>
-
-  <p><em>— Colin Raffel, Assistant Professor of Computer Science, University of North Carolina at Chapel Hill and co-creator of T5</em></p>
-</blockquote>
-
-<h1 id="scaling-the-initialization-is-easy-but-scaling-training-is-hard">Scaling the Initialization Is Easy, But Scaling Training Is Hard</h1>
-
-<p>Large neural networks are hard to train partly because we don’t understand how their behavior changes as their size increases. Early work on deep learning, such as by <a href="http://proceedings.mlr.press/v9/glorot10a.html">Glorot &amp; Bengio</a> and <a href="https://www.microsoft.com/en-us/research/publication/delving-deep-into-rectifiers-surpassing-human-level-performance-on-imagenet-classification/">He et al.</a>, generated useful heuristics that deep learning practitioners widely use today. In general, these heuristics try to keep the activation scales consistent at initialization. However, as training starts, this consistency breaks at different model widths, as illustrated on the left in Figure 1.</p>
-
-<p>Unlike at random initialization, behavior during training is much harder to mathematically analyze. Our goal is to obtain a similar consistency so that as model width increases, the change in activation scales during training stay consistent and similar to initialization to avoid numerical overflow and underflow. Our solution, µP, achieves this goal, as seen on the right in Figure 1, which shows the stability of network activation scales for the first few steps of training across increasing model width. </p>
-
+<h3>2.0 Model Function</h3>
 <!-- [![Two line-plots showing the change in activation scale between PyTorch default and the µ-Parametrization. Under PyTorch default, the activation scale grows as the network width increases for a particular time step. Under µ-Parametrization, the activation scale is stable across widths for a particular time step. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg) -->
 
 <p><img src="/assets/tp5/logits_attnlogits_embedding_edited.jpg" class="limit-height" style="max-height:400px;" /></p>
