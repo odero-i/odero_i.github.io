@@ -251,16 +251,10 @@
 <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 <!-- [![Two line-plots showing the change in activation scale between PyTorch default and the µ-Parametrization. Under PyTorch default, the activation scale grows as the network width increases for a particular time step. Under µ-Parametrization, the activation scale is stable across widths for a particular time step. ](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg)](https://www.microsoft.com/en-us/research/uploads/prod/2022/03/logits_attnlogits_embedding_edited.jpg) -->
 
-<h3>3.0 Compute Cost</h3>
-<p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
-<p>Gradient descent involve repeated steps to adjust the values of w and b to get smaller and smaller <b>Cost</b>, \(J{(w,b)}\)</p>
-
-
-
 
 <h3>3.0 Compute Cost</h3>
 <p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
-<p>Gradient descent involve repeated steps to adjust the values of `w` and `b` to get smaller and smaller `Cost`, \(J(w,b)\).</p>
+<p>Gradient descent involve repeated steps to adjust the values of <b>w</b> and <b>b</b> to get smaller and smaller <b>Cost</b>, \(J(w,b)\).</p>
 <p>The equation for Cost with one variable</p> 
 $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2}$$ 
 
@@ -270,7 +264,7 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 <ul>
   <li>\(f_{w,b}(x^{(i)}) \)is our prediction for example $i$ using parameters \(w,b\).</li>
   <li>\((f_{w,b}(x^{(i)}) -y^{(i)})^2\) is the squared difference between the target value and the prediction. </li>
-  <li>These differences are summed over all the $m$ examples and divided by `2*m` to produce the cost, \(J(w,b)\).</li>
+  <li>These differences are summed over all the $m$ examples and divided by <b>2*m</b> to produce the cost, \(J(w,b)\).</li>
 </ul>
    
 <p>Note,</p> 
@@ -284,7 +278,9 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 <h4>3.1 Cost versus iterations of gradient descent</h4>
 
 <p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
-![Cost vs Iteration](images/cost.png)
+
+<img src="../../images/cost.png" height="36" width="auto">
+
 
 
 
