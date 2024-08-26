@@ -299,7 +299,104 @@ $$
     <li>\(b\) is a scalar parameter. </li>
 </ul>
 
+<h2>2.0 Load datasets</h2>
+<p>As shown in a problem statement, our dataset contains five features (size, bedrooms, floors and, age, price of the house), \(n = 5\) and ahundred examples, \(m = 100\).</p>
+<p>In this case our dataset will have the size of \((m , n) = (100 , 5)\)</p>
 
+$$\mathbf{data} = 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & \cdots & y^{(0)}_{n-1} \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & \cdots & y^{(1)}_{n-1} \\
+ \vdots      & \vdots      & \vdots      & \vdots      & \vdots\\
+ x^{(m-1)}_{0} & x^{(m-1)}_{1} & x^{(m-1)}_{2} & \cdots & y^{(m-1)}_{n-1}
+\end{pmatrix}
+
+=
+ 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & x^{(0)}_{3} & y^{(0)}_{4} \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & x^{(1)}_{3} & y^{(1)}_{4} \\
+ \vdots      & \vdots      & \vdots      & \vdots      & \vdots\\
+ x^{(99)}_{0} & x^{(99)}_{1} & x^{(99)}_{2} & x^{(99)}_{3} & y^{(99)}_{4}
+\end{pmatrix}
+$$
+
+$$data \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 5}$$
+
+<h3>2.1 Load input datasets, \(\mathbf{x}^{(i)}_{j}\)</h3>
+
+<p>Input datasets will comprise of five features (size, bedrooms, floors and, age), $n = 4$ and hundred exaples,\(m = 100\).</p>
+
+$$\mathbf{X} = 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & \cdots & x^{(0)}_{n-1}  \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & \cdots & x^{(1)}_{n-1}  \\
+ \vdots      & \vdots      & \vdots      & \vdots \\
+ x^{(m-1)}_{0} & x^{(m-1)}_{1} & \cdots & x^{(m-1)}_{n-1} 
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & x^{(0)}_{3}  \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & x^{(1)}_{3}  \\
+ \vdots      & \vdots      & \vdots      & \vdots \\
+ x^{(99)}_{0} & x^{(99)}_{1} & x^{(99)}_{2} & x^{(99)}_{3} 
+\end{pmatrix}
+$$
+
+$$\mathbf{X} \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 4}$$
+
+<h3>2.2 Load output datasets, \(\mathbf{y}^{(i)}_{j}\)</h3>
+
+<p>Input datasets will comprise of only one features (price), \(n = 1\) and hundred exaples,\(m = 100\).</p>
+
+
+$$\mathbf{Y} = 
+\begin{pmatrix}
+  y^{(0)}_{0} \\ 
+  y^{(1)}_{0} \\
+  \vdots     \\
+ y^{(m-1)}_{0}
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+  y^{(0)}_{0} \\ 
+  y^{(1)}_{0} \\
+  \vdots     \\
+ y^{(99)}_{0}
+\end{pmatrix}
+$$
+
+$$Y \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 1}$$
+
+<h3>2.3 Initialize parameters  \(\mathbf{w}_{j}  , b\)</h3>
+
+<ul>
+    <li>
+        \(\mathbf{w}_{j}\) is a vector with $n = 4$ elements.
+
+        <ul>
+            <li>
+                Each element contains the parameter associated with one feature.
+            </li>
+        </ul>
+    </li>
+</ul>
+
+$$\mathbf{w} = \begin{pmatrix}
+w_{0} \\ 
+w_{1} \\
+\vdots\\
+w_{n-1}
+\end{pmatrix}
+= \begin{pmatrix}
+w_{0} \\ 
+w_{1} \\
+w_{2}\\
+w_{3}
+\end{pmatrix}
+$$
+
+$$\mathbf{w} \in \mathbb{R}_{n \times 1}  =  \mathbb{R}_{4 \times 1}$$
 
 
 
