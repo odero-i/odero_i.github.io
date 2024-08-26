@@ -191,8 +191,51 @@
     <li>For these cities, you have the city population.</li>
   </ul>
 </ul>
-<p>In this post, we relay how our fundamental research enabled us, for the first time, to tune enormous neural networks that are too expensive to train more than once. We achieved this by showing that a particular parameterization preserves optimal hyperparameters across different model sizes. This is the µ-Parametrization (or <em>µP</em>, pronounced “myu-P”) that we introduced in a <a href="https://arxiv.org/abs/2011.14522">previous paper</a>, where we showed that it uniquely enables maximal feature learning in the infinite-width limit. In collaboration with researchers at <a href="https://openai.com/">OpenAI</a>, we verified its practical advantage on a range of realistic scenarios, which we describe in our new paper, “<a href="arxiv.org/abs/2203.03466">Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</a>.”</p>
+<p>Can you use the data to help you identify which cities may potentially give your business higher profits?</p>
 
+<ul>
+  <li>Note:</li>
+  <ul>
+    <li>X is the population of a city</li>
+    <li>y is the profit of a restaurant in that city. A negative value for profit indicates a loss.</li>
+    <ul>
+      <li>Both X and y are arrays.</li>
+    </ul>
+  </ul>
+</ul>
+
+Here's the table converted to HTML:
+
+```html
+<table border="1">
+  <tr>
+    <th>Population of a city (x 10,000) as x</th>
+    <th>Profit of a restaurant (x $10,000) as f<sub>w,b</sub>(x<sup>(i)</sup>) or y</th>
+  </tr>
+  <tr>
+    <td>6.1101</td>
+    <td>17.592</td>
+  </tr>
+  <tr>
+    <td>5.5277</td>
+    <td>9.1302</td>
+  </tr>
+  <tr>
+    <td>8.5186</td>
+    <td>13.662</td>
+  </tr>
+  <tr>
+    <td>7.0032</td>
+    <td>11.854</td>
+  </tr>
+  <tr>
+    <td>5.8598</td>
+    <td>6.8233</td>
+  </tr>
+</table>
+```
+
+This will create a table with the data you provided.
 <p>By greatly reducing the need to guess which training hyperparameters to use, this technique can accelerate research on enormous neural networks, such as <a href="https://arxiv.org/abs/2005.14165">GPT-3</a> and potentially larger successors in the future. We also released a PyTorch package that facilitates the integration of our technique in existing models, available on the <a href="http://github.com/microsoft/mup">project GitHub page</a> or by simply running <code class="highlighter-rouge">pip install mup</code>.</p>
 
 <!-- [Read the paper](https://www.microsoft.com/en-us/research/publication/tuning-large-neural-networks-via-zero-shot-hyperparameter-transfer/)
