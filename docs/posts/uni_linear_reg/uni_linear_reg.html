@@ -272,16 +272,18 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
   <li>$(f_{w,b}(x^{(i)}) -y^{(i)})^2$ is the squared difference between the target value and the prediction. </li>
   <li>These differences are summed over all the $m$ examples and divided by `2*m` to produce the cost, $J(w,b)$.</li>
 </ul>
--   
--    
->Note, 
-- Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
+   
+<p>Note,</p> 
+<ul>
+  <li>
+    Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
+  </li>
+</ul>
 
 
-_**3.1 Cost versus iterations of gradient descent**_
+<h4>3.1 Cost versus iterations of gradient descent</h4>
 
-A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.
-
+<p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
 ![Cost vs Iteration](images/cost.png)
 
 
