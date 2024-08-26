@@ -279,7 +279,7 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 
 <p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
 
-<img src="../../images/cost.png" height="36" width="auto">
+<img src="../../images/cost.png" height="100" width="auto">
 
 
 <h4>3.2 Plot of cost J(w,b) vs w,b with path of gradient descent</h4>
@@ -290,19 +290,19 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
   <li>initial steps are much larger than the steps near the goal.</li>
 </ul>
 
-<img src="../../images/counter_cost.png" height="36", width="auto">
+<img src="../../images/counter_cost.png" height="100", width="auto">
 
 <h4>3.3 Convex Cost surface</h4>
 
-<p>The fact that the cost function squares the loss, $ \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2$  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
-<h3>4.0 Gradient Descent</h3>
+<p>The fact that the cost function squares the loss, \( \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2\)  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
 
-<p>In linear regression, we utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$</p>
+<h3>4.0 Gradient Descent</h3>
+<p>In linear regression, we utilize input training data to fit the parameters \(w\),\(b\) by minimizing a measure of the error between our predictions \(f_{w,b}(x^{(i)})\) and the actual data \(y^{(i)}\). The measure is called the $cost$, \(J(w,b)\). In training you measure the cost over all of our training samples \(x^{(i)},y^{(i)}\)</p>
 $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
 \;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
  b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
 \end{align*}$$
-where, parameters $w$, $b$ are updated simultaneously.  
+where, parameters \(w\), \(b\) are updated simultaneously.  
 The gradient is defined as:
 $$
 \begin{align}
@@ -311,19 +311,18 @@ $$
 \end{align}
 $$
 
-Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
+<p>Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.</p>
 
+<h3>4.1 Cost vs w, with gradients, b set to 100.</h3>
 
-_**4.1 Cost vs w, with gradients, b set to 100.**_
-
-The plot shows $\frac{\partial J(w,b)}{\partial w}$ or the slope of the cost curve relative to $w$ at three points. The derivative is negative. Due to the 'bowl shape', the derivatives will always lead gradient descent toward the bottom where the gradient is zero.
+<p>The plot shows \(\frac{\partial J(w,b)}{\partial w}\) or the slope of the cost curve relative to $w$ at three points. The derivative is negative. Due to the 'bowl shape', the derivatives will always lead gradient descent toward the bottom where the gradient is zero.</p>
 
 ![gradient](images/grads.png)
+<img src="../../images/grads.png" height="100", width="auto">
 
-#### 5.0 Evaluating our model
+ <h3>5.0 Evaluating our model</h3>
 
-To evaluate the estimation model, we use coefficient of determination which is given by the following formula:
-
+<p>To evaluate the estimation model, we use coefficient of determination which is given by the following formula:</p>
 $$
 R^2 = 1 - \frac{Residual\ Square\ Sum}{Total\ Square\ Sum}
 $$
@@ -333,19 +332,19 @@ $$
 R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - f_{w,b}(x^{(i)})_{mean})^2}
 $$
 
-#### 6.0 Learning parameters using batch gradient descent 
+<h3>6.0 Learning parameters using batch gradient descent </h3>
 
-You will now find the optimal parameters of a linear regression model by using batch gradient descent. Recall batch refers to running all the examples in one iteration.
-- You don't need to implement anything for this part. Simply run the cells below. 
+<p>You will now find the optimal parameters of a linear regression model by using batch gradient descent. Recall batch refers to running all the examples in one iteration.</p>
+<ul>
+  <li>You don't need to implement anything for this part. Simply run the cells below. </li>
+  <li>A good way to verify that gradient descent is working correctly is to look at the value of \(J(w,b)\) and check that it is decreasing with each step. </li>
+  <li>Assuming you have implemented the gradient and computed the cost correctly and you have an appropriate value for the learning rate alpha, $J(w,b)$ should never increase and should converge to a steady value by the end of the algorithm.  </li>
+</ul>
 
-- A good way to verify that gradient descent is working correctly is to look
-at the value of $J(w,b)$ and check that it is decreasing with each step. 
+<h4>6.1 Expected Output</h4>
 
-- Assuming you have implemented the gradient and computed the cost correctly and you have an appropriate value for the learning rate alpha, $J(w,b)$ should never increase and should converge to a steady value by the end of the algorithm.
+<p>Optimal w, b found by gradient descent </p>
 
-_**6.1 Expected Output**_
-
-Optimal w, b found by gradient descent 
 
 | w                  | b                        |
 | -------------------| ------------------------ |
