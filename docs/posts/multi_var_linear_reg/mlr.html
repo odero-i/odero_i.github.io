@@ -773,8 +773,111 @@ $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
 
 <img src="../../images/output4.png" class="limit-height">
 
+<p>
+    The plot shows , $\ w_0\ $ at each iteration is overshooting the optimal value and as a result, cost ends up *increasing* rather than approaching the minimum. Note that this is not a completely accurate picture as there are 4 parameters being modified each pass rather than just one. This plot is only showing \(w_0\) with the other parameters fixed at benign values.
+</p>
+<ul>
+    <li>
+        <b>\(\ \mathbf{\alpha} \ =\ 9e-7\)</b>
+    </li>
+</ul>
+
+<pre>
+    <code>
+        def load_parms():
+            data=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            iter=data[:, 0]
+            w0=data[:, 1]
+            cost=data[:,11]
+            r_square=data[:, 12]
+            return iter,w0, cost, r_square
+
+        iter, w0, cost, r_square=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+
+<pre>
+    <code>
+        x_labels=['no iteration', 'w0', 'r_square']
+        fig, ax=plt.subplots(1, 2,figsize=(12,3), sharey=True)
+        ax[0].plot(iter,cost)
+        ax[1].plot(w0, cost)
+        ax[0].set_xlabel(x_labels[0])
+        ax[1].set_xlabel(x_labels[1])
+        ax[0].set_ylabel("costt")
+
+        plt.show()
+
+        x_labels=['no iteration', 'w0', 'r_square']
+        plt.plot(iter, r_square)
+        plt.xlabel(x_labels[0])
+        plt.ylabel("r_square")
+
+        plt.show()
+    </code>
+    <p>Python</p>
+</pre>
+
+<img src="../../images/output5.png" class="limit-height">
+
+<img src="../../images/output6.png" class="limit-height">
+
+<p>
+    On the left, you see that cost is decreasing as it should. On the right, you can see that $w_0$ is still oscillating around the minimum, but it is decreasing each iteration rather than increasing. Note above that <b>dj_dw[0]</b> changes sign with each iteration as <b>w[0]</b> jumps over the optimal value.
+This alpha value will converge. You can vary the number of iterations to see how it behaves.
+</p>
 
 
+<ul>
+    <li>
+        <b>\(\ \mathbf{\alpha} \ =\ 1e-7\)</b>
+    </li>
+</ul>
+
+<pre>
+    <code>
+        def load_parms():
+            data=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            iter=data[:, 0]
+            w0=data[:, 1]
+            cost=data[:,11]
+            r_square=data[:, 12]
+            return iter,w0, cost, r_square
+
+        iter, w0, cost, r_square=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+
+<pre>
+    <code>
+        x_labels=['no iteration', 'w0', 'r_square']
+        fig, ax=plt.subplots(1, 2,figsize=(12,3), sharey=True)
+        ax[0].plot(iter,cost)
+        ax[1].plot(w0, cost)
+        ax[0].set_xlabel(x_labels[0])
+        ax[1].set_xlabel(x_labels[1])
+        ax[0].set_ylabel("costt")
+
+        plt.show()
+
+        x_labels=['no iteration', 'w0', 'r_square']
+        plt.plot(iter, r_square)
+        plt.xlabel(x_labels[0])
+        plt.ylabel("r_square")
+
+        plt.show()
+    </code>
+    <p>Python</p>
+</pre>
+
+<img src="../../images/output7.png" class="limit-height">
+
+<img src="../../images/output8.png" class="limit-height">
+
+<p>
+    On the left, you see that cost is decreasing as it should. On the right you can see that (\w_0\) is decreasing without crossing the minimum. Note above that <b>dj_w0</b> is negative throughout the run. This solution will also converge, though not quite as quickly as the previous example.</p>
 
 <p>continue ...</p>
 
