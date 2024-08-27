@@ -490,10 +490,8 @@ $$
 R^2 = 1 - \frac{Residual\ Sum\ of\ Squares\ (\mathbf{ss}_{res})}{Total\ Sum\ of\ Squares\ (\mathbf{ss}_{total})}
 $$
 
-
-<!-- ![Residual Sum of Squares](images/ssr.png)
-
-![Total Sum of Squares](images/sst.png) -->
+<img src="../../images/ssr.png" class="limit-height">
+<img src="../../images/sst.png" class="limit-height">
 
 
 $$
@@ -504,6 +502,52 @@ $$
 $$
 R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(y_{mean}^{(i)} - y^{(i)})^2}
 $$
+
+<h2>Feature scaling and Learning Rate (Multi-variable)</h2>
+<h3>Goals</h3>
+<p>Here will:</p>
+<ul>
+    <li>explore the impact of the *learning rate alpha* on gradient descent</li>
+    <li>improve performance of gradient descent by *feature scaling* using z-score normalization</li>
+</ul>
+
+<h3>Tools</h3>
+<p>We will utilize the functions and files developed in the last code as well as matplotlib and NumPy. </p>
+<h3>Problem Statement</h3>
+<p>As in the previous , we will use the motivating example of housing price prediction. The training data set contains many examples with 4 features (size, bedrooms, floors and age) shown in the table below. Note, in this lab, the Size feature is in sqft while earlier labs utilized 1000 sqft.</p>
+<p>for example</p>
+<h3>Dataset: </h3>
+<table>
+    <tr>
+        <th>Size (sqft)</th>
+        <th>Number of Bedrooms</th>
+        <th>Number of floors</th>
+        <th>Age of  Home</th>
+        <th>Price (1000s dollars)</th>
+    </tr>
+    <tr>
+        <td>952</td>
+        <td>2</td>
+        <td>1</td>
+        <td>65</td>
+        <td>271.5</td>
+    </tr>
+    <tr>
+        <td>1244</td>
+        <td>3</td>
+        <td>2</td>
+        <td>64</td>
+        <td>232</td>
+    </tr>
+    <tr>
+        <td>1947</td>
+        <td>3</td>
+        <td>2</td>
+        <td>17</td>
+        <td>509.8</td>
+    </tr>
+</table>
+
 
 
 
