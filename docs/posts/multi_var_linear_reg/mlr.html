@@ -560,6 +560,7 @@ $$
       import numpy as np
       import <matplotlib class="pyt">matplotlib.pylab</matplotlib>
     </code>
+    <b>Python</b>
 </pre>
 
 <p>Let's view the dataset and its features by plotting each feature versus price.</p>
@@ -571,6 +572,27 @@ $$
             x = data[:, :4]
             y=data[:, 4]
             return x, y
+    </code>
+    <b>Python</b>
+</pre>
+
+<pre>
+    <code>
+        # load the dataset
+        x_train,y_train=data_load()
+        x_features = ['size(sqft)','bedrooms','floors','age']
+    </code>
+    <b>Python</b>
+</pre>
+
+<pre>
+    <code>
+        # feature engineering
+        x_fe=x_train[:,1]*x_train[:,2]
+
+        print(x_fe)
+        print(x_train[:,1])
+        print(x_train[:,2])
     </code>
     <b>Python</b>
 </pre>
