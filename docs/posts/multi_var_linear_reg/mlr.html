@@ -999,6 +999,37 @@ This alpha value will converge. You can vary the number of iterations to see how
 </pre>
 
 
+<h3>Feature scalling technique</h3>
+<p>three different techniques: </p>
+<ul>
+    <li>Feature scaling, essentially dividing each positive feature by its maximum value, or more generally, rescale each feature by both its minimum and maximum values using (x-min)/(max-min). Both ways normalizes features to the range of -1 and 1, where the former method works for positive features which is simple and serves well for the lecture's example, and the latter method works for any features.</li>
+    <li>Mean normalization: \(x_i := \dfrac{x_i - \mu_i}{max - min} \) </li>
+    <li>Z-score normalization which we will explore below. </li>
+</ul>
+
+<h4>z-score normalization </h4>
+<p>After z-score normalization, all features will have a mean of 0 and a standard deviation of 1.</p>
+<p>To implement z-score normalization, adjust your input values as shown in this formula:</p>
+    $$x^{(i)}_j = \dfrac{x^{(i)}_j - \mu_j}{\sigma_j} \tag{1}$$ 
+<p>where \(j\) selects a feature or a column in the \(\mathbf{X}\) matrix. \(µ_j\) is the mean of all the values for feature \(j\) and \(\sigma_j\) is the standard deviation of feature \(j\).</p>
+
+$$
+\begin{align}
+\mu_j &= \frac{1}{m} \sum_{i=0}^{m-1} x^{(i)}_j \tag{2}\\
+\sigma^2_j &= \frac{1}{m} \sum_{i=0}^{m-1} (x^{(i)}_j - \mu_j)^2  \tag{3}
+\end{align}
+$$
+
+<b>Implementation Note:</b>
+<p>When normalizing the features, it is important
+    to store the values used for normalization - the mean value and the standard deviation used for the computations. After learning the parameters
+    from the model, we often want to predict the prices of houses we have not
+    seen before. Given a new x value (living room area and number of bed-
+    rooms), we must first normalize x using the mean and standard deviation
+    that we had previously computed from the training set.</p>
+
+
+
 <p>continue ...</p>
 
 
