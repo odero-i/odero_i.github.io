@@ -562,6 +562,18 @@ $$
     </code>
 </pre>
 
+<p>Let's view the dataset and its features by plotting each feature versus price.</p>
+
+<pre>
+    <code>
+        def data_load():
+            data = np.loadtxt("data/houses.txt", delimiter=",")
+            x = data[:, :4]
+            y=data[:, 4]
+            return x, y
+    </code>
+    <b>Python</b>
+</pre>
 
 <p>continue ...</p>
 
