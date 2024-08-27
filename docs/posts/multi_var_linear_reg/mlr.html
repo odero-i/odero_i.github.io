@@ -646,6 +646,47 @@ $$
     </code>
 </pre>
 <img src="../../images/output2.png" class="limit-height">
+<p>Plotting each feature vs. the target, price, provides some indication of which features have the strongest influence on price. Above, increasing size also increases price. Bedrooms and floors don't seem to have a strong impact on price. Newer houses have higher prices than older houses.</p>
+
+<h2> Learning rate</h2>
+
+<b>Gradient descent</b>
+<p>From Gradient descent for multiple variables:</p>
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
+& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j} \tag{5}  \; & \text{for j = 0..n-1}\newline
+&b\ \ = b -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+<p>where, n is the number of features, parameters $w_j$,  $b$, are updated simultaneously and where </p>
+
+<b>Debugging:</b>
+
+<ul>
+    <li>
+        How to make sure gradient descent work correctly.
+    </li>
+    <li>
+        How to choose learning rate, \(\mathbf{\alpha}\)
+    </li>
+</ul>
+
+<b>Make sure gradient descent work correctly</b>
+<b>Objective :</b>
+<ul>
+    <li>
+        \(min_{w,b}\ \ \mathbf{J}_{(w,b)}\)
+    </li>
+    <li>
+        \(\mathbf{J}_{(w,b)}\) should dencrease after every iteration.
+    </li>
+</ul>
+
+<b>Automatic convergence test :</b>
+<ul>
+    <li>
+        Let \(\mathbf{\alpha}\) be a small number, \(10^{-3}\). If \(\ \mathbf{J}_{(w,b)}\ \) dencreases by \(\ \le \mathbf{\alpha}\ \) in one iteration, declare convergence.
+    </li>
+</ul>
+
 
 <p>continue ...</p>
 
