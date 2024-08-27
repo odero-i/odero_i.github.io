@@ -573,6 +573,7 @@ $$
             y=data[:, 4]
             return x, y
     </code>
+    <b>Python</b>
 </pre>
 <p></p>
 
@@ -581,7 +582,8 @@ $$
         # load the dataset
         x_train,y_train=data_load()
         x_features = ['size(sqft)','bedrooms','floors','age']
-    </code>>
+    </code>
+    <b>Python</b>
 </pre>
 <p></p>
 <pre>
@@ -593,6 +595,7 @@ $$
         print(x_train[:,1])
         print(x_train[:,2])
     </code>
+    <b>Python</b>
 </pre>
 <p></p>
 <pre>
@@ -613,6 +616,7 @@ $$
         2. 1. 1. 1. 2. 2. 1. 1. 1. 1. 2. 2. 1. 2. 1. 2. 1. 1. 1. 2. 1. 1. 1. 2.
         1. 2. 1. 1.]
     </code>
+    <b>Python</b>
 </pre>
 <p></p>
 <pre>
@@ -632,6 +636,7 @@ $$
         ax[0].set_ylabel("Price (1000's)")
         plt.show()
     </code>
+    <b>Python</b>
 </pre>
 <p></p>
 <img src="../../images/output1.png" class="limit-height">
@@ -644,6 +649,7 @@ $$
         ax[0].set_ylabel("Price (1000's)")
         plt.show()
     </code>
+    <b>Python</b>
 </pre>
 <img src="../../images/output2.png" class="limit-height">
 <p>Plotting each feature vs. the target, price, provides some indication of which features have the strongest influence on price. Above, increasing size also increases price. Bedrooms and floors don't seem to have a strong impact on price. Newer houses have higher prices than older houses.</p>
@@ -686,6 +692,88 @@ $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
         Let \(\mathbf{\alpha}\) be a small number, \(10^{-3}\). If \(\ \mathbf{J}_{(w,b)}\ \) dencreases by \(\ \le \mathbf{\alpha}\ \) in one iteration, declare convergence.
     </li>
 </ul>
+
+<b>Convergence :</b>
+<ul>
+    <li>Parameter, (\\ \mathbf{(w,b)}\ \) are found for a global minimum.</li>
+</ul>
+
+<b>Identify problems with Gradient Descent :</b>
+<ul>
+    <li>
+        If you see cost, \(\ \mathbf{J}_{(w,b)}\ \) increases instead of dencreses over a number of iterarions (overshooting).
+    </li>
+    <li>
+        If you see cost, \(\ \mathbf{J}_{(w,b)}\ \) dencreses but in isolatio like waves over the number of iterations.
+    </li>
+</ul>
+
+<b>Adjust Learning rate</b>
+<ul>
+    <li>
+        If learning rate, \(\ \mathbf{\alpha}\ \) is too big. Observe this by plotting \(\ \mathbf{J}_{(w,b)}\ \) vs \(\ \mathbf{w}_{j}\ \)
+     <ul>
+        <li>
+            cost, (\\ \mathbf{J}_{(w,b)}\ \) overshoots.
+        </li>
+        <li>
+            cost, \(\ \mathbf{J}_{(w,b)}\ \) takes more iterations to converge. 
+        </li>
+     </ul>
+    </li>
+</ul>
+
+<b>Let's run gradient descent for :</b>
+<ul>
+    <li>
+        <b>\(\ \mathbf{\alpha} \ =\ 9.9e-7\)</b>
+    </li>
+</ul>
+
+<pre>
+    <code>
+        def load_parms():
+            data=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            iter=data[:, 0]
+            w0=data[:, 1]
+            cost=data[:,11]
+            r_square=data[:, 12]
+            return iter,w0, cost, r_square
+
+        iter, w0, cost, r_square=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+
+<pre>
+    <code>
+        x_labels=['no iteration', 'w0', 'r_square']
+        fig, ax=plt.subplots(1, 2,figsize=(12,3), sharey=True)
+        ax[0].plot(iter,cost)
+        ax[1].plot(w0, cost)
+        ax[0].set_xlabel(x_labels[0])
+        ax[1].set_xlabel(x_labels[1])
+        ax[0].set_ylabel("costt")
+
+        # plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+        plt.show()
+
+        x_labels=['no iteration', 'w0', 'r_square']
+        plt.plot(iter, r_square)
+        plt.xlabel(x_labels[0])
+        plt.ylabel("r_square")
+
+        plt.show()
+    </code>
+    <b>Python</b>
+</pre>
+
+<img src="../../images/output3.png" class="limit-height">
+
+<img src="../../images/output4.png" class="limit-height">
+
+
 
 
 <p>continue ...</p>
