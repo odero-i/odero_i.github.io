@@ -1028,7 +1028,129 @@ $$
     rooms), we must first normalize x using the mean and standard deviation
     that we had previously computed from the training set.</p>
 
+<b>Implementation</b>
 
+<h3>Distribution of features befor and after normalization</h3>
+<p>Let's look at the steps involved in Z-score normalization. The plot below shows the transformation step by step of <b>size (sqft)</b></p>
+<pre>
+    <code>
+        def load_data():
+            x=np.loadtxt("data/houses.txt", delimiter=",") 
+            x_norm=np.loadtxt("data/houses_norm.txt", delimiter=",")
+            x_mean=np.loadtxt("data/house_mean.txt", delimiter=",")
+
+            return x, x_mean, x_norm
+
+        x, x_mean, x_norm=load_data()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+<pre>
+    <code>
+        x_mm=x[:,0:4] - x_mean
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+
+<pre>
+    <code>
+        x_labels=['size', 'no_bedroom', 'no floor', 'age', 'price']
+
+        fig,ax=plt.subplots(1, 3, figsize=(24, 6))
+
+
+        ax[0].scatter(x[:,0], x[:,3])
+        ax[0].set_xlabel(x_labels[0]); 
+        ax[0].set_ylabel(x_labels[3]);
+        ax[0].set_title("unnormalized")
+        # ax[0].axis('equal')
+
+        ax[1].scatter(x_mm[:,0], x[:,3])
+        ax[1].set_xlabel(x_labels[0]);
+        ax[0].set_ylabel(x_labels[3]);
+        ax[1].set_title(r"X - $\mu$")
+        # ax[1].axis('equal')
+
+        ax[2].scatter(x_norm[:,0], x[:,3])
+        ax[2].set_xlabel(x_labels[0])
+        ax[0].set_ylabel(x_labels[3])
+        ax[2].set_title(r"Z-score normalized")
+        # ax[2].axis('equal')
+        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        fig.suptitle("distribution of features before, during, after normalization")
+        plt.show()
+    </code>
+    <b>
+        Python
+    </b>
+</pre>
+
+<img src="../../images/output9.png" class="limit-height">
+<p>The plot above shows the relationship between two of the training set parameters, "age" and "size(sqft)". <b>These are plotted with equal scale</b>.</p>
+<ul>
+    <li>
+        Left: Unnormalized: The range of values or the variance of the 'size(sqft)' feature is much larger than that of age
+    </li>
+    <li>
+        Middle: The first step removes the mean or average value from each feature. This leaves features that are centered around zero. It's difficult to see the difference for the 'age' feature, but 'size(sqft)' is clearly around zero.
+    </li>
+    <li>
+        Right: The second step divides by the variance. This leaves both features centered at zero with a similar scale.
+    </li>
+</ul>
+
+<p>Let's re-run our gradient descent algorithm with normalized data.</p>
+<p>Note the <b>vastly larger value of alpha</b>. This will speed up gradient descent.</p>
+<ul>
+    <li>
+        <b>\(\ \mathbf{\alpha} \ =\ 1e-1\)</b>
+    </li>
+</ul>
+
+<pre>
+    <code>
+        def load_parms():
+            data=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            iter=data[:, 0]
+            w0=data[:, 1]
+            cost=data[:,11]
+            r_square=data[:, 12]
+            return iter,w0, cost, r_square
+
+        iter, w0, cost, r_square=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+
+<pre>
+    <code>
+        x_labels=['no iteration', 'w0', 'r_square']
+        fig, ax=plt.subplots(1, 2,figsize=(12,3), sharey=True)
+        ax[0].plot(iter,cost)
+        ax[1].plot(w0, cost)
+        ax[0].set_xlabel(x_labels[0])
+        ax[1].set_xlabel(x_labels[1])
+        ax[0].set_ylabel("costt")
+
+        plt.show()
+
+        plt.plot(iter, r_square)
+        plt.xlabel(x_labels[0])
+        plt.ylabel("r_square")
+
+        plt.show()
+
+
+        plt.show()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+<img src="../../images/output10.png" class="limit-height">
+<img src="../../images/output11.png" class="limit-height">
 
 <p>continue ...</p>
 
