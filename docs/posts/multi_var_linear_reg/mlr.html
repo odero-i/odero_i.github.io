@@ -1152,6 +1152,115 @@ $$
 <img src="../../images/output10.png" class="limit-height">
 <img src="../../images/output11.png" class="limit-height">
 
+<p>The scaled features get very accurate results <b>much, much faster!</b>. Notice the gradient of each parameter is tiny by the end of this fairly short run. A learning rate of 0.1 is a good start for regression with normalized features.</p>
+
+<p>Let's plot our predictions versus the target values. Note, the prediction is made using the normalized feature while the plot is shown using the original feature values.</p>
+
+<pre>
+    <code>
+        def load_parms():
+            x_norm=np.loadtxt("data/houses_norm.txt", delimiter=',')
+            data=np.loadtxt("data/houses.txt", delimiter=',')
+            params=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            y=data[:,4]
+            w=params[:, 1:5]
+            b=params[:, 5]
+            djdw=params[:,6:10]
+            djdb=params[:, 10]
+            return x_norm,y,w, b
+
+        x_norm,y,w, b=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+
+<pre>
+    <code>
+        x_labels=['size', 'no_bedroom', 'no floor', 'age', 'price']
+
+        #predict target using normalized features
+        iter = w.shape[0]
+        m=y.shape[0]
+
+        yp = np.zeros(m)
+        for i in range(m):
+            yp[i] = np.dot(x_norm[i], w[(iter-1),:]) + b[iter-1]
+
+        # plot predictions and targets versus original features    
+        fig,ax=plt.subplots(1,4,figsize=(24, 6),sharey=True)
+        for i in range(len(ax)):
+            ax[i].scatter(x_norm[:,i],y, label = 'target')
+            ax[i].set_xlabel(x_labels[i])
+            ax[i].scatter(x_norm[:,i],yp, label = 'predict')
+        ax[0].set_ylabel("Price"); ax[0].legend();
+
+        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        fig.suptitle("target versus prediction using z-score normalized model")
+        plt.show()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+<img src="../../images/output12.png" class="limit-height">
+<p>The results look good. A few points to note:</p>
+<ul>
+    <li>
+        with multiple features, we can no longer have a single plot showing results versus features.
+    </li>
+    <li>
+        when generating the plot, the normalized features were used. Any predictions using the parameters learned from a normalized training set must also be normalized.
+    </li>
+</ul>
+
+<b>Prediction</b>
+<p>The point of generating our model is to use it to predict housing prices that are not in the data set. Let's predict the price of a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old. Recall, that you must normalize the data with the mean and standard deviation derived when the training data was normalized. </p>
+
+<pre>
+    <code>
+        def load_parms():
+            x_norm=np.loadtxt("data/houses_norm.txt", delimiter=',')
+            data=np.loadtxt("data/houses.txt", delimiter=',')
+            params=np.loadtxt("data/saved_par.txt", delimiter=",") 
+            x_mean=np.loadtxt("data/house_mean.txt", delimiter=',')
+            x_std=np.loadtxt("data/houses_std.txt", delimiter=',')
+            y=data[:,4]
+            w=params[:, 1:5]
+            b=params[:, 5]
+            return x_norm, y, w, b, x_mean, x_std
+
+        x_norm, y, w, b, x_mean, x_std=load_parms()
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+<pre>
+    <code>
+        # First, normalize out example.
+        x_house = np.array([1200, 3, 1, 40])
+
+        #predict target using normalized features
+        iter = w.shape[0]
+
+        yp = np.zeros(1)
+
+        x_house_norm = (x_house - x_mean) / x_std
+
+        x_house_predict = np.dot(x_house_norm, w[(iter-1),:]) + b[iter-1]
+        print(f" predicted price of a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old = ${x_house_predict}")
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+<pre>
+    <code>
+        predicted price of a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old = $1.3857270007835593e+51
+    </code>
+    <Out>Output</Out>
+</pre>
+
+
+
 <p>continue ...</p>
 
 
