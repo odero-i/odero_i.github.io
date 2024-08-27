@@ -616,7 +616,7 @@ $$
         2. 1. 1. 1. 2. 2. 1. 1. 1. 1. 2. 2. 1. 2. 1. 2. 1. 1. 1. 2. 1. 1. 1. 2.
         1. 2. 1. 1.]
     </code>
-    <b>Python</b>
+    <b>Output</b>
 </pre>
 <p></p>
 <pre>
@@ -907,8 +907,96 @@ This alpha value will converge. You can vary the number of iterations to see how
     </tr>
 </table>
 
+<p>The data have very different and wide range of data, this may cause parameters to converge to minimum at a very different rate.</p>
+
+<p>
+    <ul>
+        <li>\(w_0\) which corespond to \(x_0\), size (sqft) will converge at a slower pace than \(w_2\) corespond to \(x_2\), number of floors.</li>
+        <li>the features vary significantly in magnitude making some features update much faster than others. </li>
+        <li>So we have to make sure all \(\mathbf{w_{j}}\) converge at the same rate atleast we have to making \(\mathbf{x_{j}^{i}}\) into approximatelly \(-1\ge \mathbf{x}_{j}^{i} \le +1\) range.</li>
+    </ul>
+</p>
+
+<b>Acceptable ranges of \(\mathbf{x_{j}}\)</b>
+<ul>
+    <li>
+        \(\mathbf{-1}\ge \mathbf{x}_{j} \le \mathbf{+1}\)
+    </li>
+    <li>\(\mathbf{-3}\ge \mathbf{x}_{j} \le \mathbf{+3}\)</li>
+    <li>\(\mathbf{-0.33}\ge \mathbf{x}_{j} \le \mathbf{+0.33}\) </li>
+</ul>
+
+<pre>
+    <code>
+        def data_load():
+            data = np.loadtxt("data/houses.txt", delimiter=",")
+            x = data[:, :4]
+            y=data[:, 4]
+            return x, y
+
+        # load the dataset
+        x_train,y_train=data_load()
+        x_features = ['size(sqft)','bedrooms','floors','age']
 
 
+        #size of the house
+        max_size=np.max(x_train[:,0])
+        min_size=np.min(x_train[:,0])
+        range_size=max_size - min_size
+        print(f"min_size: {min_size}")
+        print(f"max_size: {max_size}")
+        print(f"range of house size: {range_size}")
+
+
+        #no of bedroom in the house
+        max_bed=np.max(x_train[:,1])
+        min_bed=np.min(x_train[:,1])
+        range_bed=max_bed - min_bed
+        print(f"min_bed: {min_bed}")
+        print(f"max_bed: {max_bed}")
+        print(f"range of no of bedrooms : {range_bed}")
+
+
+        #no  of floors in the house
+        max_flr=np.max(x_train[:, 2])
+        min_flr=np.min(x_train[:,2])
+        range_flr=max_flr - min_flr
+        print(f"min_flr: {min_flr}")
+        print(f"max_flr: {max_flr}")
+        print(f"no of floors: {range_flr}")
+
+
+        #age  of the house
+        max_age=np.max(x_train[:, 3])
+        min_age=np.min(x_train[:,3])
+        range_age=max_age - min_age
+        print(f"min_age: {min_age}")
+        print(f"max_age: {max_age}")
+        print(f"age of the house: {range_age}")
+
+
+    </code>
+    <b>Python</b>
+</pre>
+<p></p>
+
+<pre>
+    <code>
+        min_size: 788.0
+        max_size: 3194.0
+        range of house size: 2406.0
+        min_bed: 0.0
+        max_bed: 4.0
+        range of no of bedrooms : 4.0
+        min_flr: 1.0
+        max_flr: 2.0
+        no of floors: 1.0
+        min_age: 12.0
+        max_age: 107.0
+        age of the house: 95.0
+    </code>
+    <b>Output</b>
+</pre>
 
 
 <p>continue ...</p>
