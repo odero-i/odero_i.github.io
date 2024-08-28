@@ -41,6 +41,30 @@
   gtag('config', 'UA-26652609-2');
 </script>  <script src="https://lightning.svbtle.com/cargo/share_buttons-dd547cdb8c37c1c5b949d9a5f034ef854d39634831852762b3d730f59a9e47d4.js" data-turbolinks-track="true"></script>
   <script src="//platform.twitter.com/widgets.js" async></script>
+
+  <script>
+    // Function to handle kudos click
+    function handleKudosClick(event) {
+      event.preventDefault(); // Prevent the default action
+      
+      var kudoElement = event.currentTarget; // The element that was clicked
+      var kudoCountElement = kudoElement.querySelector('.num'); // Find the kudos count element
+      
+      // Increment the kudos count
+      var currentCount = parseInt(kudoCountElement.textContent, 10);
+      kudoCountElement.textContent = currentCount + 1;
+      
+      // Change the appearance to show it's been "kudo'd"
+      kudoElement.classList.add('complete');
+    }
+  
+    // Attach event listeners to the kudos buttons
+    document.querySelectorAll('.kudo.able').forEach(function(kudoButton) {
+      kudoButton.addEventListener('click', handleKudosClick);
+    });
+  </script>
+  
+
 </head>
 <body class="overlord blog">
 <style scoped>
@@ -191,7 +215,7 @@ section#readnext:hover p span {
   <a href="https://svbtleusercontent.com/rrN7pqfXC3qYFpS251K3hF0xspap.png"><img src="https://svbtleusercontent.com/rrN7pqfXC3qYFpS251K3hF0xspap_small.png" alt=""></a></p>
 
 
-  <figure class="postend kudo able clearfix" id="kudo_2RGK4Zc5CVmThp8wZeC8pG">
+  <!-- <figure class="postend kudo able clearfix" id="kudo_2RGK4Zc5CVmThp8wZeC8pG">
     <a href="#kudo">
       <div class="filling">&nbsp;</div>
     </a>
@@ -205,7 +229,24 @@ section#readnext:hover p span {
     <div class="num">1,393</div>
     <div class="txt">Kudos</div>
   </figure>
-</article>
+</article> -->
+
+<figure class="postend kudo able clearfix" id="kudo_2RGK4Zc5CVmThp8wZeC8pG">
+  <a href="#kudo">
+    <div class="filling">&nbsp;</div>
+  </a>
+  <div class="num">1,393</div> <!-- Kudos count -->
+  <div class="txt">Kudos</div>
+</figure>
+
+figure.kudo.complete div.filling {
+  background-color: #FFD700; /* Gold color to indicate kudos */
+}
+
+figure.kudo.complete .txt {
+  color: #FFD700;
+}
+
 
   <div id="share_links" data-no-turbolink>
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="gdb" data-related="svbtle" data-no-turbolink>Tweet</a>
