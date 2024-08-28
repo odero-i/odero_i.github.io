@@ -49,20 +49,43 @@
       
       var kudoElement = event.currentTarget; // The element that was clicked
       var kudoCountElement = kudoElement.querySelector('.num'); // Find the kudos count element
+      var kudoId = kudoElement.id; // Get the ID of the kudo element
+      
+      // Retrieve the current count from local storage
+      var currentCount = parseInt(localStorage.getItem(kudoId) || '0', 10);
       
       // Increment the kudos count
-      var currentCount = parseInt(kudoCountElement.textContent, 10);
-      kudoCountElement.textContent = currentCount + 1;
+      currentCount += 1;
+      
+      // Update the count element
+      kudoCountElement.textContent = currentCount;
+      
+      // Store the updated count in local storage
+      localStorage.setItem(kudoId, currentCount);
       
       // Change the appearance to show it's been "kudo'd"
       kudoElement.classList.add('complete');
     }
   
-    // Attach event listeners to the kudos buttons
-    document.querySelectorAll('.kudo.able').forEach(function(kudoButton) {
-      kudoButton.addEventListener('click', handleKudosClick);
-    });
+    // Function to initialize kudos counts from local storage
+    function initializeKudos() {
+      document.querySelectorAll('.kudo.able').forEach(function(kudoButton) {
+        var kudoId = kudoButton.id;
+        var storedCount = localStorage.getItem(kudoId);
+        
+        if (storedCount) {
+          kudoButton.querySelector('.num').textContent = storedCount;
+          kudoButton.classList.add('complete');
+        }
+        
+        kudoButton.addEventListener('click', handleKudosClick);
+      });
+    }
+  
+    // Initialize kudos counts on page load
+    document.addEventListener('DOMContentLoaded', initializeKudos);
   </script>
+  
   
 
 </head>
