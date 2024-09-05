@@ -303,13 +303,11 @@ section#readnext:hover p span {
           }
           return f_x;
         }
-        <!-- <img src="./images/compute_model_output.png" > -->
       </code>
     </pre>
   </blockquote>
 
 
-  <h3>3.0 Compute Cost</h3>
 <h1 id="compute_cost_1">Compute Cost <a class="head_anchor" href="#compute_cost_1">#</a></h1>
 <p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
 <p>Gradient descent involve repeated steps to adjust the values of <b>w</b> and <b>b</b> to get smaller and smaller <b>Cost</b>, \(J(w,b)\).</p>
@@ -331,6 +329,41 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
     Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
   </li>
 </ul>
+
+<blockquote>
+  <pre>
+    <code>
+      float compute_cost(float x[], float y[], float w, float b, int m){
+
+        /*
+        Computes the cost function for linear regression.
+    
+        Args:
+        X (ndarray (m,1)): Data, m examples 
+        Y (ndarray (m,1)): target values
+        w,b (scalar)     : model parameters  
+        m (scalar)       : number of examples, X
+    
+        Returns
+          total_cost (float): The cost of using w,b as the parameters for linear regression
+                to fit the data points in X and Y
+        */
+    
+        float J_wb = 0;
+        float f_x;
+    
+        for (int i = 0; i < m; i++)
+        {
+          f_x = x[i] * w + b; 
+          J_wb += pow((f_x - y[i]), 2);
+        }
+        J_wb /= (2 * m);
+    
+        return J_wb;
+      }
+    </code>
+  </pre>
+</blockquote>
 
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
