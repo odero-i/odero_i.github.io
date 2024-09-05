@@ -30,17 +30,27 @@
   <link rel="stylesheet" href="https://lightning.svbtle.com/cargo/legacy/build.blog-120c367e4cc2cdf2d031c71f795ecea0ef4033f8b24d12d8e147c86e08e2ed2a.css" media="all" data-turbolinks-track="reload" />
   <script src="https://lightning.svbtle.com/cargo/build.blog-41a284c81b4230cd8ab812d35fabef8cc99e927407ed15604d3206997ef79818.js" data-turbolinks-track="reload"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGMRYDBB5R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('set', 'linker', {
-    'accept_incoming': true
-  });
-  gtag('config', 'G-VGMRYDBB5R');
-  gtag('config', 'UA-26652609-2');
-</script>  <script src="https://lightning.svbtle.com/cargo/share_buttons-dd547cdb8c37c1c5b949d9a5f034ef854d39634831852762b3d730f59a9e47d4.js" data-turbolinks-track="true"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('set', 'linker', {
+      'accept_incoming': true
+    });
+    gtag('config', 'G-VGMRYDBB5R');
+    gtag('config', 'UA-26652609-2');
+  </script>  
+  <script src="https://lightning.svbtle.com/cargo/share_buttons-dd547cdb8c37c1c5b949d9a5f034ef854d39634831852762b3d730f59a9e47d4.js" data-turbolinks-track="true"></script>
   <script src="//platform.twitter.com/widgets.js" async></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+    
 </head>
 <body class="overlord blog">
 <style scoped>
@@ -200,6 +210,40 @@ section#readnext:hover p span {
       <li>Both 'X' and 'y' are arrays.</li>
     </ul>
   </ul>
+
+  <table>
+    <tr>
+      <th>Population of a city (<b>x</b> 10,000) as \(x\) </th>
+      <th>Profit of a restaurent (<b>x</b> $10,000) as \( f_{w,b}(x^{(i)}) \)or \(x\) </th>
+      
+  </tr>
+    <tr>
+      <td>6.1101</td>
+      <td>17.592</td>
+    </tr>
+    <tr>
+      <td>5.5277</td>
+      <td>9.1302</td>
+    </tr>
+    <tr>
+      <td>8.5186</td>
+      <td>13.662</td>
+    </tr>
+    <tr>
+      <td>7.0032</td>
+      <td>11.854</td>
+    </tr>
+    <tr>
+      <td>5.8598</td>
+      <td>6.8233</td>
+    </tr>
+  </table>
+  <p>Number of training example (size (1000 sqft) as x) \(m\)</p>
+  <p>In this case \(m = 5\)</p>
+
+  <h1 id="college_1">Model Function <a class="head_anchor" href="#college_1">#</a></h1>
+  <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
+  <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
