@@ -3,30 +3,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>My path to OpenAI</title>
+  <title>Univariate Linear Regression</title>
   <script>(function(d) {var config = {kitId: 'all7jvn',scriptTimeout: 1000,async: true},h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)})(document);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="https://lightning.svbtle.com/cargo/favicon-3686f5990e669ad2a1684f0ac250c4d9ddc03e2ef6f3c980f17b7aae786833ef.ico">
   <link rel="icon" sizes="196x196" href="https://lightning.svbtle.com/cargo/apple-touch-icon-8ed2bd858a30400ead0535543ffb8ad2ab3e036a2f0adb797dc641458d00a41a.png">
   <link rel="mask-icon" href="https://lightning.svbtle.com/cargo/default-b7e7b5361ab4c50a9ceb6dc296e0f157e2ec9c2f2c6f30832d991dc361d69512.svg" color="black">
-  <meta name="generator" content="Svbtle.com" />
-  <meta name="description" content="I started programming seriously during a gap year after high school. I’d read Turing’s Computing Machinery and Intelligence, and was inspired by the notion of writing code that could understand something that I, as the code’s author, did not. I... | Greg Brockman | Svbtle"/>
-  <link rel="canonical" href="https://blog.gregbrockman.com/my-path-to-openai" />
-  <meta property="og:url" content="https://blog.gregbrockman.com/my-path-to-openai" />
+  <!-- <meta name="generator" content="Svbtle.com" /> -->
+  <meta name="description" content="C programming| Isack Odero "/>
+  <link rel="canonical" href="https://oderoi.github.io/ulr" />
+  <meta property="og:url" content="https://oderoi.github.io/ulr" />
   <meta property="twitter:site" content="@svbtle" />
-  <meta property="twitter:title" content="My path to OpenAI" />
-  <meta property="twitter:description" content="I started programming seriously during a gap year after high school. I’d read Turing’s Computing Machinery and Intelligence, and was inspired by the notion of writing code that could understand something that I, as the code’s author, did not. I..." />
-  <meta property="twitter:creator" content="@gdb" />
+  <meta property="twitter:title" content="Univariate Linear Regression" />
+  <meta property="twitter:description" content="Univariate Linear Regression with C programming, ..." />
+  <meta property="twitter:creator" content="@oderoi_" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
-  <meta property="twitter:domain" content="https://blog.gregbrockman.com" />
-  <meta property="og:title" content="My path to OpenAI &bull; Greg Brockman" />
+  <meta property="twitter:domain" content="https://oderoi.githu.io" />
+  <meta property="og:title" content="Univariate Linear Regression &bull; Isack Odero" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="I started programming seriously during a gap year after high school. I’d read Turing’s Computing Machinery and Intelligence, and was inspired by the notion of writing code that could understand something that I, as the code’s author, did not. I... | Greg Brockman | Svbtle" />
+  <meta property="og:description" content="Univariate Linear Regression using C programming language, ... | Isack Odero" />
   <meta property="og:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
-  <meta property="og:site_name" content="Greg Brockman on Svbtle" />
+  <meta property="og:site_name" content="Isack Odero" />
   <meta property="fb:app_id" content="346346195413177" />
-  <link rel="alternate" type="application/rss+xml" href="https://blog.gregbrockman.com/feed" />
+  <link rel="alternate" type="application/rss+xml" href="https://oderoi.github.io/feed" />
   <link rel="stylesheet" href="https://lightning.svbtle.com/cargo/legacy/build.blog-120c367e4cc2cdf2d031c71f795ecea0ef4033f8b24d12d8e147c86e08e2ed2a.css" media="all" data-turbolinks-track="reload" />
   <script src="https://lightning.svbtle.com/cargo/build.blog-41a284c81b4230cd8ab812d35fabef8cc99e927407ed15604d3206997ef79818.js" data-turbolinks-track="reload"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGMRYDBB5R"></script>
@@ -160,21 +160,15 @@ section#readnext:hover p span {
     <figure id="logo_top" class=" user_top">
       <a href="/">Svbtle</a>
     </figure>
-    <h2 id="nav_title" class="user_top"><a href="https://blog.gregbrockman.com">Greg Brockman</a></h2>
+    <h2 id="nav_title" class="user_top"><a href="https://oderoi.github.io">Isack Odero</a></h2>
   </div>
   <figure id="hamburger">
     <a href="#menu" id="hamburger_button">Menu</a>
   </figure>
   <ul id="dropdown" class="onblog">
-    <li class="dropdown_message">
-     <a href="https://svbtle.com">Greg Brockman is writing on the <span class="logoize">Svbtle</span> network.</a>
-    </li>
-    <li><a href="https://gregbrockman.com"  target="_blank">gregbrockman.com</a></li>
-    <li><a href="https://x.com/gdb" class="xdotcom" target="_blank">@gdb</a></li>
-    <li><a href="/feed">rss feed</a></li>
+    <li><a href="https://x.com/oderoi_" class="xdotcom" target="_blank">@oderoi</a></li>
     <li style="margin: 0; padding: 0;"><hr class="overlord_nav" /></li>
-    <li><a href="https://svbtle.com/about">about svbtle</a></li>
-    <li><a href="https://svbtle.com/signup">sign up</a></li>
+    <li><a href="about_me.html">about me</a></li>
   </ul>
 </nav>
 <div id="whiteout"></div>
@@ -183,15 +177,10 @@ section#readnext:hover p span {
   <article id="angbJyhsMUeJe4t4KyKHG1" class="post  historical">
 	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
   <h1 class="article_title">
-    <a href="https://blog.gregbrockman.com/my-path-to-openai">My path to OpenAI</a>
+    <a href="https://oderoi.github.io/ulr">Univariate Linear Regression</a>
   </h1>
-	<p>I started programming seriously during a gap year after high school. I’d read Turing’s <a href="https://www.csee.umbc.edu/courses/471/papers/turing.pdf">Computing Machinery and Intelligence</a>, and was inspired by the notion of writing code that could understand something that I, as the code’s author, did not. I started writing a chatbot — how hard could it possibly be?</p>
-
-<p>I managed to build something that could talk about the weather very convincingly. But no matter where I looked, it seemed that no one had any techniques that could make my bot really <strong>work</strong>.</p>
-
-<p>I soon shelved my chatbot pursuits. I decided to focus on creating systems that can have a real impact, and have been doing that ever since.</p>
-<h1 id="college_1">College <a class="head_anchor" href="#college_1">#</a></h1>
-<p>In college, I found a field that captured what drew me to AI: programming languages. I was thrilled that a compiler or static analyzer could “understand” a program in a way that I couldn’t, and then apply that understanding to do something very useful (such as generate fast code or prove correctness).</p>
+	<h1 id="college_1">Problem statement <a class="head_anchor" href="#college_1">#</a></h1>
+  <p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
 
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
