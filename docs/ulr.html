@@ -189,7 +189,7 @@ section#readnext:hover p span {
   <h1 class="article_title">
     <a href="https://oderoi.github.io/ulr">Univariate Linear Regression</a>
   </h1>
-	<h1 id="college_1">Problem statement <a class="head_anchor" href="#college_1">#</a></h1>
+	<h1 id="problem_statement_1">Problem statement <a class="head_anchor" href="#problem_statement_1">#</a></h1>
   <p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
   <p>
     <ul>
@@ -241,7 +241,7 @@ section#readnext:hover p span {
   <p>Number of training example (size (1000 sqft) as x) \(m\)</p>
   <p>In this case \(m = 5\)</p>
 
-  <h1 id="college_1">Model Function <a class="head_anchor" href="#college_1">#</a></h1>
+  <h1 id="model_function_1">Model Function <a class="head_anchor" href="#model_function_1">#</a></h1>
   <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
   <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 
@@ -274,6 +274,29 @@ section#readnext:hover p span {
     </pre>
   </blockquote>
 
+
+  <h3>3.0 Compute Cost</h3>
+<h1 id="compute_cost_1">Compute Cost <a class="head_anchor" href="#compute_cost_1">#</a></h1>
+<p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
+<p>Gradient descent involve repeated steps to adjust the values of <b>w</b> and <b>b</b> to get smaller and smaller <b>Cost</b>, \(J(w,b)\).</p>
+<p>The equation for Cost with one variable</p> 
+$$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2}$$ 
+
+<p>where</p> 
+  $$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$
+  
+<ul>
+  <li>\(f_{w,b}(x^{(i)}) \)is our prediction for example $i$ using parameters \(w,b\).</li>
+  <li>\((f_{w,b}(x^{(i)}) -y^{(i)})^2\) is the squared difference between the target value and the prediction. </li>
+  <li>These differences are summed over all the $m$ examples and divided by <b>2*m</b> to produce the cost, \(J(w,b)\).</li>
+</ul>
+   
+<p>Note,</p> 
+<ul>
+  <li>
+    Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
+  </li>
+</ul>
 
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
