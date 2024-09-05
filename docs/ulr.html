@@ -509,6 +509,134 @@ $$
 </blockquote>
 
 
+<h1 id="learning_parameter_1">Learning parameters using batch gradient descent<a class="head_anchor" href="#learning_parameter_1">#</a></h1>
+
+<p>You will now find the optimal parameters of a linear regression model by using batch gradient descent. Recall batch refers to running all the examples in one iteration.</p>
+<ul>
+  <li>You don't need to implement anything for this part. Simply run the cells below. </li>
+  <li>A good way to verify that gradient descent is working correctly is to look at the value of \(J(w,b)\) and check that it is decreasing with each step. </li>
+  <li>Assuming you have implemented the gradient and computed the cost correctly and you have an appropriate value for the learning rate alpha, \(J(w,b)\) should never increase and should converge to a steady value by the end of the algorithm.  </li>
+</ul>
+
+<h2 id="learning_parameter_1">Expected Output<a class="head_anchor" href="#learning_parameter_1">#</a></h2>
+
+<p>Optimal w, b found by gradient descent </p>
+
+
+<table>
+  <tr>
+    <th>w</th>
+  <th>b</th>
+</tr>
+  <tr>
+    <td>|-3.216610 </td>
+    <td>|-3.216610 </td>
+  </tr>
+</table>
+<p>We will now use our final parameters w, b to find our prediction for single example.</p>
+
+<p>recall:</p>
+
+$$
+f_{w,b}(x^{(i)}) = w * x^{i} + b
+$$
+
+<p>Let's predict what profit will be for the ares of 35,000 and 70,000 people</p>
+
+<ul>
+  <li>The model takes in population of a city in 10,000s as input. </li>
+  <li>Therefore, 35,000 people can be translated into an input to the model as <b>input[] = {3.5}</b></binput></li>
+  <li>Similarly, 70,000 people can be translated into an input to the model as <b>input[] = {7.5}</b></li>
+</ul>
+
+<h1 id="main_function_1">The main function<a class="head_anchor" href="#main_function_1">#</a></h1>
+
+<blockquote>
+  <pre>
+    <code>
+      #include &lt;stdio.h&gt;
+      #include &lt;stdlib.h&gt;
+      #include &lt;math.h&gt;
+    
+      //Initializing functions
+      float *compute_model_output(float x[], float w, float b, int m);
+      float compute_cost(float x[], float y[], float w, float b, int m);
+      float *compute_gradients(float x[], float y[], float w, float b, int m);
+      float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha);
+      float evaluate_model(float x[], float y[], float w, float b, int m);
+    
+      int main(){
+    
+        //initialize w and b
+        float w_in = 0;
+        float b_in = 0;
+    
+        //initialize input, x
+        float x[]={6.1101, 5.5277, 8.5186, 7.0032, 5.8598, 
+                  8.3829, 7.4764, 8.5781, 6.4862, 5.0546, 
+                  5.7107, 14.164, 5.734, 8.4084, 5.6407, 
+                  5.3794, 6.3654, 5.1301,6.4296, 7.0708, 6.1891};
+        float y[]={17.592, 9.1302, 13.662, 11.854, 6.8233,
+                  11.886, 4.3483, 12, 6.5987, 3.8166, 3.2522,
+                  15.505, 3.1551, 7.2258, 0.71618, 3.5129, 
+                  5.3048, 0.56077, 3.6518, 5.3893, 3.1386};
+    
+        //number of example, m
+        int m = sizeof(x) / sizeof(x[0]);
+        float alpha = 1e-2;
+        int num_iters = 10000;
+    
+        float w = 0;
+        float b = 0;
+        float J_wb = 0;
+        float dj_dw = 0;
+        float dj_db = 0;
+    
+        for (int i = 0; i <= num_iters; i++)
+        {
+          // Save cost J at each iteration
+          J_wb = compute_cost(x, y, w, b, m);
+          
+          // Calculate the gradient and update the parameters using gradient_function
+          float *grads = compute_gradients(x, y, w, b, m);
+    
+          dj_dw = grads[0];
+          dj_db = grads[1];
+    
+          // Update Parameters using equation (3) above
+          float *p_hist = compute_weight_bias(w, b, dj_dw, dj_db, alpha);
+    
+          //R square
+          float R_square = evaluate_model(x, y, w, b, m);
+    
+          w = p_hist[0];
+          b = p_hist[1];
+          
+          // Print cost every at intervals 10 times or as many iterations if < 10
+          if (ceil(i % 1000) == 0)
+          {
+            printf("Iteration: %5d\tCost: %10f\t R_Score: %10f\t dj_dw: %10f\t dj_db:%10f\t w: %10f\tb:%8f\n", i, J_wb, R_square, dj_dw, dj_db, w, b);
+          }
+        }
+    
+        //Predicting the Profit of restaurant, with a given Population, popul for 1 example, eg=1
+        int eg = 2;
+        float popul[] = {3.5, 7.5};
+    
+        float weight = w;
+        float bias = b;
+        float *pred = compute_model_output(popul, weight, bias, eg);
+        for (int i = 0; i < eg; i++)
+        {
+          printf("\nFor population: %f,\t we predict the profit of:$ %f\n", popul[i] * 10000, pred[i] * 10000);
+        }
+    
+        return 0;
+      }
+
+    </code>
+  </pre>
+</blockquote>
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
 <p>Junior year, I decided that it didn’t make sense to try to do a startup while still in school. Instead, I was going to meet with people doing startups, and over time pattern match what works and what doesn’t. In the meanwhile, I finally started my programming language research, securing research funds from a professor and recruiting some of my friends for a static buffer overrun detection project.</p>
