@@ -245,6 +245,33 @@ section#readnext:hover p span {
   <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
   <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 
+
+  <blockquote><p>The goal of supervised deep learning is to solve almost any problem of the form “map <code class="prettyprint">X</code> to <code class="prettyprint">Y</code>”. <code class="prettyprint">X</code> can include images, speech, or text, and <code class="prettyprint">Y</code> can include categories or even sentences. Mapping images to categories, speech to text, text to categories, go boards to good moves, and the like, is extremely useful, and cannot be done as well with other methods.</p>
+
+    <pre>
+      float *compute_model_output(float x[], float w, float b, int m){
+
+        /*
+        Computes the prediction of a linear model
+        Args:
+        X[m] (ndarray (m,1)): Data, m examples 
+        w,b (scalar)     : model parameters 
+        m (scalar)       : number of examples, X
+        Returns
+        Y[m] (ndarray (m,1)): target values
+        */
+    
+        float *f_x = (float *)malloc(m * sizeof(float));
+    
+        for(int i = 0; i < m; i++){
+          f_x[i] = x[i] * w + b;
+        }
+        return f_x;
+      }
+    </pre>
+  </blockquote>
+
+
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
 <p>Junior year, I decided that it didn’t make sense to try to do a startup while still in school. Instead, I was going to meet with people doing startups, and over time pattern match what works and what doesn’t. In the meanwhile, I finally started my programming language research, securing research funds from a professor and recruiting some of my friends for a static buffer overrun detection project.</p>
