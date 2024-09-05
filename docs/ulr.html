@@ -246,28 +246,30 @@ section#readnext:hover p span {
   <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 
 
-  <blockquote><p>The goal of supervised deep learning is to solve almost any problem of the form “map <code class="prettyprint">X</code> to <code class="prettyprint">Y</code>”. <code class="prettyprint">X</code> can include images, speech, or text, and <code class="prettyprint">Y</code> can include categories or even sentences. Mapping images to categories, speech to text, text to categories, go boards to good moves, and the like, is extremely useful, and cannot be done as well with other methods.</p>
+  <blockquote>
 
     <pre>
-      float *compute_model_output(float x[], float w, float b, int m){
+      <code>
+        float *compute_model_output(float x[], float w, float b, int m){
 
-        /*
-        Computes the prediction of a linear model
-        Args:
-        X[m] (ndarray (m,1)): Data, m examples 
-        w,b (scalar)     : model parameters 
-        m (scalar)       : number of examples, X
-        Returns
-        Y[m] (ndarray (m,1)): target values
-        */
-    
-        float *f_x = (float *)malloc(m * sizeof(float));
-    
-        for(int i = 0; i < m; i++){
-          f_x[i] = x[i] * w + b;
+          /*
+          Computes the prediction of a linear model
+          Args:
+          X[m] (ndarray (m,1)): Data, m examples 
+          w,b (scalar)     : model parameters 
+          m (scalar)       : number of examples, X
+          Returns
+          Y[m] (ndarray (m,1)): target values
+          */
+      
+          float *f_x = (float *)malloc(m * sizeof(float));
+      
+          for(int i = 0; i < m; i++){
+            f_x[i] = x[i] * w + b;
+          }
+          return f_x;
         }
-        return f_x;
-      }
+      </code>
     </pre>
   </blockquote>
 
