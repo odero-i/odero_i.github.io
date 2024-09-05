@@ -383,6 +383,132 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 </ul>
 
 <img src="./images/counter_cost.png" class="limit-height">
+
+
+<h2 id="compute_cost_1">Convex Cost surface <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>The fact that the cost function squares the loss, \( \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2\)  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
+
+
+<h1 id="gradient_descent_1">Gradient Descent <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
+<p>In linear regression, we utilize input training data to fit the parameters \(w\),\(b\) by minimizing a measure of the error between our predictions \(f_{w,b}(x^{(i)})\) and the actual data \(y^{(i)}\). The measure is called the $cost$, \(J(w,b)\). In training you measure the cost over all of our training samples \(x^{(i)},y^{(i)}\)</p>
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
+\;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
+ b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+where, parameters \(w\), \(b\) are updated simultaneously.  
+The gradient is defined as:
+$$
+\begin{align}
+\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})*x^{(i)} \tag{4}\\
+  \frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\\
+\end{align}
+$$
+
+<p>Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.</p>
+
+
+
+<blockquote>
+  <pre>
+    <code>
+      float *compute_gradients(float x[], float y[], float w, float b, int m){
+
+        /*
+        Computes the gradients w,b for linear regression 
+        Args:
+        x (ndarray (m,1)): Data, m examples 
+        y (ndarray (m,1)): target values
+        w,b (scalar)    : model parameters  
+        m (scalar)       : number of examples, X
+        Returns
+        dj_dw (scalar): The gradient of the cost w.r.t. the parameters w  
+        dj_db (scalar): The gradient of the cost w.r.t. the parameters b
+        grads (ndarray (2,1)): gradients [dj_dw, dj_db]  
+        */
+    
+        float f_x;
+        float dj_dw = 0;
+        float dj_db = 0;
+        float *grads = (float *)malloc(2 * sizeof(float));
+    
+        for (int i = 0; i < m; i++)
+        {
+          f_x = x[i] * w + b;
+          dj_dw += (f_x - y[i]) * x[i];
+          dj_db += (f_x - y[i]);
+        }
+        dj_dw /= m;
+        dj_db /= m;
+    
+        grads[0] = dj_dw;   //index 0: dj_dw
+        grads[1] = dj_db;   //index 1: dj_db
+    
+        return grads;
+      }
+    
+    </code>
+  </pre>
+</blockquote>
+
+
+<h2 id="gradient_descent_1">Cost vs w, with gradients, b set to 100 <a class="head_anchor" href="#gradient_descent_1">#</a></h2>
+
+<p>The plot shows \(\frac{\partial J(w,b)}{\partial w}\) or the slope of the cost curve relative to \(w\) at three points. The derivative is negative. Due to the 'bowl shape', the derivatives will always lead gradient descent toward the bottom where the gradient is zero.</p>
+
+![gradient](images/grads.png)
+<img src="./images/grads.png" class="limit-height">
+
+
+ <h1 id="evaluation_1">Evaluating our model <a class="head_anchor" href="#evaluation_1">#</a></h1>
+
+<p>To evaluate the estimation model, we use coefficient of determination which is given by the following formula:</p>
+$$
+R^2 = 1 - \frac{Residual\ Square\ Sum}{Total\ Square\ Sum}
+$$
+
+
+$$
+R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - f_{w,b}(x^{(i)})_{mean})^2}
+$$
+
+<blockquote>
+  <pre>
+    <code>
+      float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha){
+
+        /*
+        Performs gradient descent to fit w,b. Updates w,b by taking 
+        gradient steps with learning rate alpha
+
+        Args:
+        w,b (scalar): initial values of model parameters  
+        alpha (float):     Learning rate
+        dj_dw (scalar): The gradient of the cost w.r.t. the parameters w  
+        dj_db (scalar): The gradient of the cost w.r.t. the parameters b
+
+        Returns:
+        w (scalar): Updated value of parameter after running gradient descent
+        b (scalar): Updated value of parameter after running gradient descent
+        p_hist (ndarray (2,1)): History of parameters [w,b] 
+        */
+
+        float *p_hist = (float *)malloc(2 * sizeof(float));
+
+        w = w - (alpha * dj_dw);
+        b = b - (alpha * dj_db);
+
+        p_hist[0] = w; //weight
+        p_hist[1] = b; //bias
+
+        return p_hist;
+      }
+
+    </code>
+  </pre>
+</blockquote>
+
+
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
 <p>Junior year, I decided that it didn’t make sense to try to do a startup while still in school. Instead, I was going to meet with people doing startups, and over time pattern match what works and what doesn’t. In the meanwhile, I finally started my programming language research, securing research funds from a professor and recruiting some of my friends for a static buffer overrun detection project.</p>
