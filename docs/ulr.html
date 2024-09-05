@@ -365,6 +365,24 @@ $$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
   </pre>
 </blockquote>
 
+
+
+<h2 id="compute_cost_1">Cost versus iterations of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
+
+<img src="./images/cost.png" class="limit-height">
+
+
+<h2 id="compute_cost_1">Plot of cost J(w,b) vs w,b with path of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>Plot shows the $cost(w,b)$ over a range of $w$ and $b$. Cost levels are represented by the rings. Overlayed, using red arrows, is the path of gradient descent. Here are some things to note:</p>
+<ul>
+  <li>The path makes steady (monotonic) progress toward its goal.</li>
+  <li>initial steps are much larger than the steps near the goal.</li>
+</ul>
+
+<img src="./images/counter_cost.png" class="limit-height">
 <p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
 <p>Junior year, I decided that it didn’t make sense to try to do a startup while still in school. Instead, I was going to meet with people doing startups, and over time pattern match what works and what doesn’t. In the meanwhile, I finally started my programming language research, securing research funds from a professor and recruiting some of my friends for a static buffer overrun detection project.</p>
