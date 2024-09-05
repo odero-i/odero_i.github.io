@@ -636,67 +636,8 @@ $$
     </code>
   </pre>
 </blockquote>
-<p>I kept trying to find time for programming language research. But I also kept getting distracted by new startup ideas (generally pretty bad), and new people to work on them with (generally pretty good). I’d started out at Harvard and transferred to MIT, trying to constantly surround myself by people who I could learn from and build something useful with.</p>
 
-<p>Junior year, I decided that it didn’t make sense to try to do a startup while still in school. Instead, I was going to meet with people doing startups, and over time pattern match what works and what doesn’t. In the meanwhile, I finally started my programming language research, securing research funds from a professor and recruiting some of my friends for a static buffer overrun detection project.</p>
 
-<p>A few weeks later, I was contacted by an unlaunched startup in Palo Alto. Normally I would have discarded the email, but I’d decided to start meeting startups. The team and I instantly clicked, and I knew that these were exactly the kind of people I’d been looking for all along. So I left school, never to actually get our buffer overrun detector working.</p>
-<h1 id="stripe_1">Stripe <a class="head_anchor" href="#stripe_1">#</a></h1>
-<p>That company is <a href="https://www.quora.com/How-did-Stripe-come-up-with-its-name">now</a> <a href="https://stripe.com/">Stripe</a>. I helped scale it from 4 to 250 people, and in the year since I left it’s continued scaling without any of my help to over 450.</p>
-
-<p>When I considered <a href="/leaving-stripe">leaving</a>, it was primarily because I felt like the company was in a great place, and it would continue to do great things with or without me. I cared most about working with great people to make something amazing happen — but developer infrastructure wasn’t the problem that I wanted to work on for the rest of my life.</p>
-
-<p>However, there was one problem that I could imagine happily working on for the rest of my life: moving humanity to safe human-level AI. It’s hard to imagine anything more amazing and positively impactful than successfully creating AI, so long as it’s done in a good way.</p>
-<h1 id="leaving-stripe_1">Leaving Stripe <a class="head_anchor" href="#leaving-stripe_1">#</a></h1>
-<p>Before I finalized my decision to leave, <a href="https://en.wikipedia.org/wiki/Patrick_Collison">Patrick</a> asked me to go talk to <a href="https://en.wikipedia.org/wiki/Sam_Altman">Sam Altman</a>. He said Sam had a good outsider’s perspective, had seen lots of people in similar circumstances, and would probably have a good recommendation on what I should do.</p>
-
-<p>Within five minutes of talking to Sam, he told me I was definitely ready to leave. He said to let him know if he could be helpful in figuring out my next thing.</p>
-
-<p>I replied that AI was top of my list (and it was definitely my life goal). However, I wasn’t yet sure whether it was the right time, or what the best way for me to contribute would be.</p>
-
-<p>He said, “We’ve been thinking about spinning up an AI lab through YC. We should keep in touch.”</p>
-<h1 id="initial-exploration_1">Initial exploration <a class="head_anchor" href="#initial-exploration_1">#</a></h1>
-<p>I left Stripe about a week or two later, and started digging into AI to try to better understand what was happening in the field. Even just from watching posts that made it onto Hacker News (such as <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">char-rnn</a>), it was clear that there was mounting excitement and activity around AI generally and deep learning particularly. But I approached the field with healthy skepticism: I wanted to be sure things were really working before diving in.</p>
-
-<p>My first goal was to figure out what deep learning actually was. It turned out this was surprisingly hard. For example, <a href="http://deeplearning.net/">deeplearning.net</a> just says “Deep Learning is a new area of Machine Learning research, which has been introduced with the objective of moving Machine Learning closer to one of its original goals: Artificial Intelligence” — which sounds exciting but isn’t very descriptive <strong>[1]</strong>.</p>
-
-<p>Fortunately, I had some friends working in AI, <a href="https://www.linkedin.com/in/dario-amodei-3934934">Dario Amodei</a> and <a href="https://colah.github.io/">Chris Olah</a>. I asked them for some pointers, and they gave me some good starter resources. The most useful of these was <a href="http://neuralnetworksanddeeplearning.com/">Michael Nielsen’s book</a>, and after reading it I practiced my newfound skills on <a href="https://www.kaggle.com">Kaggle</a>. (I was even number 1 for a while on my <a href="https://www.kaggle.com/c/denoising-dirty-documents">first contest</a>!)</p>
-<h1 id="kindling_1">Kindling <a class="head_anchor" href="#kindling_1">#</a></h1>
-<p>Along the way, I kept meeting super smart people in AI, and reconnected with some of my smartest friends from college, such as <a href="https://paulfchristiano.com/">Paul Christiano</a> and <a href="http://cs.stanford.edu/%7Ejsteinhardt/">Jacob Steinhardt</a>, who were now working in the field. This was a strong signal.</p>
-
-<p>The more I dug, the more I became convinced that AI was poised for impact. Deep learning capabilities are incredibly impressive: for example, we can now classify objects in images with <a href="http://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/">extreme accuracy</a> (despite this 2014 <a href="http://xkcd.com/1425/">XKCD</a>), <a href="https://www.technologyreview.com/s/544651/baidus-deep-learning-system-rivals-people-at-speech-recognition/">speech recognition</a> has gotten very good, and we can generate surprisingly <a href="https://github.com/Newmu/dcgan_code#bedrooms-after-5-epochs">realistic images</a>. That being said, these technologies are new enough that they haven’t yet changed how anyone lives: their impact today is limited to powering certain <a href="https://www.quora.com/How-is-Machine-Learning-applied-to-Google-Photos">product features</a>.</p>
-
-<p>I remember saying this to one of my friends who had built Facebook News Feed back in the day. His reply was skeptical. “Simple algorithms, lots of data.” Everyone tries to peddle cool new AI algorithms, but in reality, if you just scale up a logistic regression it works really well. I then pulled out the <a href="http://www.forbes.com/sites/amitchowdhry/2015/07/30/google-translates-word-lens-feature-now-supports-27-languages">Google Translate app</a> from my pocket, put it in airplane mode, and demonstrated how it translates the text under the camera directly on the image. He was suitably impressed, and admitted simple algorithms wouldn’t help there. (It’s mostly but not 100% <a href="http://googleresearch.blogspot.com/2015/07/how-google-translate-squeezes-deep.html">deep learning</a>, but that’s not the point — the point is it <strong>works</strong>.)</p>
-<h1 id="initial-spark_1">Initial spark <a class="head_anchor" href="#initial-spark_1">#</a></h1>
-<p>In June, Sam pinged me asking if I’d figured out yet what to do next. I told him my current plan was to start an AI company within the next year. We jumped on a call, where he mentioned that they were moving forward with the YC AI project. I asked Sam what the purpose of the lab was.</p>
-
-<p>“To build safe human-level AI”, he said.</p>
-
-<p>At that moment I knew he was the right partner to build my next company with. Very few people today would have the audacity to explicitly try building human-level AI. I realized that sometimes an effort needs only someone bold enough to pronounce a goal, and then the right people will join them.</p>
-<h1 id="the-dinner_1">The dinner <a class="head_anchor" href="#the-dinner_1">#</a></h1>
-<p>About a month later, Sam set up a dinner in Menlo Park. On the list were Dario, Chris, Paul, <a href="http://www.cs.toronto.edu/%7Eilya/">Ilya Sutskever</a>, <a href="https://en.wikipedia.org/wiki/Elon_Musk">Elon Musk</a>, Sam, and a few others.</p>
-
-<p>We talked about the state of the field, how far off human-level AI seemed to be, what you might need to get there, and the like. The conversation centered around what kind of organization could best work to ensure that AI was beneficial.</p>
-
-<p>It was clear that such an organization needed to be a non-profit, without any competing incentives to dilute its mission. It also needed to be at the cutting edge of research (per the <a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> quote, “the best way to predict the future is to invent it”). And to do that, it would need the best AI researchers in the world.</p>
-
-<p>So the question became: would it be possible to create from scratch a lab with the best AI researchers? Our conclusion: not obviously impossible.</p>
-
-<p>This was my first time meeting Elon and Ilya, and I strongly remember my impressions of both. I was struck by how inquisitive Elon was, and how much he sought others opinions and really listened to them. Ilya on the other hand was a source of grounding: he was a clear technical expert with a breadth of knowledge and vision, and could always dive into the specifics of the limitations and capabilities of current systems.</p>
-
-<p>After the dinner concluded, Sam gave me a ride back to the city. We both agreed that it seemed worth starting something here. I knew it would only happen if someone was willing to go full-time on figuring out exactly what that would be and who would be a part of it. I volunteered myself as tribute.</p>
-
-<p>And so the next day, I had something impactful to build once again.</p>
-
-<p><strong>Footnotes:</strong></p>
-
-<p><strong>[1]</strong> I asked Ilya to suggest a good definition:</p>
-<blockquote><p>The goal of supervised deep learning is to solve almost any problem of the form “map <code class="prettyprint">X</code> to <code class="prettyprint">Y</code>”. <code class="prettyprint">X</code> can include images, speech, or text, and <code class="prettyprint">Y</code> can include categories or even sentences. Mapping images to categories, speech to text, text to categories, go boards to good moves, and the like, is extremely useful, and cannot be done as well with other methods.</p>
-
-<p>An attractive feature of deep learning is that it is largely domain independent: many of the insights learned in one domain apply in other domains.</p>
-
-<p>Under the hood, the model builds up layers of abstraction. These abstractions get the job done, but it’s really hard to understand how exactly they do it. The model learns by gradually changing the synaptic strengths of the neural network using the incredibly simple yet mysteriously effective <a href="http://neuralnetworksanddeeplearning.com/chap2.html">backpropagation algorithm</a>. As a result, we can build massively sophisticated systems using very few lines of code (since we only code the model and the learning algorithm, but not the end result).</p>
-</blockquote>
   <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
     <a href="#kudo">
       <div class="filling">&nbsp;</div>
