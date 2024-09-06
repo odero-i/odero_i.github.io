@@ -275,29 +275,29 @@ section#readnext:hover p span {
 
   <blockquote>
 
-    <pre>
-      <code>
-        float *compute_model_output(float x[], float w, float b, int m){
+  <pre>
+  <code>
+  float *compute_model_output(float x[], float w, float b, int m){
 
-          /*
-          Computes the prediction of a linear model
-          Args:
-          X[m] (ndarray (m,1)): Data, m examples 
-          w,b (scalar)     : model parameters 
-          m (scalar)       : number of examples, X
-          Returns
-          Y[m] (ndarray (m,1)): target values
-          */
-      
-          float *f_x = (float *)malloc(m * sizeof(float));
-      
-          for(int i = 0; i < m; i++){
-            f_x[i] = x[i] * w + b;
-          }
-          return f_x;
-        }
-      </code>
-    </pre>
+    /*
+    Computes the prediction of a linear model
+    Args:
+    X[m] (ndarray (m,1)): Data, m examples 
+    w,b (scalar)     : model parameters 
+    m (scalar)       : number of examples, X
+    Returns
+    Y[m] (ndarray (m,1)): target values
+    */
+
+    float *f_x = (float *)malloc(m * sizeof(float));
+
+    for(int i = 0; i < m; i++){
+      f_x[i] = x[i] * w + b;
+    }
+    return f_x;
+  }
+  </code>
+  </pre>
   </blockquote>
 
 
