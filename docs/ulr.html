@@ -53,7 +53,7 @@
   
   <style>
     /* Make the container responsive */
-    pre {
+    code {
       white-space: pre-wrap; /* Line break preservation */
       word-wrap: break-word; /* Prevent overflow */
       /* font-size:small; Adjust font size based on screen size */
@@ -65,8 +65,6 @@
 
     code {
       font-size: small;
-      display: block;
-      line-height: 1.5;
     }
 
     body{
@@ -79,14 +77,9 @@
         font-size: small;
       }
     }
-    @media (max-width: 768px) {
-      pre {
-        font-size: small; /* Slightly smaller font for smaller screens */
-      }
-    }
 
-    @media (max-width: 480px) {
-      pre {
+    @media screen and (max-width: 480px) {
+      code {
         font-size:smaller; /* Smaller font for mobile screens */
       }
     }
