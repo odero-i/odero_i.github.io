@@ -56,24 +56,31 @@
     pre {
       white-space: pre-wrap; /* Line break preservation */
       word-wrap: break-word; /* Prevent overflow */
-      font-size:small; /* Adjust font size based on screen size */
+      /* font-size:small; Adjust font size based on screen size */
       padding: 10px;
       background-color: #f4f4f4; /* Light grey background */
       border-radius: 5px;
       overflow: auto;
     }
+
+    code {
+      font-size: 14px;
+      display: block;
+      line-height: 1.5;
+    }
+
     body{
       font-size: small;
     }
 
     /* Responsive font size */
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       pre {
         font-size: small; /* Slightly smaller font for smaller screens */
       }
     }
 
-    @media screen and (max-width: 480px) {
+    @media (max-width: 480px) {
       pre {
         font-size:smaller; /* Smaller font for mobile screens */
       }
@@ -81,7 +88,7 @@
 
     /* Responsive image */
     img {
-      max-width: 100%; /* Image takes up full width of its container */
+      max-width: 70%; /* Image takes up full width of its container */
       height: auto; /* Maintain aspect ratio */
       display: block;
       margin: 10px 0; /* Margin around the image */
