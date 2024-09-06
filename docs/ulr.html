@@ -438,9 +438,31 @@ $$
 R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - f_{w,b}(x^{(i)})_{mean})^2}
 $$
 
+<style>
+  @media screen and (max-width: 480px) {
+    pre code {
+      font-size: 10px;
+    }
+  }
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    pre code {
+      font-size: 12px;
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    pre code {
+      font-size: 14px;
+    }
+  }
+  @media screen and (min-width: 1025px) {
+    pre code {
+      font-size: 16px;
+    }
+  }
+</style>
 <blockquote>
   <pre>
-    <code style="font-size: x-small;">
+    <code>
       float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha){
 
         /*
@@ -469,7 +491,6 @@ $$
 
         return p_hist;
       }
-
     </code>
   </pre>
 </blockquote>
