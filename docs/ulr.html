@@ -162,45 +162,6 @@ section#readnext:hover p span {
   }
 }
 
-code {
-      font-size: small;
-    }
-
-    body{
-      font-size: small;
-    }
-
-    /* Responsive font size */
-    
-    @media screen and (max-width: 1200px) {
-      code {
-        font-size: small;
-      }
-    }
-
-    @media screen and (max-width: 1024px) {
-      code {
-        font-size: smaller;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      code {
-        font-size: x-small;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      code {
-        font-size:xx-small; 
-      }
-    }
-
-    /* Responsive image */
-    img {
-      max-width: 50%; /* Image takes up full width of its container */
-      height: auto; /* Maintain aspect ratio */
-    }
 
 </style>
 
@@ -289,7 +250,7 @@ code {
   <blockquote>
 
     <pre>
-      <code style="font-size: small;">
+      <code>
         float *compute_model_output(float x[], float w, float b, int m){
 
           /*
@@ -643,6 +604,11 @@ $$
   </pre>
 </blockquote>
 
+<style>
+   code {
+    font-size: small;
+   }
+</style>
 
   <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
     <a href="#kudo">
