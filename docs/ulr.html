@@ -273,32 +273,32 @@ section#readnext:hover p span {
   <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
 
 
-  <blockquote>
+<blockquote>
 
-  <pre>
-  <code>
-  float *compute_model_output(float x[], float w, float b, int m){
+<pre>
+<code>
+float *compute_model_output(float x[], float w, float b, int m){
 
-    /*
-    Computes the prediction of a linear model
-    Args:
-    X[m] (ndarray (m,1)): Data, m examples 
-    w,b (scalar)     : model parameters 
-    m (scalar)       : number of examples, X
-    Returns
-    Y[m] (ndarray (m,1)): target values
-    */
+  /*
+  Computes the prediction of a linear model
+  Args:
+  X[m] (ndarray (m,1)): Data, m examples 
+  w,b (scalar)     : model parameters 
+  m (scalar)       : number of examples, X
+  Returns
+  Y[m] (ndarray (m,1)): target values
+  */
 
-    float *f_x = (float *)malloc(m * sizeof(float));
+  float *f_x = (float *)malloc(m * sizeof(float));
 
-    for(int i = 0; i < m; i++){
-      f_x[i] = x[i] * w + b;
-    }
-    return f_x;
+  for(int i = 0; i < m; i++){
+    f_x[i] = x[i] * w + b;
   }
-  </code>
-  </pre>
-  </blockquote>
+  return f_x;
+}
+</code>
+</pre>
+</blockquote>
 
 
 <h1 id="compute_cost_1">Compute Cost <a class="head_anchor" href="#compute_cost_1">#</a></h1>
