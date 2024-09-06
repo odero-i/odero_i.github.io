@@ -203,7 +203,7 @@ FcgidProcessLifeTime 150
 
 <p>A couple of levels required us to run a simulated browser so people could exploit XSS bugs. For those levels, we ran a <a href="http://phantomjs.org/">PhantomJS</a> script every few minutes. To make sure it only ran when needed (and that it ran as your assigned UNIX user, in case of Webkit vulnerabilities), we spawned the headless Webkit instance directly from the FCGI dispatcher, using the following code:</p>
 
-<pre><code class="prettyprint lang-ruby">Thread.abort_on_exception = true
+<pre><code class="prettyprint lang-c">Thread.abort_on_exception = true
 Thread.new do
   while true
     started = Time.now
