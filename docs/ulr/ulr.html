@@ -1,0 +1,671 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Univariate Linear Regression</title>
+  <script>(function(d) {var config = {kitId: 'all7jvn',scriptTimeout: 1000,async: true},h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)})(document);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://lightning.svbtle.com/cargo/favicon-3686f5990e669ad2a1684f0ac250c4d9ddc03e2ef6f3c980f17b7aae786833ef.ico">
+  <link rel="icon" sizes="196x196" href="https://lightning.svbtle.com/cargo/apple-touch-icon-8ed2bd858a30400ead0535543ffb8ad2ab3e036a2f0adb797dc641458d00a41a.png">
+  <link rel="mask-icon" href="https://lightning.svbtle.com/cargo/default-b7e7b5361ab4c50a9ceb6dc296e0f157e2ec9c2f2c6f30832d991dc361d69512.svg" color="black">
+  <!-- <meta name="generator" content="Svbtle.com" /> -->
+  <meta name="description" content="C programming| Isack Odero "/>
+  <link rel="canonical" href="https://oderoi.github.io/ulr" />
+  <meta property="og:url" content="https://oderoi.github.io/ulr" />
+  <meta property="twitter:site" content="@svbtle" />
+  <meta property="twitter:title" content="Univariate Linear Regression" />
+  <meta property="twitter:description" content="Univariate Linear Regression with C programming, ..." />
+  <meta property="twitter:creator" content="@oderoi_" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
+  <meta property="twitter:domain" content="https://oderoi.githu.io" />
+  <meta property="og:title" content="Univariate Linear Regression &bull; Isack Odero" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Univariate Linear Regression using C programming language, ... | Isack Odero" />
+  <meta property="og:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
+  <meta property="og:site_name" content="Isack Odero" />
+  <meta property="fb:app_id" content="346346195413177" />
+  <link rel="alternate" type="application/rss+xml" href="https://oderoi.github.io/feed" />
+  <link rel="stylesheet" href="https://lightning.svbtle.com/cargo/legacy/build.blog-120c367e4cc2cdf2d031c71f795ecea0ef4033f8b24d12d8e147c86e08e2ed2a.css" media="all" data-turbolinks-track="reload" />
+  <script src="https://lightning.svbtle.com/cargo/build.blog-41a284c81b4230cd8ab812d35fabef8cc99e927407ed15604d3206997ef79818.js" data-turbolinks-track="reload"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGMRYDBB5R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('set', 'linker', {
+      'accept_incoming': true
+    });
+    gtag('config', 'G-VGMRYDBB5R');
+    gtag('config', 'UA-26652609-2');
+  </script>  
+  <script src="https://lightning.svbtle.com/cargo/share_buttons-dd547cdb8c37c1c5b949d9a5f034ef854d39634831852762b3d730f59a9e47d4.js" data-turbolinks-track="true"></script>
+  <script src="//platform.twitter.com/widgets.js" async></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+ 
+
+<style>
+  blockquote pre code {
+    margin-left: -10px;
+  }
+@media screen and (max-width: 480px) {
+  body pre code {
+    font-size: 7px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  body pre code {
+    font-size: 9px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  body pre code {
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  body pre code {
+    font-size: 13px;
+  }
+}
+</style>
+
+</head>
+<body class="overlord blog">
+<style scoped>
+figure#user_logo a,
+figure#user_foot a,
+figure.avatar a,
+nav#overlord.user_top figure#logo_top a,
+figure.kudo.complete div.filling {
+  background-image: url('https://lightning.svbtle.com/cargo/blank-3dc89b51de1fd0e237e0320a05be98fb1f11cc04dcf200934ba8a64deec81ffd.png')
+}
+
+figure.kudo.activated div.filling,
+figure.kudo.complete div.filling {
+  background-color: #000000;
+}
+
+figure.kudo.activated a,
+figure.kudo.complete a {
+  border-color: #000000;
+}
+
+blockquote,
+a blockquote,
+div#readnext:hover span.flank_title,
+div#foot_more:hover a,
+div#foot_userbar a#bottom_tagline span:hover,
+article.linked h1.article_title a:hover,
+a.continue_button:hover,
+article p a:hover,
+ul#lightning_drop,
+figure#user_foot,
+ul#user_links li a:hover,
+ul#foot_links li a:hover,
+a.buttonize:hover,
+button.buttonize:hover,
+a.buttonize.outline:hover,
+button.buttonize.outline:hover,
+nav.pagination span.next a:hover,
+nav.pagination span.prev a:hover,
+section#readnext:hover p span,
+nav#overlord.user_top figure#logo_top {
+  border-color: #000000;
+}
+/*figure#user_logo,*/
+
+figure.avatar,
+nav#overlord.user_top figure#logo_top a,
+ul#user_links li a:hover,
+ul#foot_links li a:hover,
+a.buttonize:hover,
+button.buttonize:hover,
+a.buttonize.outline:hover,
+button.buttonize.outline:hover,
+nav.pagination span.next a:hover,
+nav.pagination span.prev a:hover,
+figure#user_logo a,
+figure#user_foot a  {
+	background-color: #000000;
+}
+
+h6.separator_title.read_first,
+header#user_top h2 a,
+footer#blog_foot h5 a,
+article.post h1 a:hover,
+div.preview strong,
+nav#overlord h2#nav_title.user_top a,
+section#readnext:hover h3,
+section#readnext:hover p span {
+  color: #000000;
+}
+
+@keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+@-moz-keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+@-webkit-keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+
+</style>
+
+<figure id="loading">&nbsp;</figure>
+<nav id="overlord" class="user_top">
+  <div id="lockup" class="">
+    <figure id="logo_top" class=" user_top">
+      <a href="/">Svbtle</a>
+    </figure>
+    <h2 id="nav_title" class="user_top"><a href="https://oderoi.github.io">Isack Odero</a></h2>
+  </div>
+  <figure id="hamburger">
+    <a href="#menu" id="hamburger_button">Menu</a>
+  </figure>
+  <ul id="dropdown" class="onblog">
+    <li><a href="https://x.com/oderoi_" class="xdotcom" target="_blank">@oderoi</a></li>
+    <li style="margin: 0; padding: 0;"><hr class="overlord_nav" /></li>
+    <li><a href="about_me.html">about me</a></li>
+  </ul>
+</nav>
+<div id="whiteout"></div>
+
+<section id="container" class="blog user_post">
+  <article id="angbJyhsMUeJe4t4KyKHG1" class="post  historical">
+	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
+  <h1 class="article_title">
+    <a href="https://oderoi.github.io/ulr">Univariate Linear Regression</a>
+  </h1>
+	<h1 id="problem_statement_1">Problem statement <a class="head_anchor" href="#problem_statement_1">#</a></h1>
+  <p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
+  <p>
+    <ul>
+      <li>You would like to expand your business to cities that may give your restaurant higher profits.</li>
+      <li>The chain already has restaurants in various cities and you have data for profits and populations from the cities.</li>
+      <li>You also have data on cities that are candidates for a new restaurant. </li>
+      <ul>
+        <li>For these cities, you have the city population.</li>
+      </ul>
+    </ul>
+  </p>
+  <p>Can you use the data to help you identify which cities may potentially give your business higher profits?</p>
+  <p>Note:</p>
+  <ul>
+    <li>'X' is the population of a city</li>
+    <li>'y' is the profit of a restaurant in that city. A negative value for profit indicates a loss. </li>
+    <ul>
+      <li>Both 'X' and 'y' are arrays.</li>
+    </ul>
+  </ul>
+
+  <table>
+    <tr>
+      <th>Population of a city (<b>x</b> 10,000) as \(x\) </th>
+      <th>Profit of a restaurent (<b>x</b> $10,000) as \( f_{w,b}(x^{(i)}) \)or \(x\) </th>
+      
+  </tr>
+    <tr>
+      <td>6.1101</td>
+      <td>17.592</td>
+    </tr>
+    <tr>
+      <td>5.5277</td>
+      <td>9.1302</td>
+    </tr>
+    <tr>
+      <td>8.5186</td>
+      <td>13.662</td>
+    </tr>
+    <tr>
+      <td>7.0032</td>
+      <td>11.854</td>
+    </tr>
+    <tr>
+      <td>5.8598</td>
+      <td>6.8233</td>
+    </tr>
+  </table>
+  <p>Number of training example (size (1000 sqft) as x) \(m\)</p>
+  <p>In this case \(m = 5\)</p>
+
+  <h1 id="model_function_1">Model Function <a class="head_anchor" href="#model_function_1">#</a></h1>
+  <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
+  <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
+
+
+<blockquote>
+<pre>
+<code>
+float *compute_model_output(float x[], float w, float b, int m){
+
+  /*
+  Computes the prediction of a linear model
+  Args:
+  X[m] (ndarray (m,1)): Data, m examples 
+  w,b (scalar)     : model parameters 
+  m (scalar)       : number of examples, X
+  Returns
+  Y[m] (ndarray (m,1)): target values
+  */
+
+  float *f_x = (float *)malloc(m * sizeof(float));
+
+  for(int i = 0; i < m; i++){
+    f_x[i] = x[i] * w + b;
+  }
+  return f_x;
+}
+</code>
+</pre>
+</blockquote>
+
+
+<h1 id="compute_cost_1">Compute Cost <a class="head_anchor" href="#compute_cost_1">#</a></h1>
+<p>Cost is the measure of how well our model will predict the target output well, in this case target output is Profit of a restaurent.</p>
+<p>Gradient descent involve repeated steps to adjust the values of <b>w</b> and <b>b</b> to get smaller and smaller <b>Cost</b>, \(J(w,b)\).</p>
+<p>The equation for Cost with one variable</p> 
+$$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2}$$ 
+
+<p>where</p> 
+  $$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$
+  
+<ul>
+  <li>\(f_{w,b}(x^{(i)}) \)is our prediction for example $i$ using parameters \(w,b\).</li>
+  <li>\((f_{w,b}(x^{(i)}) -y^{(i)})^2\) is the squared difference between the target value and the prediction. </li>
+  <li>These differences are summed over all the $m$ examples and divided by <b>2*m</b> to produce the cost, \(J(w,b)\).</li>
+</ul>
+   
+<p>Note,</p> 
+<ul>
+  <li>
+    Summation ranges are typically from 1 to m, while code will be from 0 to m-1.
+  </li>
+</ul>
+
+<blockquote>
+<pre>
+<code>
+float compute_cost(float x[], float y[], float w, float b, int m){
+
+  /*
+  Computes the cost function for linear regression.
+
+  Args:
+  X (ndarray (m,1)): Data, m examples 
+  Y (ndarray (m,1)): target values
+  w,b (scalar)     : model parameters  
+  m (scalar)       : number of examples, X
+
+  Returns
+    total_cost (float): The cost of using w,b as the parameters for linear regression
+          to fit the data points in X and Y
+  */
+
+  float J_wb = 0;
+  float f_x;
+
+  for (int i = 0; i < m; i++)
+  {
+    f_x = x[i] * w + b; 
+    J_wb += pow((f_x - y[i]), 2);
+  }
+  J_wb /= (2 * m);
+
+  return J_wb;
+}
+</code>
+</pre>
+</blockquote>
+
+
+
+<h2 id="compute_cost_1">Cost versus iterations of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
+
+<img src="./images/cost.png" class="limit-height">
+
+
+<h2 id="compute_cost_1">Plot of cost J(w,b) vs w,b with path of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>Plot shows the $cost(w,b)$ over a range of $w$ and $b$. Cost levels are represented by the rings. Overlayed, using red arrows, is the path of gradient descent. Here are some things to note:</p>
+<ul>
+  <li>The path makes steady (monotonic) progress toward its goal.</li>
+  <li>initial steps are much larger than the steps near the goal.</li>
+</ul>
+
+<img src="./images/counter_cost.png" class="limit-height">
+
+
+<h2 id="compute_cost_1">Convex Cost surface <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+
+<p>The fact that the cost function squares the loss, \( \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2\)  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
+
+
+<h1 id="gradient_descent_1">Gradient Descent <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
+<p>In linear regression, we utilize input training data to fit the parameters \(w\),\(b\) by minimizing a measure of the error between our predictions \(f_{w,b}(x^{(i)})\) and the actual data \(y^{(i)}\). The measure is called the $cost$, \(J(w,b)\). In training you measure the cost over all of our training samples \(x^{(i)},y^{(i)}\)</p>
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
+\;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
+ b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+<p>where, parameters \(w\), \(b\) are updated simultaneously. </p> 
+<p>The gradient is defined as:</p>
+$$
+\begin{align}
+\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})*x^{(i)} \tag{4}\\
+  \frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\\
+\end{align}
+$$
+
+<p>Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.</p>
+
+
+
+<blockquote>
+<pre>
+<code>
+float *compute_gradients(float x[], float y[], float w, float b, int m){
+
+  /*
+  Computes the gradients w,b for linear regression 
+  Args:
+  x (ndarray (m,1)): Data, m examples 
+  y (ndarray (m,1)): target values
+  w,b (scalar)    : model parameters  
+  m (scalar)       : number of examples, X
+  Returns
+  dj_dw (scalar): The gradient of the cost w.r.t. the parameters w  
+  dj_db (scalar): The gradient of the cost w.r.t. the parameters b
+  grads (ndarray (2,1)): gradients [dj_dw, dj_db]  
+  */
+
+  float f_x;
+  float dj_dw = 0;
+  float dj_db = 0;
+  float *grads = (float *)malloc(2 * sizeof(float));
+
+  for (int i = 0; i < m; i++)
+  {
+    f_x = x[i] * w + b;
+    dj_dw += (f_x - y[i]) * x[i];
+    dj_db += (f_x - y[i]);
+  }
+  dj_dw /= m;
+  dj_db /= m;
+
+  grads[0] = dj_dw;   //index 0: dj_dw
+  grads[1] = dj_db;   //index 1: dj_db
+
+  return grads;
+}
+</code>
+</pre>
+</blockquote>
+
+
+<h2 id="gradient_descent_1">Cost vs w, with gradients, b set to 100 <a class="head_anchor" href="#gradient_descent_1">#</a></h2>
+
+<p>The plot shows \(\frac{\partial J(w,b)}{\partial w}\) or the slope of the cost curve relative to \(w\) at three points. The derivative is negative. Due to the 'bowl shape', the derivatives will always lead gradient descent toward the bottom where the gradient is zero.</p>
+
+<img src="./images/grads.png" class="limit-height">
+
+
+ <h1 id="evaluation_1">Evaluating our model <a class="head_anchor" href="#evaluation_1">#</a></h1>
+
+<p>To evaluate the estimation model, we use coefficient of determination which is given by the following formula:</p>
+$$
+R^2 = 1 - \frac{Residual\ Square\ Sum}{Total\ Square\ Sum}
+$$
+
+
+$$
+R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - f_{w,b}(x^{(i)})_{mean})^2}
+$$
+
+
+<blockquote>
+<pre>
+<code>
+float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha){
+
+  /*
+  Performs gradient descent to fit w,b. Updates w,b by taking 
+  gradient steps with learning rate alpha
+
+  Args:
+  w,b (scalar): initial values of model parameters  
+  alpha (float):     Learning rate
+  dj_dw (scalar): The gradient of the cost w.r.t. the parameters w  
+  dj_db (scalar): The gradient of the cost w.r.t. the parameters b
+
+  Returns:
+  w (scalar): Updated value of parameter after running gradient descent
+  b (scalar): Updated value of parameter after running gradient descent
+  p_hist (ndarray (2,1)): History of parameters [w,b] 
+  */
+
+  float *p_hist = (float *)malloc(2 * sizeof(float));
+
+  w = w - (alpha * dj_dw);
+  b = b - (alpha * dj_db);
+
+  p_hist[0] = w; //weight
+  p_hist[1] = b; //bias
+
+  return p_hist;
+}
+</code>
+</pre>
+</blockquote>
+
+
+<h1 id="learning_parameter_1">Learning parameters using batch gradient descent<a class="head_anchor" href="#learning_parameter_1">#</a></h1>
+
+<p>You will now find the optimal parameters of a linear regression model by using batch gradient descent. Recall batch refers to running all the examples in one iteration.</p>
+<ul>
+  <li>You don't need to implement anything for this part. Simply run the cells below. </li>
+  <li>A good way to verify that gradient descent is working correctly is to look at the value of \(J(w,b)\) and check that it is decreasing with each step. </li>
+  <li>Assuming you have implemented the gradient and computed the cost correctly and you have an appropriate value for the learning rate alpha, \(J(w,b)\) should never increase and should converge to a steady value by the end of the algorithm.  </li>
+</ul>
+
+<h2 id="learning_parameter_1">Expected Output<a class="head_anchor" href="#learning_parameter_1">#</a></h2>
+
+<p>Optimal w, b found by gradient descent </p>
+
+
+<table>
+  <tr>
+    <th>w</th>
+  <th>b</th>
+</tr>
+  <tr>
+    <td>|-3.216610 </td>
+    <td>|-3.216610 </td>
+  </tr>
+</table>
+<p>We will now use our final parameters w, b to find our prediction for single example.</p>
+
+<p>recall:</p>
+
+$$
+f_{w,b}(x^{(i)}) = w * x^{i} + b
+$$
+
+<p>Let's predict what profit will be for the ares of 35,000 and 70,000 people</p>
+
+<ul>
+  <li>The model takes in population of a city in 10,000s as input. </li>
+  <li>Therefore, 35,000 people can be translated into an input to the model as <b>input[] = {3.5}</b></binput></li>
+  <li>Similarly, 70,000 people can be translated into an input to the model as <b>input[] = {7.5}</b></li>
+</ul>
+
+<h1 id="main_function_1">The main function<a class="head_anchor" href="#main_function_1">#</a></h1>
+
+<blockquote>
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+//Initializing functions
+float *compute_model_output(float x[], float w, float b, int m);
+float compute_cost(float x[], float y[], float w, float b, int m);
+float *compute_gradients(float x[], float y[], float w, float b, int m);
+float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha);
+float evaluate_model(float x[], float y[], float w, float b, int m);
+
+int main(){
+
+  //initialize w and b
+  float w_in = 0;
+  float b_in = 0;
+
+  //initialize input, x
+  float x[]={6.1101, 5.5277, 8.5186, 7.0032, 5.8598, 
+            8.3829, 7.4764, 8.5781, 6.4862, 5.0546, 
+            5.7107, 14.164, 5.734, 8.4084, 5.6407, 
+            5.3794, 6.3654, 5.1301,6.4296, 7.0708, 6.1891};
+  float y[]={17.592, 9.1302, 13.662, 11.854, 6.8233,
+            11.886, 4.3483, 12, 6.5987, 3.8166, 3.2522,
+            15.505, 3.1551, 7.2258, 0.71618, 3.5129, 
+            5.3048, 0.56077, 3.6518, 5.3893, 3.1386};
+
+  //number of example, m
+  int m = sizeof(x) / sizeof(x[0]);
+  float alpha = 1e-2;
+  int num_iters = 10000;
+
+  float w = 0;
+  float b = 0;
+  float J_wb = 0;
+  float dj_dw = 0;
+  float dj_db = 0;
+
+  for (int i = 0; i <= num_iters; i++)
+  {
+    // Save cost J at each iteration
+    J_wb = compute_cost(x, y, w, b, m);
+    
+    // Calculate the gradient and update the parameters using gradient_function
+    float *grads = compute_gradients(x, y, w, b, m);
+
+    dj_dw = grads[0];
+    dj_db = grads[1];
+
+    // Update Parameters using equation (3) above
+    float *p_hist = compute_weight_bias(w, b, dj_dw, dj_db, alpha);
+
+    //R square
+    float R_square = evaluate_model(x, y, w, b, m);
+
+    w = p_hist[0];
+    b = p_hist[1];
+    
+    // Print cost every at intervals 10 times or as many iterations if < 10
+    if (ceil(i % 1000) == 0)
+    {
+      printf("Iteration: %5d\tCost: %10f\t R_Score: %10f\t dj_dw: %10f\t dj_db:%10f\t w: %10f\tb:%8f\n", i, J_wb, R_square, dj_dw, dj_db, w, b);
+    }
+  }
+
+  //Predicting the Profit of restaurant, with a given Population, popul for 1 example, eg=1
+  int eg = 2;
+  float popul[] = {3.5, 7.5};
+
+  float weight = w;
+  float bias = b;
+  float *pred = compute_model_output(popul, weight, bias, eg);
+  for (int i = 0; i < eg; i++)
+  {
+    printf("\nFor population: %f,\t we predict the profit of:$ %f\n", popul[i] * 10000, pred[i] * 10000);
+  }
+
+  return 0;
+}
+</code>
+</pre>
+</blockquote>
+
+
+  <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
+    <a href="#kudo">
+      <div class="filling">&nbsp;</div>
+    </a>
+    <div class="num">2,076</div>
+    <div class="txt">Kudos</div>
+  </figure>
+  <figure class="side kudo able clearfix" id="kudo_side_angbJyhsMUeJe4t4KyKHG1">
+    <a href="#kudo">
+      <div class="filling">&nbsp;</div>
+    </a>
+    <div class="num">2,076</div>
+    <div class="txt">Kudos</div>
+  </figure>
+</article>
+
+  <div id="share_links" data-no-turbolink>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="oderoi" data-related="svbtle" data-no-turbolink>Tweet</a>
+    <!-- <div style="margin-top: 4px; margin-bottom: 8px; margin-left: 0px; display: block;" class="fb-share-button" data-href="https://oderoi.github.io/Univariate-linear-regression" data-layout="button_count" data-no-turbolink></div> -->
+  <div>
+</section>
+<section id="readnext">
+  <a href="https://oderoi.github.io/mlr">
+    <h4 class="readnext_header">Now read this</h4>
+    <h3 class="readnext_title">Multivariate Linear Regression</h3>
+    <p class="readnext_content">C programming language,... <span class="continue_btn">Continue&nbsp;&rarr;</span></p>
+  </a>
+</section>
+<footer id="blog_foot" class="cf">
+  <ul id="foot_links">
+    <li><a href="https://x.com/oderoi_">@oderoi</a></li>
+    <li><a href="https://oderoi.github.io" >oderoi</a></li>
+  </ul>
+  <figure id="user_foot"><a href="/">Svbtle</a></figure>
+  <h5><a href="https://oderoi.github.io">Isack Odero</a></h5>
+</footer>
+
+
+<div id="lights">&nbsp;</div>
+<div id="app-data" data-name="svbtle" data-version="8.5-legible" data-magicNum="2572031820.15"></div><div id="px-data" data-ax="posts" data-sx="show"></div><div id="user-data" data-here="false" data-state="logged-out"></div><div id="blog-data" data-title="Greg Brockman" data-blogname="gdb" data-extid="8SMTiky8WK9x16AjSma1Vx" data-color="000000" data-color-rgb="0,0,0" data-color-rgba="(0,0,0,0.5)" data-blog-tracker="UA-26652609-2"></div></body>
+</html>
