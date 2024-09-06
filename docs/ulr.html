@@ -52,17 +52,6 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
   
   <style>
-    /* Make the container responsive */
-    code {
-      white-space: pre-wrap; /* Line break preservation */
-      word-wrap: break-word; /* Prevent overflow */
-      /* font-size:small; Adjust font size based on screen size */
-      padding: 0px;
-      /* background-color: #f4f4f4; Light grey background */
-      border-radius: 5px;
-      overflow: auto;
-    }
-
     code {
       font-size: small;
     }
@@ -73,6 +62,11 @@
 
     /* Responsive font size */
     @media screen and (max-width: 768px) {
+      code {
+        font-size: small;
+      }
+    }
+    @media screen and (max-width: 992px) {
       code {
         font-size: small;
       }
