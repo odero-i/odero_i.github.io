@@ -203,22 +203,86 @@ FcgidProcessLifeTime 150
 
 <p>A couple of levels required us to run a simulated browser so people could exploit XSS bugs. For those levels, we ran a <a href="http://phantomjs.org/">PhantomJS</a> script every few minutes. To make sure it only ran when needed (and that it ran as your assigned UNIX user, in case of Webkit vulnerabilities), we spawned the headless Webkit instance directly from the FCGI dispatcher, using the following code:</p>
 
-<pre><code class="prettyprint lang-c">Thread.abort_on_exception = true
-Thread.new do
-  while true
-    started = Time.now
+<pre><code class="prettyprint lang-c">
+  #include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
 
-    pid = fork do
-      cmd = File.join(File.dirname(__FILE__), '../browser-runner.sh')
-      exec([cmd, cmd])
-    end
-    Process.wait(pid)
-    status = $?.exitstatus
-    $stderr.puts "Exited with status #{$?}" unless status == 0
+//Initializing functions
+float *compute_model_output(float x[], float w, float b, int m);
+float compute_cost(float x[], float y[], float w, float b, int m);
+float *compute_gradients(float x[], float y[], float w, float b, int m);
+float *compute_weight_bias(float w, float b, float dj_dw, float dj_db, float alpha);
+float evaluate_model(float x[], float y[], float w, float b, int m);
 
-    sleep(60 * (3 * rand + 1))
-  end
-end
+int main(){
+
+  //initialize w and b
+  float w_in = 0;
+  float b_in = 0;
+
+  //initialize input, x
+  float x[]={6.1101, 5.5277, 8.5186, 7.0032, 5.8598, 
+            8.3829, 7.4764, 8.5781, 6.4862, 5.0546, 
+            5.7107, 14.164, 5.734, 8.4084, 5.6407, 
+            5.3794, 6.3654, 5.1301,6.4296, 7.0708, 6.1891};
+  float y[]={17.592, 9.1302, 13.662, 11.854, 6.8233,
+            11.886, 4.3483, 12, 6.5987, 3.8166, 3.2522,
+            15.505, 3.1551, 7.2258, 0.71618, 3.5129, 
+            5.3048, 0.56077, 3.6518, 5.3893, 3.1386};
+
+  //number of example, m
+  int m = sizeof(x) / sizeof(x[0]);
+  float alpha = 1e-2;
+  int num_iters = 10000;
+
+  float w = 0;
+  float b = 0;
+  float J_wb = 0;
+  float dj_dw = 0;
+  float dj_db = 0;
+
+  for (int i = 0; i <= num_iters; i++)
+  {
+    // Save cost J at each iteration
+    J_wb = compute_cost(x, y, w, b, m);
+    
+    // Calculate the gradient and update the parameters using gradient_function
+    float *grads = compute_gradients(x, y, w, b, m);
+
+    dj_dw = grads[0];
+    dj_db = grads[1];
+
+    // Update Parameters using equation (3) above
+    float *p_hist = compute_weight_bias(w, b, dj_dw, dj_db, alpha);
+
+    //R square
+    float R_square = evaluate_model(x, y, w, b, m);
+
+    w = p_hist[0];
+    b = p_hist[1];
+    
+    // Print cost every at intervals 10 times or as many iterations if < 10
+    if (ceil(i % 1000) == 0)
+    {
+      printf("Iteration: %5d\tCost: %10f\t R_Score: %10f\t dj_dw: %10f\t dj_db:%10f\t w: %10f\tb:%8f\n", i, J_wb, R_square, dj_dw, dj_db, w, b);
+    }
+  }
+
+  //Predicting the Profit of restaurant, with a given Population, popul for 1 example, eg=1
+  int eg = 2;
+  float popul[] = {3.5, 7.5};
+
+  float weight = w;
+  float bias = b;
+  float *pred = compute_model_output(popul, weight, bias, eg);
+  for (int i = 0; i < eg; i++)
+  {
+    printf("\nFor population: %f,\t we predict the profit of:$ %f\n", popul[i] * 10000, pred[i] * 10000);
+  }
+
+  return 0;
+}
 </code></pre>
 
 <p>Giving UNIX users random names (and using <a href="http://httpd.apache.org/docs/2.2/mod/mod_userdir.html">mod_userdir</a> as a routing layer) served as a convenient access-control mechanism. We assigned CTF solvers a level URL such as <a href="https://level01-2.stripe-ctf.com/user-iqrncaxifi"></a><a href="https://level01-2.stripe-ctf.com/user-iqrncaxifi">https://level01-2.stripe-ctf.com/user-iqrncaxifi</a>, which was backed by a UNIX user with name <code>user-iqrncaxifi</code>. To prevent people from discovering other users, we set permissions on <code>/etc/passwd</code> and <code>/etc/group</code> to <code>600</code>. It turns out that this makes some software a bit sad (e.g. bash can’t fill in the username in your shell prompt, and Python can’t load the site module), but for the most part those can be worked around.</p>
