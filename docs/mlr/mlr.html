@@ -694,6 +694,16 @@ double *compute_gradient(float **x, float y[m], double w[][1], double b){
 <p>
   <img src="./images/sst.png" >
 </p>
+<p>
+  $$
+  R^2 = 1 - \frac{\mathbf{ss}_{res}}{\mathbf{ss}_{total}}\\
+  $$
+</p>
+<p>
+  $$
+  R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(y_{mean}^{(i)} - y^{(i)})^2}
+  $$
+</p>
 
   <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
     <a href="#kudo">
