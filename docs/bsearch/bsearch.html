@@ -299,52 +299,63 @@ section#readnext:hover p span {
     <p>
         <img src="./images/Binary_Search_Depiction.svg.png" alt="binary_search" />
     </p>
+    <p>
+        None:
+        <ul>
+            <li>
+                While it is possible to perform binary search using <b>for-loop</b>> and compare each number, the sequential search (binary search) is efficient, especially if the list is long.
+            </li>
+        </ul>
+    </p>
 <blockquote>
 <pre>
 <code>
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
-/*
-Note: colA=rowB, A[N][K] . B[K][M]. Hence you will get C[rowA][colB] = C[N][M].
-*/
-
-#define rowA 4
-#define colA 4
-#define rowB 4
-#define colB 4
-    
-//Declaration of dot_product() function.
-
-int** dot_product(int A[][colA], int B[][colB]);
+int bsearch(int arr[], int S, int E, int T);
 
 int main(){
 
-    //Initialize and Declare the matrix A[rowA][colA]
-    int A[][colA]={ {1,2,3,4},
-                    {5,6,7,8}, 
-                    {9,10,11,12},
-                    {13,14,15,16}};
+    //Array
+    int arr[]={1,3,4,6,7,8,10,13,14,18,19,21,24,37,40,45,71};
 
-    //Initialize and Declare the matrix B[rowB][colB]
-    int B[][colB]= {{1,2,3,4},
-                    {1,2,3,4},
-                    {1,2,3,4},
-                    {1,2,3,4}};
+    //size of array
+    int n=sizeof(arr)/sizeof(int);
 
-    //Calling dot_product() function
-    int **mult=dot_product(A,B);
+    //number we are to searche (element, n)
+    //we ask user to enter the number
+    int T;
+    printf("Enter Element: T to find in the Array: ");
+    scanf("%d", &T);
 
-    //This is nested for-loop for printing matrix C[rowA][colB]
-    for (int i = 0; i < rowA; i++)
+    //start_index, S
+    int S=0;
+
+    //end_index, E
+    int E=n - 1;
+
+    //initialize the index we are searching for to the binary search implementation
+    int index=bsearch(arr, S, E, T);
+
+    /*
+    if binary search (bsearch() function) return -1, 
+        - this means it did not find the number you are searching
+            in the Array
+
+    else, it will return the index of the searched number, 
+    (element, T).
+    */
+    
+    if (index == -1)
     {
-        for (int j = 0; j < colB; j++)
-        {
-            printf("%d\t", mult[i][j]);
-        }
-        printf("\n");
-        
+        printf("Element T: %d is Not found.\n", T);
+    }else
+    {
+        printf("Element, T: %d is found at index: %d",T, index);
     }
+    
+    
 
     return 0;
 }
@@ -353,40 +364,54 @@ int main(){
 </blockquote>
 
 <p>
-    This is the dot_product() function.
-</p>
-<p>
-    It takes in two 2D-arrays A[rowA][colA] and B[rowB][colB].
-</p>
-<p>
-    This function returns a pointer-to-pointer variable that points to the 2D-array C[rowA][colB].
+    This is the bsearch() function.
 </p>
 
 
 <blockquote>
 <pre>
 <code>
-int** dot_product (int A[][colA], int B[][colB]){
 
-    int ** mult=(int **)malloc(rowA*sizeof(int *));
-    for (int i = 0; i < rowA; i++)
-    {  
-        mult[i] =(int *)malloc(colB*sizeof(int));
-    }
+int bsearch(int arr[], int S, int E, int T){
 
-    // Nested for-loop to perform Matrix Multiplication or Dot Product
-    for (int i = 0; i < rowA; i++)
+    //if end_index, E is greater or equal to start_index, S
+    if (E >= S)
     {
-        for (int j = 0; j < colB; j++)
+        //find the middle_index, m
+        int m= S + (E - S)/2;
+
+        /*
+        if array element at middle_index, m is equal to element, 
+        T(number we are finding)
+        return the middle_index, m and end the program
+        */
+        if (arr[m] == T){
+            return m;
+        }
+
+        /*
+        if array element at middle_index, m is greater than element, 
+        T(number we are searching)
+            return this function (bsearch() function) with end_index, 
+            E is set to middle_index, m - 1
+        else
+            return this function (bsearch() function) with start_index, 
+            S is set to middle_index, m + 1 
+        */
+        if (arr[m] > T){
+            return bsearch(arr, S, m - 1, T);
+        }else
         {
-            mult[i][j]=0;
-            for (int k = 0; k < colA; k++)
-            {
-                mult[i][j] += A[i][k]*B[k][j];
-            }
-        }  
+            return bsearch(arr, m + 1, E, T);
+        }
+        
     }
-return mult;
+    /*
+    return -1 if the number we are searching (element, T) 
+    is not found in Array
+    */
+    return -1;
+    
 }
 
 </code>
