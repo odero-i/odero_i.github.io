@@ -705,6 +705,76 @@ double *compute_gradient(float **x, float y[m], double w[][1], double b){
   $$
 </p>
 
+<blockquote>
+<pre>
+<code>
+double r_squared(float **x, float y[m], double w[][1], double b){
+
+  /*
+
+  Computes the gradient for linear regression 
+  Args:
+    X (ndarray (m,n)): Data, m examples with n features
+    y (ndarray (m,1)) : target values
+    w (ndarray (n,1)) : model parameters  
+    b (scalar)       : model parameter
+    
+  Returns:
+    r_square (scalar): r square score.
+    r_square = (1 - rss/tss) 
+    rss : measure of sum diff btn actual(y) value and predicted(f_wb) value.(y - f_wb)
+    tss : measure of total variance in actual(y) value. (y - f_mean)
+  
+  */
+
+  double r_square;
+  double f_wb;
+  double y_mean;
+  double y_sum;
+  double rss;
+  double tss;
+
+  for (int i = 0; i < m; i++)
+  {
+    for (int j = 0; j < 1; j++)
+    {
+      f_wb=0;
+      for (int k = 0; k < n; k++)
+      {
+        f_wb += x[i][k]*w[k][j];
+      }
+      f_wb +=b;
+    }
+
+    rss += pow((y[i] - f_wb), 2);
+    y_sum += y[i];
+      
+  }
+  y_mean = y_sum/m;
+
+  for (int i = 0; i < m; i++)
+  {
+    tss += pow((y[i] - y_mean), 2);
+  }
+  
+  r_square = 1 - (rss/tss);
+
+
+  return r_square;
+}
+</code>
+</pre>
+</blockquote>
+
+<!-- <h1 id="main_1">The main function<a class="head_anchor" href="#main_1">#</a></h1>
+<blockquote>
+<pre>
+<code>
+
+</code>
+</pre>
+</blockquote> -->
+
   <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
     <a href="#kudo">
       <div class="filling">&nbsp;</div>
