@@ -214,65 +214,61 @@ section#readnext:hover p span {
   <article id="angbJyhsMUeJe4t4KyKHG1" class="post  historical">
 	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
   <h1 class="article_title">
-    <a href="https://oderoi.github.io/ulr">Univariate Linear Regression</a>
+    <a href="https://oderoi.github.io/ulr">Multiple Variable Linear Regression</a>
   </h1>
 	<h1 id="problem_statement_1">Problem statement <a class="head_anchor" href="#problem_statement_1">#</a></h1>
-  <p>Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet.</p>
-  <p>
-    <ul>
-      <li>You would like to expand your business to cities that may give your restaurant higher profits.</li>
-      <li>The chain already has restaurants in various cities and you have data for profits and populations from the cities.</li>
-      <li>You also have data on cities that are candidates for a new restaurant. </li>
-      <ul>
-        <li>For these cities, you have the city population.</li>
-      </ul>
-    </ul>
-  </p>
-  <p>Can you use the data to help you identify which cities may potentially give your business higher profits?</p>
-  <p>Note:</p>
-  <ul>
-    <li>'X' is the population of a city</li>
-    <li>'y' is the profit of a restaurant in that city. A negative value for profit indicates a loss. </li>
-    <ul>
-      <li>Both 'X' and 'y' are arrays.</li>
-    </ul>
-  </ul>
+  <p>We will use the motivating example of housing price prediction. The training dataset contains four features (size, bedrooms, floors and, age) shown in the table below.</p>
+  
 
   <table>
     <tr>
-      <th>Population of a city (<b>x</b> 10,000) as \(x\) </th>
-      <th>Profit of a restaurent (<b>x</b> $10,000) as \( f_{w,b}(x^{(i)}) \)or \(x\) </th>
+      <th>Size (sqft)</th>
+      <th>Number of Bedrooms </th>
+      <th>Number of floors</th>
+      <th>Age of home (years)</th>
+      <th>Price (1,000s dollars)</th>
       
   </tr>
     <tr>
-      <td>6.1101</td>
-      <td>17.592</td>
+      <td>2104</td>
+      <td>5</td>
+      <td>1</td>
+      <td>45</td>
+      <td>460</td>
     </tr>
     <tr>
-      <td>5.5277</td>
-      <td>9.1302</td>
+      <td>1416</td>
+      <td>3</td>
+      <td>2</td>
+      <td>40</td>
+      <td>232</td>
     </tr>
     <tr>
-      <td>8.5186</td>
-      <td>13.662</td>
-    </tr>
-    <tr>
-      <td>7.0032</td>
-      <td>11.854</td>
-    </tr>
-    <tr>
-      <td>5.8598</td>
-      <td>6.8233</td>
+      <td>852</td>
+      <td>2</td>
+      <td>1</td>
+      <td>35</td>
+      <td>178</td>
     </tr>
   </table>
-  <p>Number of training example (size (1000 sqft) as x) \(m\)</p>
-  <p>In this case \(m = 5\)</p>
+  <p>Let's build a linear regression model using these values so you can then predict the price for other houses. For example, a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old.  </p>
 
-  <h1 id="model_function_1">Model Function <a class="head_anchor" href="#model_function_1">#</a></h1>
-  <p>The model function for linear regression (which is a function that maps from \(x\) to \(y\) is represented as</p>
-  <p>$$f_{w,b}(x^{(i)}) = w*x^{(i)} + b \tag{1}$$</p>
+  <h2 id="model_function_1">Matrix $X$ containing our example <a class="head_anchor" href="#model_function_1">#</a></h2>
+  <p>Each row of datasets represent one example, with $n$ number of features and $m$ training examples, now $\mathbf{x}$ is an input matrix with dimensions $(m, n)$ where $m$ is row and $n$ is column.</p>
+  <p>$$\mathbf{X} = 
+    \begin{pmatrix}
+     x^{(0)}_0 & x^{(0)}_1 & \cdots & x^{(0)}_{n-1} \\ 
+     x^{(1)}_0 & x^{(1)}_1 & \cdots & x^{(1)}_{n-1} \\
+     \vdots  &  \vdots  &  \vdots  &  \vdots  \\
+     x^{(m-1)}_0 & x^{(m-1)}_1 & \cdots & x^{(m-1)}_{n-1} 
+    \end{pmatrix}
+    $$</p>
 
-
+<p>Notations</p>
+<ul>
+  <li>$\mathbf{x}^{(i)}$ is vector containing example i. $\mathbf{x}^{(i)}$ $ = (x^{(i)}_0, x^{(i)}_1, \cdots,x^{(i)}_{n-1})$</li>
+  <li>$x^{(i)}_j$ is element j in example i. The superscript in parenthesis indicates the example number while the subscript represents an element.</li>
+</ul>
 <blockquote>
 <pre>
 <code>
