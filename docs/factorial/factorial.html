@@ -1,0 +1,351 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Binary Search</title>
+  <script>(function(d) {var config = {kitId: 'all7jvn',scriptTimeout: 1000,async: true},h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)})(document);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://lightning.svbtle.com/cargo/favicon-3686f5990e669ad2a1684f0ac250c4d9ddc03e2ef6f3c980f17b7aae786833ef.ico">
+  <link rel="icon" sizes="196x196" href="https://lightning.svbtle.com/cargo/apple-touch-icon-8ed2bd858a30400ead0535543ffb8ad2ab3e036a2f0adb797dc641458d00a41a.png">
+  <link rel="mask-icon" href="https://lightning.svbtle.com/cargo/default-b7e7b5361ab4c50a9ceb6dc296e0f157e2ec9c2f2c6f30832d991dc361d69512.svg" color="black">
+  <!-- <meta name="generator" content="Svbtle.com" /> -->
+  <meta name="description" content="C programming| Isack Odero "/>
+  <link rel="canonical" href="https://oderoi.github.io/ulr" />
+  <meta property="og:url" content="https://oderoi.github.io/ulr" />
+  <meta property="twitter:site" content="@svbtle" />
+  <meta property="twitter:title" content="Factorial" />
+  <meta property="twitter:description" content="Factorial with C programming, ..." />
+  <meta property="twitter:creator" content="@oderoi_" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
+  <meta property="twitter:domain" content="https://oderoi.githu.io" />
+  <meta property="og:title" content="Factorial &bull; Isack Odero" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Factorial using C programming language, ... | Isack Odero" />
+  <meta property="og:image" content="https://lightning.svbtle.com/cargo/icons/svbtle_logo-ba4b41e5249a7e3f19288fa586ea973569bfb83452114886be65bc5d8eb13b21.png" />
+  <meta property="og:site_name" content="Isack Odero" />
+  <meta property="fb:app_id" content="346346195413177" />
+  <link rel="alternate" type="application/rss+xml" href="https://oderoi.github.io/feed" />
+  <link rel="stylesheet" href="https://lightning.svbtle.com/cargo/legacy/build.blog-120c367e4cc2cdf2d031c71f795ecea0ef4033f8b24d12d8e147c86e08e2ed2a.css" media="all" data-turbolinks-track="reload" />
+  <script src="https://lightning.svbtle.com/cargo/build.blog-41a284c81b4230cd8ab812d35fabef8cc99e927407ed15604d3206997ef79818.js" data-turbolinks-track="reload"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGMRYDBB5R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('set', 'linker', {
+      'accept_incoming': true
+    });
+    gtag('config', 'G-VGMRYDBB5R');
+    gtag('config', 'UA-26652609-2');
+  </script>  
+  <script src="https://lightning.svbtle.com/cargo/share_buttons-dd547cdb8c37c1c5b949d9a5f034ef854d39634831852762b3d730f59a9e47d4.js" data-turbolinks-track="true"></script>
+  <script src="//platform.twitter.com/widgets.js" async></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+
+  <!-- The loading of KaTeX is deferred to speed up page rendering -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+ 
+
+<style>
+  blockquote pre code {
+    margin-left: -10px;
+  }
+@media screen and (max-width: 480px) {
+  body pre code {
+    font-size: 7px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  body pre code {
+    font-size: 9px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  body pre code {
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  body pre code {
+    font-size: 13px;
+  }
+}
+</style>
+
+</head>
+<body class="overlord blog">
+<style scoped>
+figure#user_logo a,
+figure#user_foot a,
+figure.avatar a,
+nav#overlord.user_top figure#logo_top a,
+figure.kudo.complete div.filling {
+  background-image: url('https://lightning.svbtle.com/cargo/blank-3dc89b51de1fd0e237e0320a05be98fb1f11cc04dcf200934ba8a64deec81ffd.png')
+}
+
+figure.kudo.activated div.filling,
+figure.kudo.complete div.filling {
+  background-color: #000000;
+}
+
+figure.kudo.activated a,
+figure.kudo.complete a {
+  border-color: #000000;
+}
+
+blockquote,
+a blockquote,
+div#readnext:hover span.flank_title,
+div#foot_more:hover a,
+div#foot_userbar a#bottom_tagline span:hover,
+article.linked h1.article_title a:hover,
+a.continue_button:hover,
+article p a:hover,
+ul#lightning_drop,
+figure#user_foot,
+ul#user_links li a:hover,
+ul#foot_links li a:hover,
+a.buttonize:hover,
+button.buttonize:hover,
+a.buttonize.outline:hover,
+button.buttonize.outline:hover,
+nav.pagination span.next a:hover,
+nav.pagination span.prev a:hover,
+section#readnext:hover p span,
+nav#overlord.user_top figure#logo_top {
+  border-color: #000000;
+}
+/*figure#user_logo,*/
+
+figure.avatar,
+nav#overlord.user_top figure#logo_top a,
+ul#user_links li a:hover,
+ul#foot_links li a:hover,
+a.buttonize:hover,
+button.buttonize:hover,
+a.buttonize.outline:hover,
+button.buttonize.outline:hover,
+nav.pagination span.next a:hover,
+nav.pagination span.prev a:hover,
+figure#user_logo a,
+figure#user_foot a  {
+	background-color: #000000;
+}
+
+h6.separator_title.read_first,
+header#user_top h2 a,
+footer#blog_foot h5 a,
+article.post h1 a:hover,
+div.preview strong,
+nav#overlord h2#nav_title.user_top a,
+section#readnext:hover h3,
+section#readnext:hover p span {
+  color: #000000;
+}
+
+@keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+@-moz-keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+@-webkit-keyframes titlePulse
+  {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #000000;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+
+</style>
+
+<figure id="loading">&nbsp;</figure>
+<nav id="overlord" class="user_top">
+  <div id="lockup" class="">
+    <figure id="logo_top" class=" user_top">
+      <a href="/">Svbtle</a>
+    </figure>
+    <h2 id="nav_title" class="user_top"><a href="https://oderoi.github.io">Isack Odero</a></h2>
+  </div>
+  <figure id="hamburger">
+    <a href="#menu" id="hamburger_button">Menu</a>
+  </figure>
+  <ul id="dropdown" class="onblog">
+    <li><a href="https://x.com/oderoi_" class="xdotcom" target="_blank">@oderoi</a></li>
+    <li style="margin: 0; padding: 0;"><hr class="overlord_nav" /></li>
+    <li><a href="about_me.html">about me</a></li>
+  </ul>
+</nav>
+<!-- <div id="whiteout"></div> -->
+
+
+<section id="container" class="blog user_post">
+  <article id="angbJyhsMUeJe4t4KyKHG1" class="post  historical">
+    <header id="user_top" class="cf ">
+        <ul id="user_links">
+          <!-- <li><a href="https://x.com/oderoi_" class="xdotcom">@oderoi</a></li> -->
+          <li><a href="https://github.com/oderoi/C/tree/main/Algoritm/Math/Factorial" class="github" >oderoi</a></li>
+          <li><a href="./about_me.html">About me</a></li>
+        </ul>
+    </header>
+
+
+	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
+  <h1 class="article_title">
+    <a href="./matmul.html">Factorial</a>
+  </h1>
+	<h1 id="problem_statement_1">Factorial in C<a class="head_anchor" href="#problem_statement_1">#</a></h1>
+
+    <p>
+        The factorial of a <b>non-negative integer n</b>, denoted by <b>n!</b>>, is the product of all positive integers less than or equal to <b>n</b>>.
+    </p>
+        
+    <p>
+        The factorial of <b>n</b> with the next smaller factorial:
+    </p>
+    <p>
+        $$n! = n x (n - 1) x (n - 2) x (n - 3) x \cdots x 3 x 2 x 1$$
+    </p>
+    <p>
+        Binary Search is a search algorithm that finds the position of a target value within a sorted array.
+    </p>
+    <p>
+        $$n! = n . (n -1) . (n - 2) \dots  3 . 2 . 1$$
+    </p>
+    <p>
+        <img src="./images/Binary_Search_Depiction.svg.png" alt="binary_search" />
+    </p>
+    <p>
+        $$n! = n$ . $(n - 1)!$$
+    </p>
+    <p>
+        $$n! = \prod_{i = 1}^{n} i.$$
+    </p>
+    <p>
+        example: $$5! = 5 . 4! = 5.4.3! = 120$$
+    </p>
+<blockquote>
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+
+//function definition
+double factorial(double a);
+
+int main(){
+    double a=98;
+
+    //function calling
+    double ans=factorial(a);
+    printf("%f!:    %f\n", a, ans);
+    return 0;
+}
+</code>
+</pre>
+</blockquote>
+
+<p>
+    This is the factorial() function.
+</p>
+
+
+<blockquote>
+<pre>
+<code>
+
+//function to compute factorila n! = n.)n - 1)!
+double factorial(double a){
+    if (a<=1){
+        return 1;
+    }
+
+    //we use recursion
+    return a*factorial(a-1);
+}
+
+</code>
+</pre>
+</blockquote>
+
+<!-- <h1 id="main_1">The main function<a class="head_anchor" href="#main_1">#</a></h1>
+<blockquote>
+<pre>
+<code>
+
+</code>
+</pre>
+</blockquote> -->
+
+  <!-- <figure class="postend kudo able clearfix" id="kudo_angbJyhsMUeJe4t4KyKHG1">
+    <a href="#kudo">
+      <div class="filling">&nbsp;</div>
+    </a>
+    <div class="num">2,076</div>
+    <div class="txt">Kudos</div>
+  </figure>
+  <figure class="side kudo able clearfix" id="kudo_side_angbJyhsMUeJe4t4KyKHG1">
+    <a href="#kudo">
+      <div class="filling">&nbsp;</div>
+    </a>
+    <div class="num">2,076</div>
+    <div class="txt">Kudos</div>
+  </figure>
+</article> -->
+
+  <div id="share_links" data-no-turbolink>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="oderoi" data-related="svbtle" data-no-turbolink>Tweet</a>
+    <!-- <div style="margin-top: 4px; margin-bottom: 8px; margin-left: 0px; display: block;" class="fb-share-button" data-href="https://oderoi.github.io/Univariate-linear-regression" data-layout="button_count" data-no-turbolink></div> -->
+  <div>
+</section>
+<section id="readnext">
+  <a href="../matmul/matmul.html">
+    <h4 class="readnext_header">Now read this</h4>
+    <h3 class="readnext_title">Matrix Multiplication</h3>
+    <p class="readnext_content">C programming language,... <span class="continue_btn">Continue&nbsp;&rarr;</span></p>
+  </a>
+</section>
+<footer id="blog_foot" class="cf">
+  <ul id="foot_links">
+    <li><a href="https://x.com/oderoi_">@oderoi</a></li>
+    <li><a href="https://oderoi.github.io" >oderoi</a></li>
+  </ul>
+  <figure id="user_foot"><a href="/">Svbtle</a></figure>
+  <h5><a href="https://oderoi.github.io">Isack Odero</a></h5>
+</footer>
+
+
+<div id="lights">&nbsp;</div>
+<div id="app-data" data-name="svbtle" data-version="8.5-legible" data-magicNum="2572031820.15"></div><div id="px-data" data-ax="posts" data-sx="show"></div><div id="user-data" data-here="false" data-state="logged-out"></div><div id="blog-data" data-title="Greg Brockman" data-blogname="gdb" data-extid="8SMTiky8WK9x16AjSma1Vx" data-color="000000" data-color-rgb="0,0,0" data-color-rgba="(0,0,0,0.5)" data-blog-tracker="UA-26652609-2"></div></body>
+</html>
