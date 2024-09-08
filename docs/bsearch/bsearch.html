@@ -229,41 +229,72 @@ section#readnext:hover p span {
 	<h1 id="problem_statement_1">Binary Search in C<a class="head_anchor" href="#problem_statement_1">#</a></h1>
 
     <p>
-        Given two matrices A of dimensions M x K and B of dimension K x N, we want to compute their dot product C = A . B, which is also known as matrix multiplication.
+        Binary search also known as <b>half-interval search</b> , <b>logarithmic search</b> or <b>binary chop</b>
     </p>
     <p>
-        The dot product.
+        <ul>
+            <li>
+                is a search algorithm that finds the position of a target value within a sorted array.
+            </li>
+        </ul>
     </p>
     <p>
-        \(C += A . B\)
+        Binary search algorithm checks if the index "start" is greater than the index "end". Based on the value present at the variable "mid", the function is called again to search for element.
     </p>
     <p>
-        \(1D Array.\)
+        In other words binary search: 
+        <ul>
+            <li>
+                comparing an element in the middle of the array with the target value. 
+                <ul>
+                    <li>
+                        if the target value matches the element, its position in the array is returned. 
+                    </li>
+                    <li>
+                        If the target value is less than the element, the search continues in the lower half of the array. 
+                    </li>
+                    <li>
+                        If the target value is greater than the element, the search continues in the upper half of the array. 
+                    </li>
+                </ul>
+            </li>
+            <li>
+                By doing this, the algorithm eliminates the half in which the target value cannot lie in each iteration.
+            </li>
+        </ul>
     </p>
     <p>
-        \(C_{i} = \sum\limits_{i = 0}^{n} (A_{i} . B_{i}) = A_{1}B_{1} + A_{2}B_{2} + ...+ A_{n}B_{n}\)
+        Binary Search is a search algorithm that finds the position of a target value within a sorted array.
     </p>
     <p>
-        \(2D Array.\)
-    </p>
-    <p>
-        \(C_{i , j} = \sum\limits_{k \in [0 ... K) } (A_{i , k} . B_{k , j})\)
-    </p>
-    <p>
-        \(C_{i , j} = A_{i , k} . B_{k , j}\)
-    </p>
-    <p>
-        consider:
-    </p>
-    <p>
-        \(A \in \mathbb{R}^{m \times k}  ==   A \in \mathbb{R}^{rowA \times colA}\)
-    </p>
-    <p>
-        \(B \in \mathbb{R}^{k \times n}  ==   B \in \mathbb{R}^{rowB \times colB}\)
-    </p>
-
-    <p>
-        The main function is the one that calls the dot_product() function.
+        Ginen: 
+        <ul>
+            <li>
+                Array $X^{n-1 (elements)}_{0}$ sorted such as 
+                <ul>
+                    <li>
+                        \(X_{0} \le X_{1} \le X_{2} \le \dots \le X_{n - 1}\) and terget value \(T\) let's find value \(T\) in \(X^{n-1 (elements)}_{0}\)
+                    </li>
+                </ul>
+                <li>
+                    set \(S\) as start_index, \(0\) and \(E\) as end_index, \(n - 1\).
+                    <ul>
+                        <li>
+                            if \(E \ge S\). \(set:\) <b>mid_index</b>, \(m\) as \(S + \frac{(E - S)}{2}\).
+                        </li>
+                        <li>
+                            if \(X_{m} = T\). \(then:\)  return <b>mid_index</b>, \(m\).
+                        </li>
+                        <li>
+                            if \(X_{m} > T\). \(set\) <b>end_index</b>, \(E\) to \(m - 1\)
+                        </li>
+                        <li>
+                            if \(X_{m} \le T\). \(set\) <b>star_index</b>, \(S\) to \(m + 1\)
+                        </li>
+                    </ul>
+                </li>
+            </li>
+        </ul>
     </p>
     
 <blockquote>
