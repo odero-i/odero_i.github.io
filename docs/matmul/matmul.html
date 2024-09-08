@@ -261,23 +261,19 @@ section#readnext:hover p span {
     <p>
         \(B \in \mathbb{R}^{k \times n}  ==   B \in \mathbb{R}^{rowB \times colB}\)
     </p>
+
+    <p>
+        The main function is the one that calls the dot_product() function.
+    </p>
     
 <blockquote>
 <pre>
 <code>
-#include <stdio.h>
-#include <stdlib.h>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
 
 /*
-Contant definition.
-
-Here we use #define for the fan fact that it behave as macros whose value are subtituted at
-run-time.
---------
-Here we have the value size of rows and columns of matrix A[rowA][colA] and B[rowB][colB].
-
-Note: Make sure if you change these values it has to obey the rule of matrix multiplication
-of colA=rowB, A[N][K] . B[K][M]. Hence you will get C[rowA][colB] = C[N][M].
+Note: colA=rowB, A[N][K] . B[K][M]. Hence you will get C[rowA][colB] = C[N][M].
 */
 
 #define rowA 4
@@ -285,25 +281,12 @@ of colA=rowB, A[N][K] . B[K][M]. Hence you will get C[rowA][colB] = C[N][M].
 #define rowB 4
 #define colB 4
     
-/*
-Declaration of dot_product() function.
--------------------------------------
-This is going to return the Resulting Array of our dot product or matrix multiplication
-*/
+//Declaration of dot_product() function.
 
 int** dot_product(int A[][colA], int B[][colB]);
 
-/*
-The main function
------------------
-*/
-
 int main(){
 
-    /*
-    Note: If you will change rowA, colA, rowB and colB constant, make sure to change 
-    also the 2-D arrays (Matricies) to match their size at their constant definition.
-    */
     //Initialize and Declare the matrix A[rowA][colA]
     int A[][colA]={ {1,2,3,4},
                     {5,6,7,8}, 
@@ -316,10 +299,10 @@ int main(){
                     {1,2,3,4},
                     {1,2,3,4}};
 
-    //Calling of dot_product() function and initialize it to a pointer variable int **mult
+    //Calling dot_product() function
     int **mult=dot_product(A,B);
 
-    //This is nested for-loop for printing the result matrix C[rowA][colB]
+    //This is nested for-loop for printing matrix C[rowA][colB]
     for (int i = 0; i < rowA; i++)
     {
         for (int j = 0; j < colB; j++)
@@ -335,26 +318,23 @@ int main(){
 </code>
 </pre>
 </blockquote>
+
 <p>
-    The main function is the one that calls the dot_product() function.
+    This is the dot_product() function.
 </p>
+<p>
+    It takes in two 2D-arrays A[rowA][colA] and B[rowB][colB].
+</p>
+<p>
+    This function returns a pointer-to-pointer variable that points to the 2D-array C[rowA][colB].
+</p>
+
 
 <blockquote>
 <pre>
 <code>
-
-/*
-This is the dot_product() function.
-            ------------
-It takes in two 2D-arrays A[rowA][colA] and B[rowB][colB].
-
-This function is said to return a pointer-to-point variable that points to the 
-2-D array C[rowA][colB] memory block.
-*/
-
 int** dot_product (int A[][colA], int B[][colB]){
 
-    //Pointer to pointer variable definition that will store C[rowA][colB]
     int ** mult=(int **)malloc(rowA*sizeof(int *));
     for (int i = 0; i < rowA; i++)
     {  
