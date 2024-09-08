@@ -213,567 +213,160 @@ section#readnext:hover p span {
 <header id="user_top" class="cf ">
   <ul id="user_links">
     <!-- <li><a href="https://x.com/oderoi_" class="xdotcom">@oderoi</a></li> -->
-    <li><a href="https://github.com/oderoi/C/tree/main/Algoritm/Artificial%20Intelligence/Multiple%20variable%20linear%20regression" class="github" >oderoi</a></li>
+    <li><a href="https://github.com/oderoi/C/tree/main/Algoritm/Math/Matrix_Multiplication" class="github" >oderoi</a></li>
     <li><a href="./about_me.html">About me</a></li>
   </ul>
 </header>
-<div id="whiteout"></div>
 
 <section id="container" class="blog user_post">
   <article id="angbJyhsMUeJe4t4KyKHG1" class="post  historical">
 	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
   <h1 class="article_title">
-    <a href="./mlr.html">Multiple Variable Linear Regression</a>
+    <a href="./matmul.html">Matrix Multiplication</a>
   </h1>
-	<h1 id="problem_statement_1">Problem statement <a class="head_anchor" href="#problem_statement_1">#</a></h1>
-  <p>We will use the motivating example of housing price prediction. The training dataset contains four features (size, bedrooms, floors and, age) shown in the table below.</p>
-  
+	<h1 id="problem_statement_1">Matrix Multiplication in C<a class="head_anchor" href="#problem_statement_1">#</a></h1>
 
-  <table>
-    <tr>
-      <th>Size (sqft)</th>
-      <th>Number of Bedrooms </th>
-      <th>Number of floors</th>
-      <th>Age of home (years)</th>
-      <th>Price (1,000s dollars)</th>
-      
-  </tr>
-    <tr>
-      <td>2104</td>
-      <td>5</td>
-      <td>1</td>
-      <td>45</td>
-      <td>460</td>
-    </tr>
-    <tr>
-      <td>1416</td>
-      <td>3</td>
-      <td>2</td>
-      <td>40</td>
-      <td>232</td>
-    </tr>
-    <tr>
-      <td>852</td>
-      <td>2</td>
-      <td>1</td>
-      <td>35</td>
-      <td>178</td>
-    </tr>
-  </table>
-  <p>Let's build a linear regression model using these values so you can then predict the price for other houses. For example, a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old.  </p>
-
-  <h2 id="problem_statement_1">Matrix \(X\) containing our example <a class="head_anchor" href="#problem_statement_1">#</a></h2>
-  <p>Each row of datasets represent one example, with \(n\) number of features and \(m\) training examples, now \(\mathbf{x}\) is an input matrix with dimensions \((m, n)\) where \(m\) is row and $n$ is column.</p>
-  <p>$$\mathbf{X} = 
-    \begin{pmatrix}
-     x^{(0)}_0 & x^{(0)}_1 & \cdots & x^{(0)}_{n-1} \\ 
-     x^{(1)}_0 & x^{(1)}_1 & \cdots & x^{(1)}_{n-1} \\
-     \vdots  &  \vdots  &  \vdots  &  \vdots  \\
-     x^{(m-1)}_0 & x^{(m-1)}_1 & \cdots & x^{(m-1)}_{n-1} 
-    \end{pmatrix}
-    $$</p>
-
-<p>Notations</p>
-<ul>
-  <li>\(\mathbf{x}^{(i)}\) is vector containing example i. \(\mathbf{x}^{(i)} = (x^{(i)}_0, x^{(i)}_1, \cdots,x^{(i)}_{n-1})\)</li>
-  <li>\(x^{(i)}_j\) is element \(j\) in example \(i\). The superscript in parenthesis indicates the example number while the subscript represents an element.</li>
-</ul>
-
-<h2 id="problem_statement_1">Parameter vector \(\mathbf{w}_{j}\) , \(b\) <a class="head_anchor" href="#problem_statement_1">#</a></h2>
-<ul>
-  <li>
-    \(\mathbf{w}\) is a vector with \(n\) elements.
-    <ul>
-      <li>Each element contains the parameter associated with one feature.</li>
-      <li>in our dataset, n is 4.</li>
-      <li>notionally, we draw this as a column vector</li>
-      <p>$$\mathbf{w} = \begin{pmatrix}
-        w_0 \\ 
-        w_1 \\
-        \vdots\\
-        w_{n-1}
-        \end{pmatrix}
-        $$</p>
-    </ul>
-  </li>
-  <li>\(b\) is a scalar parameter. </li>
-</ul>
-
-
-<h1 id="load_data_1">Load datasets <a class="head_anchor" href="#load_data_1">#</a></h1>
-<p>As shown in a problem statement, our dataset contains five features (size, bedrooms, floors and, age, price of the house), \(n = 5\) and ahundred examples, \(m = 100\).</p>
-<p>In this case our dataset will have the size of \((m , n) = (100 , 5)\)</p>
-<p>
-  $$\mathbf{data} = 
-\begin{pmatrix}
- x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & \cdots & y^{(0)}_{n-1} \\ 
- x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & \cdots & y^{(1)}_{n-1} \\
- \vdots      & \vdots      & \vdots      & \vdots      & \vdots\\
- x^{(m-1)}_{0} & x^{(m-1)}_{1} & x^{(m-1)}_{2} & \cdots & y^{(m-1)}_{n-1}
-\end{pmatrix}
-
-=
- 
-\begin{pmatrix}
- x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & x^{(0)}_{3} & y^{(0)}_{4} \\ 
- x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & x^{(1)}_{3} & y^{(1)}_{4} \\
- \vdots      & \vdots      & \vdots      & \vdots      & \vdots\\
- x^{(99)}_{0} & x^{(99)}_{1} & x^{(99)}_{2} & x^{(99)}_{3} & y^{(99)}_{4}
-\end{pmatrix}
-$$
-</p>
-
-<p>
-  $$data \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 5}$$
-</p>
-
-
-<h2 id="load_data_1">Load input datasets, \(\mathbf{x}^{(i)}_{j}\) <a class="head_anchor" href="#load_data_1">#</a></h2>
-
-<p>Input datasets will comprise of five features (size, bedrooms, floors and, age), \(n = 4\) and hundred exaples, \(m = 100\).</p>
-<p>
-  $$\mathbf{X} = 
-\begin{pmatrix}
- x^{(0)}_{0} & x^{(0)}_{1} & \cdots & x^{(0)}_{n-1}  \\ 
- x^{(1)}_{0} & x^{(1)}_{1} & \cdots & x^{(1)}_{n-1}  \\
- \vdots      & \vdots      & \vdots      & \vdots \\
- x^{(m-1)}_{0} & x^{(m-1)}_{1} & \cdots & x^{(m-1)}_{n-1} 
-\end{pmatrix}
- = 
-\begin{pmatrix}
- x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & x^{(0)}_{3}  \\ 
- x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & x^{(1)}_{3}  \\
- \vdots      & \vdots      & \vdots      & \vdots \\
- x^{(99)}_{0} & x^{(99)}_{1} & x^{(99)}_{2} & x^{(99)}_{3} 
-\end{pmatrix}
-$$
-</p>
-  $$\mathbf{X} \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 4}$$
-<p>
-
-<h2 id="load_data_1">Load output datasets, \(\mathbf{y}^{(i)}_{j}\) <a class="head_anchor" href="#load_data_1">#</a></h2>
-
-<p>
-  Input datasets will comprise of only one features (price), $n = 1$ and hundred exaples, $m = 100$.
-</p>
-
-<p>
-  $$\mathbf{Y} = 
-\begin{pmatrix}
-  y^{(0)}_{0} \\ 
-  y^{(1)}_{0} \\
-  \vdots     \\
- y^{(m-1)}_{0}
-\end{pmatrix}
- = 
-\begin{pmatrix}
-  y^{(0)}_{0} \\ 
-  y^{(1)}_{0} \\
-  \vdots     \\
- y^{(99)}_{0}
-\end{pmatrix}
-$$
-</p>
-
-<p>
-  $$Y \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 1}$$
-</p>
-
-<h2 id="load_data_1">Initialize parameters  \(\mathbf{w}_{j}\)  , b<a class="head_anchor" href="#load_data_1">#</a></h2>
-<ul>
-  <li>
-    \(\mathbf{w}_{j}\) is a vector with $n = 4$ elements.
-    <ul>
-      <li>
-        Each element contains the parameter associated with one feature.
-      </li>
-      <p>
-        $$\mathbf{w} = \begin{pmatrix}
-        w_{0} \\ 
-        w_{1} \\
-        \vdots\\
-        w_{n-1}
-        \end{pmatrix}
-        = \begin{pmatrix}
-        w_{0} \\ 
-        w_{1} \\
-        w_{2}\\
-        w_{3}
-        \end{pmatrix}
-        $$
-      </p>
-      <p>
-        $$\mathbf{w} \in \mathbb{R}_{n \times 1}  =  \mathbb{R}_{4 \times 1}$$
-      </p>
-    </ul>
-  </li>
-  <li>
-    \(b\) is a scalar parameter.
-  </li>
-</ul>
-
-
-<h1 id="gradient_descent_1">Model Prediction With Multiple Variables <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
-<p>The model's prediction with multiple variables is given by the linear model:</p>
-
-<p>$$ f_{\mathbf{w},b}(\mathbf{x}^{(i)}) =  w_0x_0 + w_1x_1 +... + w_{n-1}x_{n-1} + b \tag{1}$$</p>
-<p>or in vector Notations</p>
-<p>
-  $$ f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{X} + \mathbf{b}  \tag{2} $$ 
-</p>
-<p>
-  $$f_{\mathbf{w},b}(\mathbf{x}) \in \mathbb{R}_{m \times 1}  =  \mathbf{w} \in \mathbb{R}_{n \times 1} \cdot \mathbf{X} \in \mathbb{R}_{m \times n} + \mathbf{b} \in \mathbb{R}_{1}$$
-</p>
-<p>
-  $$f_{\mathbf{w},b}(\mathbf{x})_{m \times 1}  =  \mathbf{w}_{n \times 1} \cdot \mathbf{X}_{m \times n} + \mathbf{b}_{1}$$
-</p>
-
-<p>
-  $$f_{\mathbf{w},b}(\mathbf{x}^{(i)}) \in \mathbb{R}_{m \times 1}$$
-</p>
-<p>
-  $$f_{\mathbf{w},b}(\mathbf{x}) = 
-  \begin{pmatrix}
-    f_{\mathbf{w},b}(\mathbf{x})^{(0)}_{0} \\ 
-    f_{\mathbf{w},b}(\mathbf{x})^{(1)}_{0} \\
-    \vdots     \\
-  f_{\mathbf{w},b}(\mathbf{x})^{(m-1)}_{0}
-  \end{pmatrix}
-  = 
-  \begin{pmatrix}
-    f_{\mathbf{w},b}(\mathbf{x})^{(0)}_{0} \\ 
-    f_{\mathbf{w},b}(\mathbf{x})^{(1)}_{0} \\
-    \vdots     \\
-  f_{\mathbf{w},b}(\mathbf{x})^{(99)}_{0}
-  \end{pmatrix}
-  $$
-</p>
-<p>where \(\cdot\) is a vector `dot product`</p>
-<p>To demonstrate the dot product, we will implement prediction using (1) and (2).</p>
-
-<blockquote>
-<pre>
-<code>
-double *predict(float **x, double w[][1], double b){
-
-  /*
-  single predict using linear regression
-  
-  Args:
-    x (ndarray): Shape (m, n) example with multiple features
-    w (ndarray): Shape (n, 1) model parameters    
-    b (scalar):  model parameter     
-    
-  Returns:
-    p (scalar):  prediction
-  
-  */
-
-  double p;
-  double *f_wb=(double *)malloc(m*sizeof(double));
-  if (f_wb==NULL)
-  {
-    perror("Error allocating memory");
-    free(f_wb);
-  }
-  
-
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < 1; j++)
-    {   
-      p=0;
-      for (int k = 0; k < n; k++)
-      {
-          p += (double)x[i][k]*w[k][j];
-      }
-      p += b;
-      f_wb[i]=p;
-        
-    } 
-  }
-  
-  return f_wb;
-}
-</code>
-</pre>
-</blockquote>
-
-<h1 id="cost_1">Compute Cost With Multiple Variables <a class="head_anchor" href="#cost_1">#</a></h1>
-
-<p>The equation for the cost function with multiple variables \(J(\mathbf{w},b)\) is:</p>
-<p>
-  $$J(\mathbf{w},b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})^2 \tag{3}$$ 
-where:
-$$ f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = \mathbf{w} \cdot \mathbf{X} + b  \tag{4} $$ 
-</p>
-<p>
-  $$f_{\mathbf{w},b}(\mathbf{x}) \in \mathbb{R}_{m \times 1}$$
-</p>
-<p>
-  In contrast to previous labs, \(\mathbf{w}\) and \(\mathbf{x}^{(i)}\) are vectors rather than scalars supporting multiple features.
-</p>
-
-<blockquote>
-<pre>
-<code>
-double compute_cost(float **x, float y[m], double w[][1], double b){
-  
-  /*
-    compute cost
-  Args:
-    X (ndarray (m,n)): Data, m examples with n features
-    y (ndarray (m,1)) : target values
-    w (ndarray (n,1)) : model parameters  
-    b (scalar)       : model parameter
-    
-  Returns:
-    cost (scalar): cost
-  
-  */
-
-  double cost=0;
-  double p;
-
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < 1; j++)
-    {
-      p=0;
-      for (int k = 0; k < n; k++)
-      {
-        p += (double)x[i][k]*w[k][j];
-      }
-      p +=b;
-    }
-    cost += pow((p - (double) y[i]), 2);
-  }
-  cost /= (2*m);
-
-  return cost;
-}
-</code>
-</pre>
-</blockquote>
-
-<h1 id="learning_parameter_1">Gradient Descent With Multiple Variables<a class="head_anchor" href="#learning_parameter_1">#</a></h1>
-
-<p>Gradient descent for multiple variables:</p>
-<p>
-  $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
-& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j} \tag{5}  \; & \text{for j = 0..n-1}\newline
-&b\ \ = b -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial b}  \newline \rbrace
-\end{align*}$$
-</p>
-<p>
-  where, n is the number of features, parameters $w_j$,  $b$, are updated simultaneously and where  
-</p>
-<p>
-  $$
-  \begin{align}
-  \frac{\partial J(\mathbf{w},b)}{\partial w_j}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})x_{j}^{(i)} \tag{6}  \\
-  \frac{\partial J(\mathbf{w},b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)}) \tag{7}
-  \end{align}
-  $$
-</p>
-<ul>
-  <li>m is the number of training examples in the data set</li>
-  <li>\(f_{\mathbf{w},b}(\mathbf{x}^{(i)})\) is the model's prediction, while \(y^{(i)}\) is the target value</li>
-</ul>
-
-<p>Note</p>
-<ul>
-  <li>
     <p>
-      $$\frac{\partial J(\mathbf{w},b)}{\partial w_j} \in \mathbb{R}_{1 \times n} = \mathbb{R}_{1 \times 4}$$
+        Given two matrices A of dimensions M x K and B of dimension K x N, we want to compute their dot product C = A . B, which is also known as matrix multiplication.
     </p>
     <p>
-      $$\frac{\partial J(\mathbf{w},b)}{\partial w_j}
-      = 
-      \begin{pmatrix}
-        \frac{\partial J(\mathbf{w},b)}{\partial w_0} ,
-        \frac{\partial J(\mathbf{w},b)}{\partial w_1} ,
-        \cdots ,
-      \frac{\partial J(\mathbf{w},b)}{\partial w_{n-1}}
-      \end{pmatrix}
-      = 
-      \begin{pmatrix}
-        \frac{\partial J(\mathbf{w},b)}{\partial w_0} ,
-        \frac{\partial J(\mathbf{w},b)}{\partial w_1} ,
-        \frac{\partial J(\mathbf{w},b)}{\partial w_2} ,
-      \frac{\partial J(\mathbf{w},b)}{\partial w_3}
-      \end{pmatrix}
-      $$
+        The dot product.
     </p>
-  </li>
-  <li>
-    $$\frac{\partial J(\mathbf{w},b)}{\partial b} \in \mathbb{R}_{1}$$
-  </li>
-</ul>
+    <p>
+        \(C += A . B\)
+    </p>
+    <p>
+        \(1D Array.\)
+    </p>
+    <p>
+        \(C_{i} = \sum\limits_{i = 0}^{n} (A_{i} . B_{i}) = A_{1}B_{1} + A_{2}B_{2} + ...+ A_{n}B_{n}\)
+    </p>
+    <p>
+        \(2D Array.\)
+    </p>
+    <p>
+        \(C_{i , j} = \sum\limits_{k \in [0 ... K) } (A_{i , k} . B_{k , j})\)
+    </p>
+    <p>
+        \(C_{i , j} = A_{i , k} . B_{k , j}\)
+    </p>
+    <p>
+        consider:
+    </p>
+    <p>
+        \(A \in \mathbb{R}^{m \times k}  ==   A \in \mathbb{R}^{rowA \times colA}\)
+    </p>
+    <p>
+        \(B \in \mathbb{R}^{k \times n}  ==   B \in \mathbb{R}^{rowB \times colB}\)
+    </p>
+    
 <blockquote>
 <pre>
 <code>
-double *compute_gradient(float **x, float y[m], double w[][1], double b){
-  /*
-
-  Computes the gradient for linear regression 
-  Args:
-    X (ndarray (m,n)): Data, m examples with n features
-    y (ndarray (m,1)) : target values
-    w (ndarray (n,1)) : model parameters  
-    b (scalar)       : model parameter
+#include <stdio.h>
+    #include <stdlib.h>
     
-  Returns:
-    dj_dw (ndarray (n,1)): The gradient of the cost w.r.t. the parameters w. 
-    dj_db (scalar):       The gradient of the cost w.r.t. the parameter b. 
+    /*
+    Contant definition.
+    
+    Here we use #define for the fan fact that it behave as macros whose value are subtituted at
+    run-time.
+    --------
+    Here we have the value size of rows and columns of matrix A[rowA][colA] and B[rowB][colB].
+    
+    Note: Make sure if you change these values it has to obey the rule of matrix multiplication
+    of colA=rowB, A[N][K] . B[K][M]. Hence you will get C[rowA][colB] = C[N][M].
+    */
+    
+    #define rowA 4
+    #define colA 4
+    #define rowB 4
+    #define colB 4
+    
+    /*
+    Declaration of dot_product() function.
+    -------------------------------------
+    This is going to return the Resulting Array of our dot product or matrix multiplication
+    */
+    
+    int** dot_product(int A[][colA], int B[][colB]);
+    
+    /*
+    The main function
+    -----------------
+    */
+    
+    int main(){
+    
+        /*
+        Note: If you will change rowA, colA, rowB and colB constant, make sure to change 
+        also the 2-D arrays (Matricies) to match their size at their constant definition.
+        */
+        //Initialize and Declare the matrix A[rowA][colA]
+        int A[][colA]={ {1,2,3,4},
+                        {5,6,7,8}, 
+                        {9,10,11,12},
+                        {13,14,15,16}};
+    
+        //Initialize and Declare the matrix B[rowB][colB]
+        int B[][colB]= {{1,2,3,4},
+                        {1,2,3,4},
+                        {1,2,3,4},
+                        {1,2,3,4}};
+    
+        //Calling of dot_product() function and initialize it to a pointer variable int **mult
+        int **mult=dot_product(A,B);
+    
+        //This is nested for-loop for printing the result matrix C[rowA][colB]
+        for (int i = 0; i < rowA; i++)
+        {
+            for (int j = 0; j < colB; j++)
+            {
+                printf("%d\t", mult[i][j]);
+            }
+            printf("\n");
+            
+        }
 
-    grads (ndarray ((n+1), 1)): dj_dw and dj_db. 
-  */
-
-  double *grads=(double *)malloc((n + 1)*sizeof(double));
-  if (grads ==NULL)
-  {
-      perror("Error in allocating memory");
-      free(grads);
-  }
-
-  double *f_wb=(double *)malloc(m*sizeof(double));
-  if (f_wb ==NULL)
-  {
-      perror("Error in allocating memory");
-      free(f_wb);
-  }
-  
-  double p;
-  double dj_dw;
-  double dj_db=0;
-  
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < 1; j++)
-    {
-      p=0;
-      for (int k = 0; k < n; k++)
-      {
-        p += x[i][k]*w[k][j];
-      }
-      p += b;
-      f_wb[i]=p;
+        return 0;
     }
-
-    dj_db += f_wb[i] - y[i];
-  }
-  dj_db /= m;
-
-
-  for (int i = 0; i < n; i++)
-  {
-    dj_dw=0;
-    for (int j = 0; j < m; j++)
-    {
-      dj_dw += (f_wb[j] - y[j])*x[j][i];
-    }
-    dj_dw /= m;
-
-    grads[i]=dj_dw;       
-  }
-
-  grads[n]=dj_db;
-
-  free(f_wb);
-
-  return grads;
+    
+    /*
+    This is the dot_product() function.
+                ------------
+    It takes in two 2D-arrays A[rowA][colA] and B[rowB][colB].
+    
+    This function is said to return a pointer-to-point variable that points to the 
+    2-D array C[rowA][colB] memory block.
+    */
+    
+    int** dot_product (int A[][colA], int B[][colB]){
+    
+        //Pointer to pointer variable definition that will store C[rowA][colB]
+        int ** mult=(int **)malloc(rowA*sizeof(int *));
+        for (int i = 0; i < rowA; i++)
+        {  
+            mult[i] =(int *)malloc(colB*sizeof(int));
+        }
+    
+        // Nested for-loop to perform Matrix Multiplication or Dot Product
+        for (int i = 0; i < rowA; i++)
+        {
+            for (int j = 0; j < colB; j++)
+            {
+                mult[i][j]=0;
+                for (int k = 0; k < colA; k++)
+                {
+                    mult[i][j] += A[i][k]*B[k][j];
+                }
+            }  
+        }
+    return mult;
 }
 </code>
 </pre>
 </blockquote>
 
-<h1 id="Evaluating_1">Evaluating our model by compute R-squared<a class="head_anchor" href="#Evaluating_1">#</a></h1>
-
-<p>R-squared is the proportion of the variance in the dependent variable that is explained by the independent variables in a regression model. It ranges from 0 to 1, where 0 means no relationship and 1 means a perfect fit</p>
-<p>R-squared(coefficient of Determination) tells us How well our model is  performing or how well our model's predictions match the real results. A higher R-squared means our model is doing a better job predicting.</p>
-<p>
-  $$
-  R^2 = 1 - \frac{Residual\ Sum\ of\ Squares\ (\mathbf{ss}_{res})}{Total\ Sum\ of\ Squares\ (\mathbf{ss}_{total})}
-  $$
-</p>
-<p>
-  <img src="./images/ssr.png" >
-</p>
-<p>
-  <img src="./images/sst.png" >
-</p>
-<p>
-  $$
-  R^2 = 1 - \frac{\mathbf{ss}_{res}}{\mathbf{ss}_{total}}\\
-  $$
-</p>
-<p>
-  $$
-  R^2 = 1 - \frac{\sum\limits_{i=0}^{(m-1)}(f_{w,b}(x^{(i)}) - y^{i})^2}{\sum\limits_{i=0}^{(m-1)}(y_{mean}^{(i)} - y^{(i)})^2}
-  $$
-</p>
-
-<blockquote>
-<pre>
-<code>
-double r_squared(float **x, float y[m], double w[][1], double b){
-
-  /*
-
-  Computes the gradient for linear regression 
-  Args:
-    X (ndarray (m,n)): Data, m examples with n features
-    y (ndarray (m,1)) : target values
-    w (ndarray (n,1)) : model parameters  
-    b (scalar)       : model parameter
-    
-  Returns:
-    r_square (scalar): r square score.
-    r_square = (1 - rss/tss) 
-    rss : measure of sum diff btn actual(y) value and predicted(f_wb) value.(y - f_wb)
-    tss : measure of total variance in actual(y) value. (y - f_mean)
-  
-  */
-
-  double r_square;
-  double f_wb;
-  double y_mean;
-  double y_sum;
-  double rss;
-  double tss;
-
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < 1; j++)
-    {
-      f_wb=0;
-      for (int k = 0; k < n; k++)
-      {
-        f_wb += x[i][k]*w[k][j];
-      }
-      f_wb +=b;
-    }
-
-    rss += pow((y[i] - f_wb), 2);
-    y_sum += y[i];
-      
-  }
-  y_mean = y_sum/m;
-
-  for (int i = 0; i < m; i++)
-  {
-    tss += pow((y[i] - y_mean), 2);
-  }
-  
-  r_square = 1 - (rss/tss);
-
-
-  return r_square;
-}
-</code>
-</pre>
-</blockquote>
 
 <!-- <h1 id="main_1">The main function<a class="head_anchor" href="#main_1">#</a></h1>
 <blockquote>
