@@ -253,8 +253,8 @@ section#readnext:hover p span {
   </table>
   <p>Let's build a linear regression model using these values so you can then predict the price for other houses. For example, a house with 1200 sqft, 3 bedrooms, 1 floor, 40 years old.  </p>
 
-  <h2 id="model_function_1">Matrix $X$ containing our example <a class="head_anchor" href="#model_function_1">#</a></h2>
-  <p>Each row of datasets represent one example, with $n$ number of features and $m$ training examples, now $\mathbf{x}$ is an input matrix with dimensions $(m, n)$ where $m$ is row and $n$ is column.</p>
+  <h2 id="problem_statement_1">Matrix \(X\) containing our example <a class="head_anchor" href="#problem_statement_1">#</a></h2>
+  <p>Each row of datasets represent one example, with \(n\) number of features and \(m\) training examples, now \(\mathbf{x}\) is an input matrix with dimensions \((m, n)\) where \(m\) is row and $n$ is column.</p>
   <p>$$\mathbf{X} = 
     \begin{pmatrix}
      x^{(0)}_0 & x^{(0)}_1 & \cdots & x^{(0)}_{n-1} \\ 
@@ -266,9 +266,32 @@ section#readnext:hover p span {
 
 <p>Notations</p>
 <ul>
-  <li>$\mathbf{x}^{(i)}$ is vector containing example i. $\mathbf{x}^{(i)}$ $ = (x^{(i)}_0, x^{(i)}_1, \cdots,x^{(i)}_{n-1})$</li>
-  <li>$x^{(i)}_j$ is element j in example i. The superscript in parenthesis indicates the example number while the subscript represents an element.</li>
+  <li>\(\mathbf{x}^{(i)}\) is vector containing example i. \(\mathbf{x}^{(i)} = (x^{(i)}_0, x^{(i)}_1, \cdots,x^{(i)}_{n-1})\)</li>
+  <li>\(x^{(i)}_j\) is element \(j\) in example \(i\). The superscript in parenthesis indicates the example number while the subscript represents an element.</li>
 </ul>
+
+<h2 id="problem_statement_1">Parameter vector \(\mathbf{w}_{j}\) , \(b\) <a class="head_anchor" href="#problem_statement_1">#</a></h2>
+<ul>
+  <li>
+    \(\mathbf{w}\) is a vector with \(n\) elements.
+    <ul>
+      <li>Each element contains the parameter associated with one feature.</li>
+      <li>in our dataset, n is 4.</li>
+      <li>notionally, we draw this as a column vector</li>
+      <p>$$\mathbf{w} = \begin{pmatrix}
+        w_0 \\ 
+        w_1 \\
+        \vdots\\
+        w_{n-1}
+        \end{pmatrix}
+        $$</p>
+    </ul>
+  </li>
+  <li>\(b\) is a scalar parameter. </li>
+</ul>
+
+<p></p>
+
 <blockquote>
 <pre>
 <code>
