@@ -370,63 +370,152 @@ $$
   $$Y \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 1}$$
 </p>
 
+<h2 id="load_data_1">Initialize parameters  \(\mathbf{w}_{j}\)  , b<a class="head_anchor" href="#load_data_1">#</a></h2>
+<ul>
+  <li>
+    \(\mathbf{w}_{j}\) is a vector with $n = 4$ elements.
+    <ul>
+      <li>
+        Each element contains the parameter associated with one feature.
+      </li>
+      <p>
+        $$\mathbf{w} = \begin{pmatrix}
+        w_{0} \\ 
+        w_{1} \\
+        \vdots\\
+        w_{n-1}
+        \end{pmatrix}
+        = \begin{pmatrix}
+        w_{0} \\ 
+        w_{1} \\
+        w_{2}\\
+        w_{3}
+        \end{pmatrix}
+        $$
+      </p>
+      <p>
+        $$\mathbf{w} \in \mathbb{R}_{n \times 1}  =  \mathbb{R}_{4 \times 1}$$
+      </p>
+    </ul>
+  </li>
+  <li>
+    \(b\) is a scalar parameter.
+  </li>
+</ul>
 
-<h1 id="gradient_descent_1">Gradient Descent <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
-<p>In linear regression, we utilize input training data to fit the parameters \(w\),\(b\) by minimizing a measure of the error between our predictions \(f_{w,b}(x^{(i)})\) and the actual data \(y^{(i)}\). The measure is called the $cost$, \(J(w,b)\). In training you measure the cost over all of our training samples \(x^{(i)},y^{(i)}\)</p>
-$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
-\;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
- b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
-\end{align*}$$
-<p>where, parameters \(w\), \(b\) are updated simultaneously. </p> 
-<p>The gradient is defined as:</p>
-$$
-\begin{align}
-\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})*x^{(i)} \tag{4}\\
-  \frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\\
-\end{align}
-$$
 
-<p>Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.</p>
+<h1 id="gradient_descent_1">Model Prediction With Multiple Variables <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
+<p>The model's prediction with multiple variables is given by the linear model:</p>
 
+<p>$$ f_{\mathbf{w},b}(\mathbf{x}^{(i)}) =  w_0x_0 + w_1x_1 +... + w_{n-1}x_{n-1} + b \tag{1}$$</p>
+<p>or in vector Notations</p>
+<p>
+  $$ f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{X} + \mathbf{b}  \tag{2} $$ 
+</p>
+<p>
+  $$f_{\mathbf{w},b}(\mathbf{x}) \in \mathbb{R}_{m \times 1}  =  \mathbf{w} \in \mathbb{R}_{n \times 1} \cdot \mathbf{X} \in \mathbb{R}_{m \times n} + \mathbf{b} \in \mathbb{R}_{1}$$
+</p>
+<p>
+  $$f_{\mathbf{w},b}(\mathbf{x})_{m \times 1}  =  \mathbf{w}_{n \times 1} \cdot \mathbf{X}_{m \times n} + \mathbf{b}_{1}$$
+</p>
+
+<p>
+  $$f_{\mathbf{w},b}(\mathbf{x}^{(i)}) \in \mathbb{R}_{m \times 1}$$
+</p>
+<p>
+  $$f_{\mathbf{w},b}(\mathbf{x}) = 
+  \begin{pmatrix}
+    f_{\mathbf{w},b}(\mathbf{x})^{(0)}_{0} \\ 
+    f_{\mathbf{w},b}(\mathbf{x})^{(1)}_{0} \\
+    \vdots     \\
+  f_{\mathbf{w},b}(\mathbf{x})^{(m-1)}_{0}
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+    f_{\mathbf{w},b}(\mathbf{x})^{(0)}_{0} \\ 
+    f_{\mathbf{w},b}(\mathbf{x})^{(1)}_{0} \\
+    \vdots     \\
+  f_{\mathbf{w},b}(\mathbf{x})^{(99)}_{0}
+  \end{pmatrix}
+  $$
+</p>
+<p>where \(\cdot\) is a vector `dot product`</p>
+<p>To demonstrate the dot product, we will implement prediction using (1) and (2).</p>
 
 
 <blockquote>
 <pre>
 <code>
-float *compute_gradients(float x[], float y[], float w, float b, int m){
+  float **load_data(const char *file_id){
 
-  /*
-  Computes the gradients w,b for linear regression 
-  Args:
-  x (ndarray (m,1)): Data, m examples 
-  y (ndarray (m,1)): target values
-  w,b (scalar)    : model parameters  
-  m (scalar)       : number of examples, X
-  Returns
-  dj_dw (scalar): The gradient of the cost w.r.t. the parameters w  
-  dj_db (scalar): The gradient of the cost w.r.t. the parameters b
-  grads (ndarray (2,1)): gradients [dj_dw, dj_db]  
-  */
+    /*
+    load dataset in '.txt' file
+    
+    Args:
+      file_id (char): FILE_NAME   
+      
+    Returns:
+      data (ndarray):  shape(m, num_col_x)
+    
+    */
 
-  float f_x;
-  float dj_dw = 0;
-  float dj_db = 0;
-  float *grads = (float *)malloc(2 * sizeof(float));
+    FILE *file = fopen(file_id, "r");
+    if (file==NULL)
+    {
+        perror("Error opening file");
+        return NULL;
+    }
+    
+    //alocate the memory for the data array dynamically
+    float **data=(float **)malloc(m*sizeof(float *));
+    if (data==NULL)
+    {
+        perror("Error allocating memory");
+        fclose(file);
+        return NULL;
+    }
+    
+    for (int i = 0; i < m; i++)
+    {
+       data[i] = (float *)malloc(num_col_x*sizeof(float));
 
-  for (int i = 0; i < m; i++)
-  {
-    f_x = x[i] * w + b;
-    dj_dw += (f_x - y[i]) * x[i];
-    dj_db += (f_x - y[i]);
+       if (data[i]==NULL)
+       {
+            perror("Error allocating memory");
+            for (int j = 0; j < i; j++)
+            {
+                free(data[j]);
+            }
+            free(data);
+            fclose(file);
+            return NULL;
+       }
+       
+    }
+    
+    // read the data into the array
+    for (int i=0; i<m; i++)
+    {
+        if (fscanf(file, "%e, %e, %e, %e, %e", &data[i][0], &data[i][1], &data[i][2], &data[i][3], &data[i][4]) != 5)
+        {
+            fprintf(stderr, "Error reading data at row: %d\n", i);
+        
+            //free allocated memory before exiting due to error
+            for (int j = 0; j <= i; j++)
+            {
+                free(data[j]);
+            }
+            free(data);
+            fclose(file);
+            return NULL;
+        }
+        
+    }
+
+    fclose(file);  
+
+    return data;
   }
-  dj_dw /= m;
-  dj_db /= m;
-
-  grads[0] = dj_dw;   //index 0: dj_dw
-  grads[1] = dj_db;   //index 1: dj_db
-
-  return grads;
-}
 </code>
 </pre>
 </blockquote>
