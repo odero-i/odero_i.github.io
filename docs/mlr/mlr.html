@@ -319,27 +319,56 @@ $$
 </p>
 
 
-<h2 id="compute_cost_1">Cost versus iterations of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+<h2 id="load_data_1">Load input datasets, \(\mathbf{x}^{(i)}_{j}\) <a class="head_anchor" href="#load_data_1">#</a></h2>
 
-<p>A plot of cost versus iterations is a useful measure of progress in gradient descent. Cost should always decrease in successful runs. The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. In the plots below, note the scale of cost on the axes and the iteration step.</p>
+<p>Input datasets will comprise of five features (size, bedrooms, floors and, age), \(n = 4\) and hundred exaples, \(m = 100\).</p>
+<p>
+  $$\mathbf{X} = 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & \cdots & x^{(0)}_{n-1}  \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & \cdots & x^{(1)}_{n-1}  \\
+ \vdots      & \vdots      & \vdots      & \vdots \\
+ x^{(m-1)}_{0} & x^{(m-1)}_{1} & \cdots & x^{(m-1)}_{n-1} 
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+ x^{(0)}_{0} & x^{(0)}_{1} & x^{(0)}_{2} & x^{(0)}_{3}  \\ 
+ x^{(1)}_{0} & x^{(1)}_{1} & x^{(1)}_{2} & x^{(1)}_{3}  \\
+ \vdots      & \vdots      & \vdots      & \vdots \\
+ x^{(99)}_{0} & x^{(99)}_{1} & x^{(99)}_{2} & x^{(99)}_{3} 
+\end{pmatrix}
+$$
+</p>
+  $$\mathbf{X} \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 4}$$
+<p>
 
-<img src="./images/cost.png" class="limit-height">
+<h2 id="load_data_1">Load output datasets, \(\mathbf{y}^{(i)}_{j}\) <a class="head_anchor" href="#load_data_1">#</a></h2>
 
+<p>
+  Input datasets will comprise of only one features (price), $n = 1$ and hundred exaples, $m = 100$.
+</p>
 
-<h2 id="compute_cost_1">Plot of cost J(w,b) vs w,b with path of gradient descent <a class="head_anchor" href="#compute_cost_1">#</a></h2>
+<p>
+  $$\mathbf{Y} = 
+\begin{pmatrix}
+  y^{(0)}_{0} \\ 
+  y^{(1)}_{0} \\
+  \vdots     \\
+ y^{(m-1)}_{0}
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+  y^{(0)}_{0} \\ 
+  y^{(1)}_{0} \\
+  \vdots     \\
+ y^{(99)}_{0}
+\end{pmatrix}
+$$
+</p>
 
-<p>Plot shows the $cost(w,b)$ over a range of $w$ and $b$. Cost levels are represented by the rings. Overlayed, using red arrows, is the path of gradient descent. Here are some things to note:</p>
-<ul>
-  <li>The path makes steady (monotonic) progress toward its goal.</li>
-  <li>initial steps are much larger than the steps near the goal.</li>
-</ul>
-
-<img src="./images/counter_cost.png" class="limit-height">
-
-
-<h2 id="compute_cost_1">Convex Cost surface <a class="head_anchor" href="#compute_cost_1">#</a></h2>
-
-<p>The fact that the cost function squares the loss, \( \sum_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2\)  ensures that the 'error surface' is convex like a soup bowl. It will always have a minimum that can be reached by following the gradient in all dimensions.</p>
+<p>
+  $$Y \in \mathbb{R}_{m \times n}  =  \mathbb{R}_{100 \times 1}$$
+</p>
 
 
 <h1 id="gradient_descent_1">Gradient Descent <a class="head_anchor" href="#gradient_descent_1">#</a></h1>
