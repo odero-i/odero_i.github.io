@@ -1,0 +1,219 @@
+
+<!-- THANKS to Harold Erbin for the template! -->
+<!-- TODO: add google scholar -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="static/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Greg Yang | Professional page</title>
+  <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+  <!-- <script type="text/javascript" src="js/piwik.js"></script>
+  <noscript>
+    <p><img src="//piwik.melsophia.org/piwik.php?idsite=3" style="border:0;" alt="" /></p>
+  </noscript> -->
+
+  <div class="page">
+    <header>
+
+      <div class="page-title">
+        <h1>Greg Yang</h1>
+      </div>
+
+      <nav class="social-container">
+        <ul class="social navigation">
+          <!-- TODO: protect email -->
+          <!-- TODO: replace text with image -->
+          <!-- <li><a href="https://www.lpthe.jussieu.fr/~erbin/files/cv_erbin.pdf"><img src="static/cv.svg" height="30" alt=""></a></li> -->
+          <!-- <li><a href="mailto:thegregyang@gmail.com"><img src="static/email.svg" height="30" alt=""></a></li> -->
+          <li><a href="https://twitter.com/thegregyang"><img src="static/twitter.svg" height="30" alt=""></a></li>
+          <li><a href="https://github.com/thegregyang"><img src="static/github.svg" height="30" alt=""></a></li>
+          <!-- <li><a href="https://orcid.org/0000-0002-9096-0659"><img src="static/orcid.svg" height="30" alt=""></a></li> -->
+        </ul>
+      </nav>
+
+      <nav class="menu-container">
+        <ul class="menu navigation">
+          <li><a href="#aboutme">About Me</a></li>
+          <li><a href="#tensorprograms"><em>Tensor Programs</em></a></li>
+          <li><a href="#tppapers">The Series</a></li>
+          <li><a href="https://decentdescent.org/">Blog</a></li>
+        </ul>
+      </nav>
+
+      <nav class="papers-container">
+        <ul class="papers navigation">
+          <li><strong>Papers:</strong></li>
+          <!-- <li><a href="https://arxiv.org/search/?searchtype=author&query=Erbin%2C+H">arXiv</a></li>
+          <li><a href="https://inspirehep.net/authors/1273902">Inspire</a></li> -->
+          <li class="svg-text"><a href="https://arxiv.org/search/?query=Yang%2C+Greg&searchtype=author&abstracts=show&order=-announced_date_first&size=50"><img src="static/arxiv.svg" height="30" alt=""></a></li>
+          <!-- <li class="svg-text"><a href="https://inspirehep.net/authors/1273902"><img src="static/inspire.svg" height="30" alt=""></a></li> -->
+        </ul>
+      </nav>
+
+    </header>
+
+    <main>
+
+      <section>
+        <h2 id="aboutme">About Me</h2>
+
+        <p>
+        I am a mathematician at <a href="http://x.ai">xAI</a>. Previously I was a researcher at <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a>.
+        </p>
+        <p>
+        I am currently developing a framework called <em>Tensor Programs</em> for understanding large neural networks. This is the theoretical foundation that gave rise to the <a href="http://arxiv.org/abs/2203.03466">hyperparameter transfer paradigm</a> for tuning enormous neural networks like GPT-3.
+        Ultimately, my goal is a <em>Theory of Everything</em> for large scale deep learning that 1) tells us the optimal way of scaling neural networks and 2) provides robust understanding to such models so as to guide safety and alignment efforts.
+        </p>
+        
+      </section>
+
+      <section>
+        <h2 id="tensorprograms"><em>Tensor Programs</em></h2>
+
+        <h3>What is a Tensor Program (TP)?</h3>
+        <p>
+          Informally, a TP is just a composition of matrix multiplication and coordinatewise nonlinearities.
+        </p>
+
+        <h3>
+          Why is it important?
+        </h3>
+
+        <h4>Universality</h4>
+        <p>
+          It turns out that practically any computation in Deep Learning can be expressed as a TP, e.g. training a transformer on wikipedia data. Simultaneously, any Tensor Program has an “infinite-width” limit which can be derived from the program itself (through what’s called the Master Theorem). So this gives a universal way of taking the infinite-width limit of any deep learning computation, e.g. training an <em>infinite-width</em> transformer on wikipedia data.
+        </p>
+        
+        <h4>Theoretical Unification</h4>
+        <p>
+          Theoretically, this generalizes and unifies several lines of previous research, including the Neural Network-Gaussian Process Correspondence, Neural Tangent Kernel, mean field limit of shallow networks, and neural signal propagation, as well as areas outside of deep learning such as random matrix theory and approximate message passing. It also yields the maximal update parametrization and the feature learning limit (see below) for any neural architecture, which would have been hard to derive otherwise without the universality provided by the Tensor Programs machinery.
+        </p>
+        <h4>Practical Impact</h4>
+        <p>
+          Practically, this maximal update parametrization (muP), for the first time, allows one to tune the hyperparameters of extremely large neural networks, too expensive to train more than once. This is because, in muP, narrow and wide neural networks share the same set of optimal hyperparameters. So one can tune the large model by just tuning a tiny version of it and copying over the hyperparameters.</p>
+
+        <details>
+          <summary>How is this different from Neural Tangent Kernel (NTK)?</summary>
+          As mentioned above, NTK is a special case of TP. More importantly, a neural network in the NTK limit does not learn features — which contradicts the conventional wisdom that neural networks are successful because of its feature learning capability (e.g. <a href="https://microscope.openai.com/models">conv nets</a> and <a href="https://github.com/jessevig/bertviz">BERT</a>). On the other hand, using TP, one can derive a limit (the <em>muP</em> mentioned above) that maximally learns features in a suitable sense (see <a href="https://arxiv.org/abs/2011.14522">TP4</a>). When explicitly trained on tasks that depend crucially on feature learning (e.g. Word2Vec), this limit handily beats the NTK limit, as one would expect.
+        </details>
+
+      </section>
+
+      <section>
+        <h2 id="tppapers">The <em>Tensor Programs</em> Series</h2>
+        <p>
+          The theory of Tensor Programs is developed (and continues to be developed) over a series of papers.
+        </p>
+        <details>
+          <summary>Scaling Limits of Wide Neural Networks</summary>
+          <p><a href="https://arxiv.org/abs/1902.04760">Arxiv</a></p>
+          <p>
+            This is the original paper on Tensor Programs (so it could be named “Tensor Programs O”). It first established the paradigm of 1) using a formal language (Tensor Programs) to capture possible neural computations and 2) deriving an algorithm (the Master Theorem) for taking the infinite-width limit of any such program. All later papers will follow this paradigm.
+          </p><p>
+            Unfortunately for readers, the writing was very dense and notation cumbersome, so the next 3 papers focus more pedagogy and presentation of the material to a wider audience, as well as some minor but useful improvements of the results in this paper.</p>
+        </details>
+
+        <details>
+          <summary>TP1: Wide Neural Networks of Any Architecture are Gaussian Processes</summary>
+          <p><a href="https://arxiv.org/abs/1910.12478">Arxiv</a> | <a href="https://github.com/thegregyang/GP4A">Github</a></p>
+          <p>This paper shows that an infinite-width neural network of any architecture (in the standard parametrization) are Gaussian processes at initialization. It also demonstrates how to calculate the kernel of this Gaussian process.</p>
+          <p>This is a consequence of the simplest form (called <em>Netsor</em>) of Tensor Programs, where one cannot use a matrix and its transpose in the same program, and its Master Theorem. Their theory is fully developed in a self-contained way here.</p>
+        </details>
+
+        <details>
+          <summary>TP2: Neural Tangent Kernel for Any Architecture</summary>
+          <p><a href="https://arxiv.org/abs/2006.14548">Arxiv</a> | <a href="https://github.com/thegregyang/NTK4A">Github</a></p>
+          <p>This paper shows that the Neural Tangent Kernel of a neural network of any architecture (in the NTK parametrization) converges to a well-defined, deterministic kernel at initialization. It also demonstrates how to calculate the kernel. (Note it doesn&#8217;t yet say anything about training, which is done in <em>Tensor Programs IIb</em> briefed below).</p>
+          <p>This is a consequence of an extension of Netsor (called <em>NetsorT</em>), where one can use a matrix and its transpose in the same program in a restricted way. Its theory is fully developed in a self-contained way here.</p>
+        </details>
+
+        <details>
+          <summary>TP2b: Architectural Universality of Neural Tangent Kernel Training Dynamics</summary>
+          <p><a href="https://arxiv.org/abs/2105.03703">Arxiv</a></p>
+          <p>This paper continues from the above and shows that 1) the <em>infinite-width</em> Neural Tangent Kernel of a neural network of any architecture (in the NTK parametrization) stays frozen over the course of training, and 2) the infinite-width network evolves via kernel gradient descent with this kernel.</p>
+          <p>This paper actually needs the machinery of (and comes after) <em>Tensor Programs III</em> (described below), but we number this <em>IIb</em> because the topic is on NTK.</p>
+        </details>
+
+        <details>
+          <summary>TP3: Neural Matrix Laws</summary>
+          <p><a href="https://arxiv.org/abs/2009.10685">Arxiv</a></p>
+          <p>This paper targets a slightly more mathematical audience than the previous papers. It shows how to calculate the Jacobian singular value distribution of an infinite-width neural network. As special cases, it recovers the classical semicircle and Marchenko-Pastur laws.</p>
+          <p>This is a consequence of the full version of Tensor Programs, where one can use a matrix and its transpose arbitrarily. Its theory is fully developed in a self-contained way here.</p>
+          <p>This paper is intended to serve as a rigorous reference for the TP foundation going forward.</p>
+        </details>
+        
+        <details>
+          <summary>TP4: Feature Learning in Infinite-Width Neural Networks</summary>
+          <p><a href="https://arxiv.org/abs/2011.14522">Arxiv</a> | <a href="https://github.com/edwardjhu/TP4">Github</a> | <a href="https://www.youtube.com/watch?v=6tA7r7Y5vUM">Youtube</a> | <a href="https://www.bilibili.com/video/BV1Ay4y1D7NR">Bilibili (for folks in China)</a> | <a href="https://decentdescent.org/tp4.html">Blog</a></p>
+          <p>This paper derives &#8220;the&#8221; feature learning limit of neural networks, in contrast to the Neural Tangent Kernel limit, using machinery developed in the previous papers (especially TP3).</p>
+          <p>(Some trivia: this paper was supposed to be written right after TP0, but I realized the TP foundation needed to be solidified in terms of presentation and notation, hence TP1-3 and why this paper came almost two years later)</p>
+        </details>
+
+        <details>
+          <summary>TP4b: Adaptive Optimization in the Infinite-Width Limit</summary>
+          <p><a href="https://arxiv.org/abs/2308.01814">Arxiv</a> </p>
+          <p>This paper classifies all infinite-width limits of general optimization algorithms including Adam and SGD with momentum, strictly generalizing TP4 (which was only about SGD).</p>
+          <p>To do so, some fundamental advances had to be made: 1) extending TP to a new instruction that can express how adaptive optimizers process gradients into update; 2) borrowing bra-ket notation from quantum physics to express key concepts and calculations in TP much more efficiently.</p>
+          <p>These advances in the TP machinery makes this the new foundation for papers going forward, subsuming TP3.</p>
+        </details>
+
+        <details>
+          <summary>A Spectral Condition for Feature Learning</summary>
+          
+          <p><a href="http://arxiv.org/abs/2310.17813">Arxiv</a> | <a href="https://x.com/TheGregYang/status/1725548084476641322?s=20">Twitter Thread</a></p>
+          <p>Show that μP is equivalent to scaling the spectral (aka operator) norm of weight matrices like sqrt(fanout/fanin).</p>
+          <p>A very accessible and pedagogical intro to the scaling (with width) of feature learning. Since the TP series has a reputation for being hard-to-read, this one is not numbered so people will be more likely to read it ;)</p>
+          </p>
+
+        </details>
+
+        <details>
+          <summary>TP5: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</summary>
+          
+          <p><a href="http://arxiv.org/abs/2203.03466">Arxiv</a> | <a href="https://github.com/microsoft/mup">Github</a> | <a href="https://decentdescent.org/tp5.html">Blog</a> | <a href="https://twitter.com/TheGregYang/status/1501294412126560257?s=20&amp;t=PKutWWGc-WseHoWnXOuc0Q">Twitter Thread</a></p>
+          <p>You can’t train GPT-3 on a single GPU, much less tune its hyperparameters (HPs).</p>
+          <p>But what if I tell you…</p>
+          <p>…you *can* tune its HPs on a single GPU thanks to the theory developed in TP4?</p>
+          <p>Essentially, narrow and wide neural networks share the same set of optimal hyperparameters if they are in the maximal update parametrization (muP) derived in TP4 (but not if they are in pytorch default parametrization).</p>
+          <p><img class="image" src="static/hpstab.png"/></p>
+          <p>This lets us <em>transfer </em>hyperparameters from small networks to large networks in the obvious way.</p>
+          <p><img class="image" src="static/mutransfer.png"/></p>
+          <!-- <p><img loading="lazy" class="alignnone wp-image-825997" sizes="(max-width: 512px) 100vw, 512px" src="https://www.microsoft.com/en-us/research/uploads/prod/2022/03/muTransfer.png" /></p> -->
+          <p>The <a href="https://twitter.com/TheGregYang/status/1501294412126560257?s=20&amp;t=PKutWWGc-WseHoWnXOuc0Q">twitter thread</a> above gives a nice but still brief overview of the key ideas and results.</p>
+          <p>(Some trivia: We finished most of the basic experiments in TP5 before I started writing TP2, at which my motivation for finish writing TP2-TP4 was just to provide enough foundation to write this paper)</p>
+
+        </details>
+        <details>
+          <summary>TP6: Feature Learning in Infinite-Depth Neural Networks</summary>
+          
+          <p><a href="http://arxiv.org/abs/2310.02244">Arxiv</a> | <a href="https://x.com/TheGregYang/status/1709700104951931077?s=20">Twitter Thread</a></p>
+          <p>We extend the results of TP4 and TP5 to infinite-width-and-depth residual networks (resnet).</p>
+          <p>When the resnet has 1 layer in each block, we can identify a unique optimal parametrization we call <em>Depth-muP</em>, which admits depthwise hyperparameter transfer. In the process, we identify <em>feature diversity</em> as a crucial factor in deep resnets.
+          For example, one can increase feature diversity by switching from relu to absolute value nonlinearity (or anything even would work), and this would greatly increase performance.</p>
+          <p><img class="image" src ="static/ORIG-relu-bd1-ln0-sweep-time.gif"/></p>
+          <p>However, when the resnet has 2 layers in each block, then we find fundamental limitations in all possible infinite-depth limits of such parametrizations.
+          </p>
+
+        </details>
+
+
+        <h3>Reading Guide</h3>
+
+        <p>An accessible discussion of the key intuitions behind network scaling with width can be found in <em><a href="http://arxiv.org/abs/2310.17813">A Spectral Condition for Feature Learning</a></em> and  <em>Appendix J</em> of <a href="http://arxiv.org/abs/2203.03466">TP5</a>. I recommend this as an entrypoint to the series.</p>
+
+        <p>Otherwise, learning and reading are most effective when one is well-motivated to understand some result. So if any of the papers have a punchline that you are interested in, feel free to read from the beginning until things become difficult to understand (you don&#8217;t have to go in order of TP1,2,3,...). At this point, it can be advantageous to switch to one of the other papers in the series to gain a different perspective on the same underlying technique. This can then help you proceed further on the original paper. Repeat until you understand everything.</p>
+        <p>&nbsp;</p>
+      </section>
+    </div>
+
+  </main>
+</body>
+
+</html>

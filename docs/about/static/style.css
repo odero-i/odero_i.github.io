@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #cccccc87;
+    color: #414141;
+    font-family: "Helvetica", "Arial", sans-serif;
+    line-height: 1.45;
+  }
+  
+  .page {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  header,
+  main {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  header {
+    background-color: hsl(29, 87%, 88%);
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .page-title {
+    padding: 20px 0;
+    width: 100%;
+  }
+  
+  .menu-container,
+  .social-container,
+  .papers-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .navigation {
+    padding: 10px 0;
+    width: 100%;
+  }
+  
+  .menu {
+    padding-top: 20px;
+  }
+  
+  .social {
+    display: flex;
+  }
+  
+  .menu-container {
+    order: 2;
+  }
+  
+  .papers {
+    padding-top: 20px;
+    align-items: center;
+  }
+  
+  .navigation > li {
+    display: inline;
+  }
+  
+  .navigation > li:last-of-type {
+    margin-right: 0;
+  }
+  
+  .menu > li {
+    margin-right: 20px;
+  }
+  
+  .social > li {
+    margin-right: 10px;
+  }
+  
+  .papers > li{
+    margin-right: 15px;
+  }
+  
+  .menu a:link,
+  .menu a:visited,
+  .papers a:link,
+  .papers a:visited {
+    text-decoration: none;
+    color: #00178b;
+  }
+  
+  .menu a:hover,
+  .papers a:hover {
+    text-decoration: underline;
+  }
+  
+  .svg-text {
+    position: relative;
+    bottom: -10px;
+  }
+  
+  section {
+    background-color: #eeeeee;
+    width: 100%;
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
+  }
+  
+  section h2 {
+    padding: 20px 0;
+  }
+  
+  section h3 {
+    padding: 20px 0;
+  }
+  
+  section p {
+    text-align: left;
+    margin-bottom: 1em;
+  }
+  
+  section ul {
+    margin-left: 30px;
+    margin-bottom: 1em;
+    /* list-style-position: inside; */
+  }
+  
+  section ul ul {
+    margin-top: 1ex;
+    /* padding-bottom: 0; */
+  }
+  
+  section li {
+    margin-bottom: 2px;
+  }
+  
+  section li:last-of-type {
+    margin-bottom: 1em;
+  }
+  
+  section a:link,
+  section a:visited {
+    text-decoration: none;
+    color: #00178b;
+  }
+  
+  section a:hover {
+    text-decoration: underline;
+  }
+  
+  summary {
+    /* font-style: italic; */
+    font-weight: bold;
+    padding: 0px 5px 0px 5px;
+    /* font-size: 17px; */
+  }
+  
+  details p {
+    margin-left: 20px;
+  }
+  
+  .image {
+    display: block;
+    max-width: 100%;
+    width: 512px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+  @media only screen and (min-width: 501px) and (max-width: 800px) {
+    .page-title {
+      width: 70%;
+    }
+  
+    .social-container {
+      width: 30%;
+    }
+  
+    .social {
+      justify-content: flex-end;
+      margin-right: 30px;
+    }
+  }
+  
+  @media only screen and (min-width: 801px) {
+  
+    html {
+      scroll-padding-top: 230px;
+    }
+  
+    body {
+      display: flex;
+    }
+  
+    .page {
+      margin: 0 auto;
+      width: 800px;
+      flex: auto;
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+  
+    header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      width: 800px;
+      height: 200px;
+      margin-bottom: 20px;
+      z-index: 1;
+    }
+  
+    main {
+      display: flex;
+      width: 800px;
+    }
+  
+    .page-title {
+      width: 70%;
+    }
+  
+    .social-container {
+      width: 30%;
+    }
+  
+    .social,
+    .papers {
+      justify-content: flex-end;
+      /* margin-right: 30px; */
+    }
+  
+    .menu-container {
+      order: 0;
+      width: 50%;
+    }
+  
+    .papers-container {
+      width: 50%;
+    }
+  
+    .papers {
+      display: flex;
+      justify-content: flex-end;
+    }
+  
+    .svg-text {
+      position: relative;
+      bottom: -3px;
+    }
+  
+    header,
+    section {
+      border-radius: 10px;
+    }
+  }
