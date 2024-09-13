@@ -1,243 +1,219 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en">
-    <link rel="stylesheet" href="https://lightning.svbtle.com/cargo/legacy/build.blog-120c367e4cc2cdf2d031c71f795ecea0ef4033f8b24d12d8e147c86e08e2ed2a.css" media="all" data-turbolinks-track="reload" />
-    <script src="https://lightning.svbtle.com/cargo/build.blog-41a284c81b4230cd8ab812d35fabef8cc99e927407ed15604d3206997ef79818.js" data-turbolinks-track="reload"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGMRYDBB5R"></script>
+<!-- THANKS to Harold Erbin for the template! -->
+<!-- TODO: add google scholar -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-  <title>Isack Odero's Home Page</title>
-  <style type="text/css" media="screen">
-	body
-	{
-	padding: 0;
-	margin: 0;
-	background-color: #666;
-	color: #000;
-	}
-	
-	#contents
-	{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 15%;
-	margin-right: 15%;
-	padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 30px;
-        padding-right: 30px;
-	background-color: #FFF;
-	color: #000;
-	}
-	
-	.code
-	{
-	color: #339;
-	background-color: transparent;
-	font-family: times, serif;
-	font-size: 0.9em;
-	padding-left: 40px;
-	}
-
-    ul li {
-    margin-top: 4px;
-    }
-</style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-// From http://stackoverflow.com/questions/12302300/track-all-outbound-links-in-google-analytics
-// Outbound Link Tracking with Google Analytics
-// Requires jQuery 1.7 or higher (use .live if using a lower version)
-$(function() {
-    $("a").on('click',function(e){
-        var url = $(this).attr("href");
-        // Console logs shows the domain name of the link being clicked and the current window
-        // console.log('e.currentTarget.host: ' + e.currentTarget.host);
-        // console.log('window.location.host: ' + window.location.host);
-        // If the domains names are different, it assumes it is an external link
-        // Be careful with this if you use subdomains
-        if (e.currentTarget.host != window.location.host) {
-            // console.log('external link click');
-            // Outbound link! Fires the Google tracker code.
-            _gat._getTrackerByName()._trackEvent("Outbound Links", e.currentTarget.host, url, 0);
-            // Checks to see if the ctrl or command key is held down
-            // which could indicate the link is being opened in a new tab
-            if (e.metaKey || e.ctrlKey) {
-                // console.log('ctrl or meta key pressed');
-                var newtab = true;
-            }
-            // If it is not a new tab, we need to delay the loading
-            // of the new link for a just a second in order to give the
-            // Google track event time to fully fire
-            if (!newtab) {
-                // console.log('default prevented');
-                e.preventDefault();
-                // console.log('loading link after brief timeout');
-                setTimeout('document.location = "' + url + '"', 100);
-            }
-        }
-        /*
-        else {
-            console.log('internal link click');
-        }
-        */
-    });
-});
-</script>
-
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="static/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Greg Yang | Professional page</title>
+  <link rel="icon" href="static/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
-<div id="contents">
-    <!-- <figure id="loading">&nbsp;</figure> -->
-    <!-- <nav id="overlord" class="user_top"> -->
-      <div id="lockup" class="">
-        <figure id="logo_top" class=" user_top">
-          <a href="/">Svbtle</a>
-        </figure>
-        <h2 id="nav_title" class="user_top"><a href="https://oderoi.github.io">Isack Odero</a></h2>
+
+  <!-- <script type="text/javascript" src="js/piwik.js"></script>
+  <noscript>
+    <p><img src="//piwik.melsophia.org/piwik.php?idsite=3" style="border:0;" alt="" /></p>
+  </noscript> -->
+
+  <div class="page">
+    <header>
+
+      <div class="page-title">
+        <h1>Greg Yang</h1>
       </div>
-  <!-- <h2> Isack Odero </h2> -->
 
-<!-- <img style="float:right" src="https://www.gravatar.com/avatar/a8899262a6722e34f543a3209d16f6cd?s=140"></img> -->
+      <nav class="social-container">
+        <ul class="social navigation">
+          <!-- TODO: protect email -->
+          <!-- TODO: replace text with image -->
+          <!-- <li><a href="https://www.lpthe.jussieu.fr/~erbin/files/cv_erbin.pdf"><img src="static/cv.svg" height="30" alt=""></a></li> -->
+          <!-- <li><a href="mailto:thegregyang@gmail.com"><img src="static/email.svg" height="30" alt=""></a></li> -->
+          <li><a href="https://twitter.com/thegregyang"><img src="static/twitter.svg" height="30" alt=""></a></li>
+          <li><a href="https://github.com/thegregyang"><img src="static/github.svg" height="30" alt=""></a></li>
+          <!-- <li><a href="https://orcid.org/0000-0002-9096-0659"><img src="static/orcid.svg" height="30" alt=""></a></li> -->
+        </ul>
+      </nav>
 
-<h3> Contact </h3>
-<ul>
-<li> <a href="https://twitter.com/oderoi_">@oderoi</a> on Twitter </li>
-<li> <a href="https://github.com/oderoi">@oderoi</a> on Github </li>
-<li> <a href="/cdn-cgi/l/email-protection#07607562604760756260657568646c6a66692964686a"><span class="__cf_email__" data-cfemail="482f3a2d2f082f3a2d2f2a3a272b23252926662b2725">[email&#160;protected]</span></a> via email </li>
-</ul>
+      <nav class="menu-container">
+        <ul class="menu navigation">
+          <li><a href="#aboutme">About Me</a></li>
+          <li><a href="#tensorprograms"><em>Tensor Programs</em></a></li>
+          <li><a href="#tppapers">The Series</a></li>
+          <li><a href="https://decentdescent.org/">Blog</a></li>
+        </ul>
+      </nav>
 
-<h3> Interests </h3>
+      <nav class="papers-container">
+        <ul class="papers navigation">
+          <li><strong>Papers:</strong></li>
+          <!-- <li><a href="https://arxiv.org/search/?searchtype=author&query=Erbin%2C+H">arXiv</a></li>
+          <li><a href="https://inspirehep.net/authors/1273902">Inspire</a></li> -->
+          <li class="svg-text"><a href="https://arxiv.org/search/?query=Yang%2C+Greg&searchtype=author&abstracts=show&order=-announced_date_first&size=50"><img src="static/arxiv.svg" height="30" alt=""></a></li>
+          <!-- <li class="svg-text"><a href="https://inspirehep.net/authors/1273902"><img src="static/inspire.svg" height="30" alt=""></a></li> -->
+        </ul>
+      </nav>
 
-<p> I love to train Deep Neural Nets 🧠 in Low Resourced Datasets. I sometimes also do C programming  and  <a href="https://oderoi.github.io">blogging</a>. </p>
+    </header>
 
-<!-- <h3> Projects </h3>
+    <main>
 
-<ul>
-  <li> <a href="https://openai.com">OpenAI</a>, including <a href="https://github.com/openai/gym">Gym</a>, <a href="https://openai.com/five/">OpenAI Five</a>, our <a href="https://openai.com/blog/openai-api/">API</a>, and training large-scale models such as <a href="https://openai.com/">Codex</a>. </li>
-  <li> I'm the former CTO of <a href="https://stripe.com">Stripe</a>, helping build it from 4 to 250 employees. </li>
-  <li> <a href="https://github.com/gdb/rubysh">Rubysh</a>, a Ruby subprocess library allowing <b>sh</b>-like syntax. </li>
-  <li> <a href="https://stripe.com/blog/capture-the-flag-wrap-up">Stripe CTF</a>, <a href="https://stripe.com/blog/capturetheflag">Stripe CTF 2.0</a>, and <a href="https://stripe.com/blog/ctf3-architecture">Stripe CTF3</a> (<a href="https://plus.google.com/events/crhd2ttdn04070osveh86dt1rqk">Q&amp;A</a>). </li>
-  <li> <a href="https://github.com/stripe/einhorn">Einhorn</a>, the language-independent shared socket manager (see my <a href="https://stripe.com/blog/meet-einhorn">Einhorn blog post</a> for more info). </li>
-  <li> <a href="https://github.com/gdb/domaincli">Domaincli</a>: register domains from the command line. </li>
-  <li> <a href="https://github.com/gdb/embedded-mongo">Embedded Mongo</a>: a Ruby library serving as a drop-in replacement for an actual MongoDB server. </li>
-  <li> <a href="https://github.com/gdb/ruby-static-checker">Ruby Static Checker</a>: statically detect name errors in Ruby. </li>
-  <li> <a href="https://github.com/gdb/anygit">Anygit</a>: Find all parents of an arbitrary <a href="#git-object-model">Git object</a>. </li>
-  <li> I have a <a href="https://github.com/git/git/commit/2dbc887eaa6fbd787edfc9472b86b0faeb54e2ae">few</a> <a href="https://github.com/git/git/commit/9f29fe9a779e55e7387577cd7f712de0b13b5cd6">patches</a> <a href="https://github.com/git/git/commit/ad9ac6db5d58de08d0497b9184e86926377c20dd">in</a> <a href="https://github.com/git/git/commit/e69164ddb9d6092a94915bb984749d48f598cea8">Git</a> (my personal <a href="https://github.com/git/git/commit/1b0b962d771fb734cbf273f216b487bb58dec7b9">favorite</a> was for an exploitable <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2542">buffer overrun</a> I found). </li>
-  <li> I somehow got roped into becoming a <a href="https://github.com/markbates/configatron">configatron</a> maintainer. </li>
-  <li> Some of my <a href="http://bugs.python.org/issue9205">Python</a> <a href="http://bugs.python.org/issue9535">patches</a> worked their way through the bug tracker. </li>
-  <li>While at Harvard, I administered and built systems for the <a href="http://hcs.harvard.edu">Harvard Computer Society</a>.</li>
-  <li> I worked on and maintained a number of popular projects at MIT, including <a href="http://xvm.mit.edu">XVM</a>, <a href="http://linerva.mit.edu">Linerva</a>, and <a href="http://scripts.mit.edu">scripts.mit.edu</a>. </li>
-  <li> I built infrastructure for <a href="http://www.ksplice.com/">Ksplice</a> for about seven months. </a>
-</ul> -->
+      <section>
+        <h2 id="aboutme">About Me</h2>
 
-<!-- <h3> Interesting links </h3>
+        <p>
+        I am a mathematician at <a href="http://x.ai">xAI</a>. Previously I was a researcher at <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a>.
+        </p>
+        <p>
+        I am currently developing a framework called <em>Tensor Programs</em> for understanding large neural networks. This is the theoretical foundation that gave rise to the <a href="http://arxiv.org/abs/2203.03466">hyperparameter transfer paradigm</a> for tuning enormous neural networks like GPT-3.
+        Ultimately, my goal is a <em>Theory of Everything</em> for large scale deep learning that 1) tells us the optimal way of scaling neural networks and 2) provides robust understanding to such models so as to guide safety and alignment efforts.
+        </p>
+        
+      </section>
 
-<p> The following are a collection of technical links that I've found interesting. </p>
+      <section>
+        <h2 id="tensorprograms"><em>Tensor Programs</em></h2>
 
-<ul>
-<li><a href="http://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying">The
-Log</a>. Everything you ever wanted to know about structured logs, and
-how to build distributed systems on top of them. </li>
-<li><a href="https://www.youtube.com/watch?v=PGLYEDpNu60">System
-operation</a>. I think this is the best (and only, really) framework
-I've seen on how to think about running a complex system.</li>
-<li> <a href="http://www.debian.org/doc/debian-policy">The Debian
-policy manual</a>. It's most useful if you're already somewhat
-familiar with Debian packaging but want to learn Debian
-conventions. </li>
-<li> <a href="http://www.joelonsoftware.com/articles/Unicode.html">Unicode
-and character sets</a>. Character sets can be confusing. This article
-will magically make them not be so. </li>
-<li> <a href="http://www.imperialviolet.org/2010/06/25/overclocking-ssl.html">Overclocking
-SSL</a>: SSL performance tuning. I found this pretty useful when
-initially setting up Stripe's SSL infrastructure. </li>
-<li> <a href="http://juliusdavies.ca/logging.html">Logging best
-practices</a>: A short guide for how to think about logging. I wish
-more software followed this article's advice. </li>
-<li> <a name="git-object-model"
-href="http://git-scm.com/book/en/Git-Internals-Git-Objects">Git
-internals - Git objects</a>: My favorite guide to the Git object
-model. </li>
-<li> <a href="http://bitcoinmagazine.com/14282/mining-2/">On mining</a>: A good overview of the challenges Bitcoin mining currently faces. </li>
-</ul> -->
+        <h3>What is a Tensor Program (TP)?</h3>
+        <p>
+          Informally, a TP is just a composition of matrix multiplication and coordinatewise nonlinearities.
+        </p>
 
-<!-- <h3> Writings and talks </h3>
+        <h3>
+          Why is it important?
+        </h3>
 
-<ul>
-<li> <a href="http://www.commerce.senate.gov/public/index.cfm/hearings?ID=042DC718-9250-44C0-9BFE-E0371AFAEBAB">Testimony</a> at the first Senate hearing on AI. </li>
-<li> Blog post on the <a href="https://stripe.com/blog/bitcoin-the-stripe-perspective">Stripe perspective on Bitcoin</a>. </li>
-<li>The <a href="https://speakerdeck.com/gdb/how-cryptocurrencies-can-succeed">slides</a> from my CoinSummit 2014 talk on what a Bitcoin for the mainstream might look like.</li>
-<li>The <a href="https://vimeo.com/97476134">video</a> and <a href="https://speakerdeck.com/gdb/how-we-scaled-stripe-from-4-to-94-employees">slides</a> from my <a href="https://www.eventbrite.com/e/bv-io-2014-bazaarvoice-tech-conference-and-hackathon-tickets-10615744979">BV.IO</a> talk on scaling Stripe from 4 to 94 employees.</li>
-<li>Quora post on <a href="https://www.quora.com/Stripe-company/How-did-Stripe-come-up-with-its-name/answer/Greg-Brockman">how Stripe got its name</a>.</li>
-<li>The <a href="https://speakerdeck.com/gdb/rescuing-ruby">slides</a> from my RubyConf AU 2014 <a href="http://lanyrd.com/2014/rubyconf-au/sctthz/">keynote</a> on what the Ruby community needs to change in order to remain relevant.</li>
-<li>The <a href="https://speakerdeck.com/gdb/building-better-software-through-mathematics">slides</a> from my <a href="http://lanyrd.com/2014/monkigras/">Monkigras 2014</a> talk on building better software through mathematics.</li>
-<li>The <a href="https://speakerdeck.com/gdb/shipping-at-stripe">slides</a> and <a href="https://vimeo.com/85675272">video</a> from my <a href="http://www.meetup.com/HNLondon/events/160280882/">HNLondon</a> talk in January 2014 on shipping at Stripe.</li>
-<li>The <a href="http://www.infoq.com/presentations/stripe-culture">video</a> and <a href="https://speakerdeck.com/gdb/building-a-culture-where-software-projects-get-done">slides</a> from my talk "Building a Culture Where Software Projects Get Done" at <a href="http://qconsf.com/presentation/building-culture-where-software-projects-get-done">QConSF 2013</a>. (For detailed presenter's notes, grab the <a href="https://gregbrockman.com/f/building-a-culture-where-software-projects-get-done.key">original</a> Keynote presentation.)</li>
-<li>Quora posts on Stripe's <a href="https://www.quora.com/Stripe-company/What-engineering-problems-and-challenges-is-Stripe-solving">engineering challenges</a> and <a href="https://www.quora.com/Stripe-company/What-is-the-engineering-interview-process-like-at-Stripe">interview process</a>.</li>
-<li>The <a href="https://airbrake.io/blog/devops/how-stripe-builds-software-an-interview-with-cto-greg-brockman/">transcript</a> of an interview I did with Airbrake on how Stripe builds software.</li>
-<li>Blog post on <a href="https://stripe.com/blog/email-transparency">email transparency</a>.</li>
-<li>The <a href="http://firstround.com/article/How-Stripe-built-one-of-Silicon-Valleys-best-engineering-teams">video and summary</a> of my talk on recruiting at Stripe from the First Round Capital CTO summit in 2012.</li>
-<li>The <a href="http://www.slideshare.net/thegdb/running-mongodb-for-high-availability">slides</a> for my talk "Running MongoDB for High Availability" at <a href="http://www.oscon.com/oscon2012/public/schedule/detail/25980">OSCON 2012</a>. This is an updated version of my MongoSF 2012 talk. </li>
-<li>The <a href="http://www.slideshare.net/thegdb/high-availability-with-mongodb-for-fun-and-profit">slides</a> and <a href="http://www.10gen.com/presentations/mongosf-2012/high-availability-with-mongodb-for-fun-and-profit">video</a> for my talk "High Availability with MongoDB for Fun and Profit" at <a href="http://www.10gen.com/events/mongosf-2012">MongoSF 2012</a>. </li>
-<li>A piece in Gigaom on <a href="http://gigaom.com/2012/04/28/6-secrets-for-building-a-super-team/">how we think about recruiting at Stripe</a>. </li>
-<li>The <a href="http://www.slideshare.net/thegdb/theres-a-monster-in-my-closet-architecture-of-a-mongodbpowered-event-processing-system">slides</a> and <a href="http://www.10gen.com/presentations/mongosv-2011/theres-a-monster-in-my-closet-architecture-of-a-mongodb-powered-event-processing-system">video</a> for my talk "There's a Monster in My Closet: Architecture of a MongoDB-powered Event Processing System" at <a href="http://www.10gen.com/events/mongosv-2011">MongoSV 2011</a>.</li>
-</ul> -->
+        <h4>Universality</h4>
+        <p>
+          It turns out that practically any computation in Deep Learning can be expressed as a TP, e.g. training a transformer on wikipedia data. Simultaneously, any Tensor Program has an “infinite-width” limit which can be derived from the program itself (through what’s called the Master Theorem). So this gives a universal way of taking the infinite-width limit of any deep learning computation, e.g. training an <em>infinite-width</em> transformer on wikipedia data.
+        </p>
+        
+        <h4>Theoretical Unification</h4>
+        <p>
+          Theoretically, this generalizes and unifies several lines of previous research, including the Neural Network-Gaussian Process Correspondence, Neural Tangent Kernel, mean field limit of shallow networks, and neural signal propagation, as well as areas outside of deep learning such as random matrix theory and approximate message passing. It also yields the maximal update parametrization and the feature learning limit (see below) for any neural architecture, which would have been hard to derive otherwise without the universality provided by the Tensor Programs machinery.
+        </p>
+        <h4>Practical Impact</h4>
+        <p>
+          Practically, this maximal update parametrization (muP), for the first time, allows one to tune the hyperparameters of extremely large neural networks, too expensive to train more than once. This is because, in muP, narrow and wide neural networks share the same set of optimal hyperparameters. So one can tune the large model by just tuning a tiny version of it and copying over the hyperparameters.</p>
 
-<!-- <h3> Papers </h3>
+        <details>
+          <summary>How is this different from Neural Tangent Kernel (NTK)?</summary>
+          As mentioned above, NTK is a special case of TP. More importantly, a neural network in the NTK limit does not learn features — which contradicts the conventional wisdom that neural networks are successful because of its feature learning capability (e.g. <a href="https://microscope.openai.com/models">conv nets</a> and <a href="https://github.com/jessevig/bertviz">BERT</a>). On the other hand, using TP, one can derive a limit (the <em>muP</em> mentioned above) that maximally learns features in a suitable sense (see <a href="https://arxiv.org/abs/2011.14522">TP4</a>). When explicitly trained on tasks that depend crucially on feature learning (e.g. Word2Vec), this limit handily beats the NTK limit, as one would expect.
+        </details>
 
-<ul>
-<li>Sunil Abraham, Greg Brockman, Stephanie Sapp, Anant Godbole.<br/>
-<a href="/pdfs/omnibus-sequences.pdf">Omnibus Sequences, Coupon Collection, and Missing Word Counts</a>.<br/>
-Methodology and Computing in Applied Probability (27 August 2011), pp. 1-16.
-</li>
-<li> Greg Brockman, Bill Kay and Emma
-E. Snively. <br />
-<a href="/pdfs/on-universal-cycles.pdf">On
-Universal Cycles of Labeled Graphs</a>.<br />
-The Electronic Journal of
-Combinatorics. Vol. 17 (2010), No. 1.</li>
-<li> James Brantner, Greg Brockman, Bill Kay and Emma
-Snively.<br />
-<a href="/pdfs/contributions-to-seymour.pdf">Contributions to Seymour's second neighborhood conjecture</a>.<br />
-Involve. Vol. 2 (2009), No. 4, 385-393.</li>
-<li> My paper <a href="/pdfs/asymptotic-behavior.pdf">Asymptotic
-Behavior of Certain Ducci Sequences</a> won 6th place in the 2007 Intel Science
-Talent Search. The first half of this paper was published in Fibonacci
-Quarterly; it can be found with the following citation:
-  <p>
-  Greg Brockman and Ryan J. Zerr. <br />
-  Asymptotic Behavior of Certain Ducci Sequences. <br />
-  Fibonacci Quarterly. Vol 45 (2007), No. 2, 155-163.
-  </p>
-</li>
-<li> In high school, I was very involved in the Chemistry Olympiad
-(culminating with a Silver Medal in
-the <a href="https://en.wikipedia.org/wiki/International_Chemistry_Olympiad">International
-Chemistry Olympiad</a>). I took a year off before college and spent a decent
-chunk of it attempting to write a high school chemistry textbook, affectionately
-dubbed <a href="/pdfs/a-chemical-progression.pdf">A Chemical
-Progression</a>. I became distracted by computers and forgot about the book, but
-one day I hope to finish it. </li>
-<li> Apparently some chemistry research I did in high school was <a href="http://pubs.rsc.org/en/Content/ArticleLanding/2013/NR/C3NR01287E">published</a>. </li>
+      </section>
 
-</ul> -->
-  
-</div>
+      <section>
+        <h2 id="tppapers">The <em>Tensor Programs</em> Series</h2>
+        <p>
+          The theory of Tensor Programs is developed (and continues to be developed) over a series of papers.
+        </p>
+        <details>
+          <summary>Scaling Limits of Wide Neural Networks</summary>
+          <p><a href="https://arxiv.org/abs/1902.04760">Arxiv</a></p>
+          <p>
+            This is the original paper on Tensor Programs (so it could be named “Tensor Programs O”). It first established the paradigm of 1) using a formal language (Tensor Programs) to capture possible neural computations and 2) deriving an algorithm (the Master Theorem) for taking the infinite-width limit of any such program. All later papers will follow this paradigm.
+          </p><p>
+            Unfortunately for readers, the writing was very dense and notation cumbersome, so the next 3 papers focus more pedagogy and presentation of the material to a wider audience, as well as some minor but useful improvements of the results in this paper.</p>
+        </details>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+        <details>
+          <summary>TP1: Wide Neural Networks of Any Architecture are Gaussian Processes</summary>
+          <p><a href="https://arxiv.org/abs/1910.12478">Arxiv</a> | <a href="https://github.com/thegregyang/GP4A">Github</a></p>
+          <p>This paper shows that an infinite-width neural network of any architecture (in the standard parametrization) are Gaussian processes at initialization. It also demonstrates how to calculate the kernel of this Gaussian process.</p>
+          <p>This is a consequence of the simplest form (called <em>Netsor</em>) of Tensor Programs, where one cannot use a matrix and its transpose in the same program, and its Master Theorem. Their theory is fully developed in a self-contained way here.</p>
+        </details>
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-26652609-1']);
-  _gaq.push(['_setDomainName', 'gregbrockman.com']);
-  _gaq.push(['_trackPageview']);
+        <details>
+          <summary>TP2: Neural Tangent Kernel for Any Architecture</summary>
+          <p><a href="https://arxiv.org/abs/2006.14548">Arxiv</a> | <a href="https://github.com/thegregyang/NTK4A">Github</a></p>
+          <p>This paper shows that the Neural Tangent Kernel of a neural network of any architecture (in the NTK parametrization) converges to a well-defined, deterministic kernel at initialization. It also demonstrates how to calculate the kernel. (Note it doesn&#8217;t yet say anything about training, which is done in <em>Tensor Programs IIb</em> briefed below).</p>
+          <p>This is a consequence of an extension of Netsor (called <em>NetsorT</em>), where one can use a matrix and its transpose in the same program in a restricted way. Its theory is fully developed in a self-contained way here.</p>
+        </details>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+        <details>
+          <summary>TP2b: Architectural Universality of Neural Tangent Kernel Training Dynamics</summary>
+          <p><a href="https://arxiv.org/abs/2105.03703">Arxiv</a></p>
+          <p>This paper continues from the above and shows that 1) the <em>infinite-width</em> Neural Tangent Kernel of a neural network of any architecture (in the NTK parametrization) stays frozen over the course of training, and 2) the infinite-width network evolves via kernel gradient descent with this kernel.</p>
+          <p>This paper actually needs the machinery of (and comes after) <em>Tensor Programs III</em> (described below), but we number this <em>IIb</em> because the topic is on NTK.</p>
+        </details>
 
-</script>
+        <details>
+          <summary>TP3: Neural Matrix Laws</summary>
+          <p><a href="https://arxiv.org/abs/2009.10685">Arxiv</a></p>
+          <p>This paper targets a slightly more mathematical audience than the previous papers. It shows how to calculate the Jacobian singular value distribution of an infinite-width neural network. As special cases, it recovers the classical semicircle and Marchenko-Pastur laws.</p>
+          <p>This is a consequence of the full version of Tensor Programs, where one can use a matrix and its transpose arbitrarily. Its theory is fully developed in a self-contained way here.</p>
+          <p>This paper is intended to serve as a rigorous reference for the TP foundation going forward.</p>
+        </details>
+        
+        <details>
+          <summary>TP4: Feature Learning in Infinite-Width Neural Networks</summary>
+          <p><a href="https://arxiv.org/abs/2011.14522">Arxiv</a> | <a href="https://github.com/edwardjhu/TP4">Github</a> | <a href="https://www.youtube.com/watch?v=6tA7r7Y5vUM">Youtube</a> | <a href="https://www.bilibili.com/video/BV1Ay4y1D7NR">Bilibili (for folks in China)</a> | <a href="https://decentdescent.org/tp4.html">Blog</a></p>
+          <p>This paper derives &#8220;the&#8221; feature learning limit of neural networks, in contrast to the Neural Tangent Kernel limit, using machinery developed in the previous papers (especially TP3).</p>
+          <p>(Some trivia: this paper was supposed to be written right after TP0, but I realized the TP foundation needed to be solidified in terms of presentation and notation, hence TP1-3 and why this paper came almost two years later)</p>
+        </details>
+
+        <details>
+          <summary>TP4b: Adaptive Optimization in the Infinite-Width Limit</summary>
+          <p><a href="https://arxiv.org/abs/2308.01814">Arxiv</a> </p>
+          <p>This paper classifies all infinite-width limits of general optimization algorithms including Adam and SGD with momentum, strictly generalizing TP4 (which was only about SGD).</p>
+          <p>To do so, some fundamental advances had to be made: 1) extending TP to a new instruction that can express how adaptive optimizers process gradients into update; 2) borrowing bra-ket notation from quantum physics to express key concepts and calculations in TP much more efficiently.</p>
+          <p>These advances in the TP machinery makes this the new foundation for papers going forward, subsuming TP3.</p>
+        </details>
+
+        <details>
+          <summary>A Spectral Condition for Feature Learning</summary>
+          
+          <p><a href="http://arxiv.org/abs/2310.17813">Arxiv</a> | <a href="https://x.com/TheGregYang/status/1725548084476641322?s=20">Twitter Thread</a></p>
+          <p>Show that μP is equivalent to scaling the spectral (aka operator) norm of weight matrices like sqrt(fanout/fanin).</p>
+          <p>A very accessible and pedagogical intro to the scaling (with width) of feature learning. Since the TP series has a reputation for being hard-to-read, this one is not numbered so people will be more likely to read it ;)</p>
+          </p>
+
+        </details>
+
+        <details>
+          <summary>TP5: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</summary>
+          
+          <p><a href="http://arxiv.org/abs/2203.03466">Arxiv</a> | <a href="https://github.com/microsoft/mup">Github</a> | <a href="https://decentdescent.org/tp5.html">Blog</a> | <a href="https://twitter.com/TheGregYang/status/1501294412126560257?s=20&amp;t=PKutWWGc-WseHoWnXOuc0Q">Twitter Thread</a></p>
+          <p>You can’t train GPT-3 on a single GPU, much less tune its hyperparameters (HPs).</p>
+          <p>But what if I tell you…</p>
+          <p>…you *can* tune its HPs on a single GPU thanks to the theory developed in TP4?</p>
+          <p>Essentially, narrow and wide neural networks share the same set of optimal hyperparameters if they are in the maximal update parametrization (muP) derived in TP4 (but not if they are in pytorch default parametrization).</p>
+          <p><img class="image" src="static/hpstab.png"/></p>
+          <p>This lets us <em>transfer </em>hyperparameters from small networks to large networks in the obvious way.</p>
+          <p><img class="image" src="static/mutransfer.png"/></p>
+          <!-- <p><img loading="lazy" class="alignnone wp-image-825997" sizes="(max-width: 512px) 100vw, 512px" src="https://www.microsoft.com/en-us/research/uploads/prod/2022/03/muTransfer.png" /></p> -->
+          <p>The <a href="https://twitter.com/TheGregYang/status/1501294412126560257?s=20&amp;t=PKutWWGc-WseHoWnXOuc0Q">twitter thread</a> above gives a nice but still brief overview of the key ideas and results.</p>
+          <p>(Some trivia: We finished most of the basic experiments in TP5 before I started writing TP2, at which my motivation for finish writing TP2-TP4 was just to provide enough foundation to write this paper)</p>
+
+        </details>
+        <details>
+          <summary>TP6: Feature Learning in Infinite-Depth Neural Networks</summary>
+          
+          <p><a href="http://arxiv.org/abs/2310.02244">Arxiv</a> | <a href="https://x.com/TheGregYang/status/1709700104951931077?s=20">Twitter Thread</a></p>
+          <p>We extend the results of TP4 and TP5 to infinite-width-and-depth residual networks (resnet).</p>
+          <p>When the resnet has 1 layer in each block, we can identify a unique optimal parametrization we call <em>Depth-muP</em>, which admits depthwise hyperparameter transfer. In the process, we identify <em>feature diversity</em> as a crucial factor in deep resnets.
+          For example, one can increase feature diversity by switching from relu to absolute value nonlinearity (or anything even would work), and this would greatly increase performance.</p>
+          <p><img class="image" src ="static/ORIG-relu-bd1-ln0-sweep-time.gif"/></p>
+          <p>However, when the resnet has 2 layers in each block, then we find fundamental limitations in all possible infinite-depth limits of such parametrizations.
+          </p>
+
+        </details>
+
+
+        <h3>Reading Guide</h3>
+
+        <p>An accessible discussion of the key intuitions behind network scaling with width can be found in <em><a href="http://arxiv.org/abs/2310.17813">A Spectral Condition for Feature Learning</a></em> and  <em>Appendix J</em> of <a href="http://arxiv.org/abs/2203.03466">TP5</a>. I recommend this as an entrypoint to the series.</p>
+
+        <p>Otherwise, learning and reading are most effective when one is well-motivated to understand some result. So if any of the papers have a punchline that you are interested in, feel free to read from the beginning until things become difficult to understand (you don&#8217;t have to go in order of TP1,2,3,...). At this point, it can be advantageous to switch to one of the other papers in the series to gain a different perspective on the same underlying technique. This can then help you proceed further on the original paper. Repeat until you understand everything.</p>
+        <p>&nbsp;</p>
+      </section>
+    </div>
+
+  </main>
 </body>
+
 </html>
