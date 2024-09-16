@@ -224,103 +224,103 @@ section#readnext:hover p span {
 
 	<time datetime="2016-05-03" class="article_time">May  3, 2016</time>
   <h1 class="article_title">
-    <a href="./matmul.html">Fibonacci Sequence</a>
+    <a href="./matmul.html">Palindromic number</a>
   </h1>
 	<h1 id="problem_statement_1">Fibonacci Series in C<a class="head_anchor" href="#problem_statement_1">#</a></h1>
 
     <p>
-      Fibonacci Sequence is a sequence in which each number is the sum of the two preceding ones.
-    </p>
+        In other words it has <b>reflectional symmetry</b> across a vertical axis.
         
     <p>
-      Number that are part of the Fibonacci sequence are known as Fibonacci numbers.
+        The term palindromic is derived from palindrome, which refers to a word (such as <b>rotor</b> , <b>tenet</b>) whose spelling is unchanged when it's letters are reversed.
     </p>
     <p>
-      It is commonly start with 0 and 1.
+        Consider a number \(n > 0\) in base \(b \ge 2\) where it is written in standard notation with \() k + 1\) digits \(a_{i}\) as:
     </p>
     <p>
-      The Fibonacci Sequence.
+        $$n = \sum _{i=0}^{k}a_{i}b^{i}$$
     </p>
     <p>
-      $$F_{0} = 0,     F_{1} = 1,$$
+        where: 
     </p>
     <p>
-      and
+      $$0 \le a_{i} < b$ for all $i$ and $a_{k} \ne 0$$
     </p>
     <p>
-      $$f_{n} = F_{n - 1}  +   F_{n - 2}$$
+        Then \(n\) is palimendric if and only if \(a_{i} = a_{k -i}\) for all \(i\). <b>Zero</b> is written \(0\) in any base and is also palindromic by definition.
     </p>
     <p>
-        $$n! = n . (n - 1)!$$
+        Note: 
+        <ul>
+            <li>
+                <p>
+                    Although palindromic number are most often considered in the <b>decimal</b> system, the concept of _**palindromicity**_ can be applied to the <b>natural numbers</b> in any <b>numeral system</b>.
+                </p>
+            </li>
+        </ul>
     </p>
     <p>
-      for 
+        Example of 20 first palindromic numbers (in decimal)
     </p>
     <p>
-      $$n > 1.$$
+      $$0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77, 88, 99, 101, \cdots$$
     </p>
     <p>
-      <img src="./images/Fibonacci_Spiral.svg.png" alt="Fibonacci Sequence" />
+        The folowing code in \(C\),  will check if the given number by user is pelindromic number or not.
     </p>
 <blockquote>
 <pre>
 <code>
+/*
+This code help us to look if a given number is palindromic or not.
+*/
+
 #include &lt;stdio.h&gt;
 
-int fibonacci(int n);
+int palindromic_no(int number, int reverse, int reaminder);
 
 int main(){
 
-    //i_nth number of fibonacci numbers
-    int n=10;
+    //Enter a number to check.
+    int num;
+    printf("Enter number: ");
+    scanf("%d", &num);
 
-    //printing the fibonnaci numbers
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d\t\n",fibonacci(i));
-    }
-    
+    int rev=0;
+    int rem;
+
+    //check is done here
+    palindromic_no(num, rev, rem);
     return 0;
 }
 </code>
 </pre>
 </blockquote>
 
-<p>
-    <u>Function definition</u>>
-</p>
 
-<p>
-  fibonacci() function will take in an argument of i_nth integer number.
-</p>
-<p>
-  fibonacci() function will return fibonacci numbers one by one
-</p>
-<p>
-  Note:. that we use <u>recursion function</u> to solve this problem.
-</p>
-<p>
-  Recursion function is the function that calls itself.
-</p>
 
 <blockquote>
 <pre>
 <code>
+int palindromic_no(int number, int reverse, int remainder){
 
-int fibonacci( int n){
+    //reversing the given number
+    int origin_no = number;
+    while (number != 0)
+    {
+        remainder=number%10;
+        reverse = reverse*10 +remainder;
+        number /= 10;
+    }
 
-  //if n is 0 return 0
-  if (n==0){
-      return n;
-  }
-
-  //if n is 1 return 1
-  if (n==1){
-      return n;
-  }
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
-
+    //check if given number is pelindromic number or not.
+    if (origin_no == reverse){
+        printf("Number: %d, is palindromic number", origin_no);
+    }else{
+        printf("Number: %d, is not palindromic number", origin_no);
+    }
+    return 0;
+    }
 </code>
 </pre>
 </blockquote>
@@ -356,9 +356,9 @@ int fibonacci( int n){
   <div>
 </section>
 <section id="readnext">
-  <a href="../palindromic_no/palindromic.html">
+  <a href="../matmul/matmul.html">
     <h4 class="readnext_header">Now read this</h4>
-    <h3 class="readnext_title">Palindromic Number</h3>
+    <h3 class="readnext_title">Matrix Multiplication</h3>
     <p class="readnext_content">C programming language,... <span class="continue_btn">Continue&nbsp;&rarr;</span></p>
   </a>
 </section>
